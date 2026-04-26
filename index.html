@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ApexVisa UK — UK Visa Risk Check</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0b0f1e;--bg2:#0f1424;--bg3:#141829;--bg4:#1a1f35;--bg5:#1f2540;
+  --border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.13);
+  --blue:#4f8ef7;--blue2:#6ba3ff;--blue-dim:rgba(79,142,247,0.15);
+  --green:#22c55e;--green-dim:rgba(34,197,94,0.12);
+  --red:#ef4444;--red-dim:rgba(239,68,68,0.12);--amber:#f59e0b;
+  --text:#e8eaf0;--text2:#9aa3b8;--text3:#5c6580;
+  --font:'Plus Jakarta Sans',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);font-size:15px;line-height:1.65;overflow-x:hidden;min-height:100vh}
+
+/* ─── KEYFRAMES ─── */
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pageFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes navIn{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes floatY{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-14px) rotate(1deg)}}
+@keyframes floatY2{0%,100%{transform:translateY(0) rotate(1deg)}50%{transform:translateY(-10px) rotate(-0.5deg)}}
+@keyframes floatBadge{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes scanDown{0%{top:0;opacity:0}8%{opacity:1}92%{opacity:1}100%{top:100%;opacity:0}}
+@keyframes stampPop{0%,38%{opacity:0;transform:scale(1.5) rotate(-15deg)}52%,84%{opacity:1;transform:scale(1) rotate(-15deg)}100%{opacity:0;transform:scale(0.8) rotate(-15deg)}}
+@keyframes shimmer{0%{background-position:-600px 0}100%{background-position:600px 0}}
+@keyframes ctaPulse{0%,100%{box-shadow:0 4px 24px rgba(79,142,247,0.35)}50%{box-shadow:0 4px 36px rgba(79,142,247,0.6),0 0 0 8px rgba(79,142,247,0.07)}}
+@keyframes glowBorder{0%,100%{opacity:0.4}50%{opacity:0.9}}
+@keyframes countUp{from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)}}
+@keyframes barGrow{from{width:0}to{width:var(--w)}}
+@keyframes ckSlide{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}
+@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(12px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+@keyframes particleDrift{0%{transform:translateY(0) translateX(0);opacity:0}10%{opacity:1}90%{opacity:0.6}100%{transform:translateY(-80vh) translateX(40px);opacity:0}}
+@keyframes cursorBlink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(11,15,30,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;padding:0 5vw;animation:navIn 0.5s ease both}
+.nav-inner{max-width:1160px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav-logo{display:flex;align-items:center;gap:9px;cursor:pointer;text-decoration:none}
+.nav-logo-icon{width:28px;height:28px;background:linear-gradient(135deg,var(--blue),#7c5cfc);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;transition:transform 0.2s}
+.nav-logo:hover .nav-logo-icon{transform:rotate(-8deg) scale(1.1)}
+.nav-logo-text{font-size:15px;font-weight:700;color:#fff;letter-spacing:-0.01em}
+.nav-logo-sub{font-size:10px;color:var(--text3);letter-spacing:0.06em;text-transform:uppercase;display:block;line-height:1}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:13.5px;font-weight:400;padding:6px 12px;border-radius:6px;transition:color 0.15s,background 0.15s;cursor:pointer}
+.nav-links a:hover,.nav-links a.active{color:var(--text);background:rgba(255,255,255,0.06)}
+.nav-cta{background:var(--blue)!important;color:#fff!important;padding:8px 16px!important;border-radius:8px!important;font-weight:600!important;font-size:13px!important;transition:opacity 0.15s,transform 0.15s!important}
+.nav-cta:hover{opacity:0.85!important;transform:translateY(-1px)!important}
+
+/* ─── SCROLL PROGRESS ─── */
+.scroll-bar{position:fixed;top:64px;left:0;right:0;height:2px;z-index:299;pointer-events:none}
+.scroll-fill{height:100%;background:linear-gradient(90deg,var(--blue),#7c5cfc);width:0%;transition:width 0.08s linear}
+
+/* ─── PAGES ─── */
+.page{display:none;padding-top:64px;min-height:100vh}
+.page.active{display:block;animation:pageFade 0.35s ease both}
+
+/* ─── HERO ─── */
+.hero{padding:72px 5vw 60px;position:relative;overflow:hidden;min-height:calc(100vh - 64px);display:flex;align-items:center}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 900px 600px at 60% -50px,rgba(79,142,247,0.1) 0%,transparent 65%),radial-gradient(ellipse 400px 400px at 5% 80%,rgba(124,92,252,0.07) 0%,transparent 60%);pointer-events:none}
+#particles{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.particle{position:absolute;width:2px;height:2px;background:var(--blue);border-radius:50%;animation:particleDrift linear infinite;opacity:0}
+.hero-grid{max-width:1160px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 420px;gap:64px;align-items:center;position:relative;z-index:1}
+
+/* Hero text animations */
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:var(--blue-dim);border:1px solid rgba(79,142,247,0.28);color:var(--blue2);font-size:12px;font-weight:500;padding:5px 14px;border-radius:20px;margin-bottom:22px;animation:fadeUp 0.6s 0.1s ease both}
+.hero-badge-dot{width:6px;height:6px;background:var(--blue);border-radius:50%;animation:blink 2s infinite}
+.hero h1{font-size:clamp(36px,5vw,64px);font-weight:800;line-height:1.06;letter-spacing:-0.03em;color:#fff;margin-bottom:20px;animation:fadeUp 0.6s 0.22s ease both}
+.hero h1 .blue{color:var(--blue)}
+.hero-cursor{display:inline-block;width:3px;height:0.85em;background:var(--blue);margin-left:3px;vertical-align:middle;animation:cursorBlink 0.75s step-end infinite}
+.hero-sub{font-size:17px;color:var(--text2);font-weight:400;max-width:500px;line-height:1.68;margin-bottom:32px;animation:fadeUp 0.6s 0.34s ease both}
+.hero-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px;animation:fadeUp 0.6s 0.46s ease both}
+.hero-notice{font-size:12px;color:var(--text3);animation:fadeUp 0.6s 0.52s ease both}
+.hero-notice a{color:var(--blue);text-decoration:none;cursor:pointer}
+.hero-notice a:hover{text-decoration:underline}
+.risk-banner{display:inline-flex;align-items:center;gap:18px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;padding:9px 18px;margin-top:24px;font-size:13px;animation:fadeUp 0.6s 0.6s ease both}
+.rbi{display:flex;align-items:center;gap:7px;color:var(--text2)}
+.rbd{width:1px;height:18px;background:var(--border)}
+.dot-r{width:7px;height:7px;border-radius:50%;background:var(--red);flex-shrink:0;animation:blink 1.5s infinite}
+.dot-g{width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0;animation:blink 2s 0.5s infinite}
+
+/* ─── HERO VISUAL — DOCUMENT SCANNER ─── */
+.hero-visual{position:relative;height:440px;animation:fadeIn 0.8s 0.4s ease both}
+.doc-card{position:absolute;background:linear-gradient(145deg,var(--bg3),var(--bg4));border:1px solid var(--border2);border-radius:14px;padding:22px;box-shadow:0 24px 64px rgba(0,0,0,0.5)}
+.doc-main{width:290px;top:10px;left:10px;animation:floatY 7s ease-in-out infinite}
+.doc-side{width:210px;top:50px;right:0;animation:floatY2 6s ease-in-out infinite 1.2s;opacity:0.82}
+
+.doc-header{display:flex;align-items:center;gap:9px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid var(--border)}
+.doc-flag{font-size:20px}
+.doc-title{font-size:12.5px;font-weight:700;color:#fff;letter-spacing:-0.01em}
+.doc-sub{font-size:10px;color:var(--text3)}
+.doc-scan{position:relative;overflow:hidden}
+.scan-line{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(79,142,247,0.9),rgba(79,142,247,0.3),transparent);animation:scanDown 3s ease-in-out infinite;box-shadow:0 0 10px rgba(79,142,247,0.7);z-index:2}
+.doc-row{margin-bottom:10px}
+.doc-lbl{font-size:9px;color:var(--text3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px}
+.doc-bar{height:7px;border-radius:4px;background:var(--bg5)}
+.doc-bar.pass{background:linear-gradient(90deg,rgba(34,197,94,0.4),rgba(34,197,94,0.2))}
+.doc-bar.warn{background:linear-gradient(90deg,rgba(245,158,11,0.4),rgba(245,158,11,0.15))}
+.doc-bar.fail{background:linear-gradient(90deg,rgba(239,68,68,0.4),rgba(239,68,68,0.15))}
+.doc-stamp{position:absolute;bottom:16px;right:16px;width:54px;height:54px;border:2.5px solid var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--green);font-size:9.5px;font-weight:800;letter-spacing:0.04em;text-align:center;line-height:1.2;animation:stampPop 7s ease-in-out infinite;transform:rotate(-15deg);text-transform:uppercase}
+
+.doc-checks{display:grid;gap:7px}
+.doc-check-row{display:flex;align-items:center;justify-content:space-between;font-size:11px}
+.doc-check-label{color:var(--text3)}
+.doc-check-pass{color:var(--green);font-weight:600;font-size:10.5px}
+.doc-check-warn{color:var(--amber);font-weight:600;font-size:10.5px}
+.doc-check-fail{color:var(--red);font-weight:600;font-size:10.5px}
+
+.float-pill{position:absolute;bottom:28px;left:-20px;background:var(--bg2);border:1px solid var(--border2);border-radius:10px;padding:11px 15px;display:flex;align-items:center;gap:10px;animation:floatBadge 4s ease-in-out infinite 0.8s;box-shadow:0 10px 32px rgba(0,0,0,0.4)}
+.fp-icon{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.fp-icon.danger{background:var(--red-dim)}
+.fp-label{font-size:11.5px;font-weight:600;color:#fff;line-height:1.2}
+.fp-sub{font-size:10px;color:var(--text3)}
+
+/* ─── TRUST STRIP ─── */
+.trust-strip{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:14px 5vw;display:flex;justify-content:center;gap:36px;flex-wrap:wrap}
+.trust-item{font-size:12px;color:var(--text3);display:flex;align-items:center;gap:6px;transition:color 0.2s}
+.trust-item:hover{color:var(--text2)}
+.trust-item svg{opacity:0.45;transition:opacity 0.2s}
+.trust-item:hover svg{opacity:0.7}
+
+/* ─── BUTTONS ─── */
+.btn-primary{background:var(--blue);color:#fff;padding:13px 26px;border-radius:9px;font-size:14px;font-weight:600;border:none;cursor:pointer;transition:opacity 0.15s,transform 0.2s,box-shadow 0.2s;display:inline-flex;align-items:center;gap:7px;text-decoration:none;font-family:var(--font)}
+.btn-primary:hover{opacity:0.88;transform:translateY(-2px);box-shadow:0 8px 24px rgba(79,142,247,0.3)}
+.btn-secondary{background:rgba(255,255,255,0.06);color:var(--text);padding:13px 22px;border-radius:9px;font-size:14px;font-weight:500;border:1px solid var(--border2);cursor:pointer;transition:background 0.15s,transform 0.2s;font-family:var(--font)}
+.btn-secondary:hover{background:rgba(255,255,255,0.1);transform:translateY(-1px)}
+
+/* ─── SECTIONS ─── */
+.section{padding:72px 5vw;max-width:1160px;margin:0 auto}
+.section-center{text-align:center}
+.eyebrow{font-size:11.5px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-bottom:12px}
+.section h2{font-size:clamp(26px,3.5vw,40px);font-weight:800;color:#fff;letter-spacing:-0.025em;line-height:1.1;margin-bottom:14px}
+.section-sub{font-size:16px;color:var(--text2);max-width:540px;margin:0 auto;line-height:1.65}
+
+/* ─── STATS BAR ─── */
+.stats-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:48px 0 0}
+.stat-cell{background:var(--bg2);padding:28px 24px;text-align:center;transition:background 0.2s}
+.stat-cell:hover{background:var(--bg3)}
+.stat-num{font-size:38px;font-weight:800;color:#fff;letter-spacing:-0.04em;line-height:1;margin-bottom:5px}
+.stat-num span{color:var(--blue)}
+.stat-lbl{font-size:12px;color:var(--text3)}
+
+/* ─── RISK METER ─── */
+.risk-meter{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:28px;margin:40px 0 0}
+.risk-meter-head{font-size:13px;font-weight:600;color:var(--text2);margin-bottom:18px;display:flex;align-items:center;gap:7px}
+.rm-dot{width:7px;height:7px;border-radius:50%;background:var(--blue);animation:blink 2s infinite;flex-shrink:0}
+.rm-rows{display:grid;gap:11px}
+.rm-row{display:grid;grid-template-columns:150px 1fr 38px;gap:12px;align-items:center}
+.rm-name{font-size:12px;color:var(--text2);text-align:right}
+.rm-track{height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.rm-fill{height:100%;border-radius:3px;width:0;transition:width 1.4s cubic-bezier(0.4,0,0.2,1)}
+.rm-fill.r{background:linear-gradient(90deg,#ef4444,#f87171)}
+.rm-fill.a{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
+.rm-fill.g{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.rm-pct{font-size:11px;color:var(--text3);font-weight:600}
+
+/* ─── STEP CARDS ─── */
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:44px}
+.step-card{background:var(--bg2);padding:32px 28px;position:relative;overflow:hidden;transition:background 0.25s,transform 0.25s;cursor:default}
+.step-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),#7c5cfc);transform:scaleX(0);transform-origin:left;transition:transform 0.35s ease}
+.step-card:hover{background:var(--bg3)}
+.step-card:hover::after{transform:scaleX(1)}
+.step-icon{width:40px;height:40px;border-radius:10px;background:var(--blue-dim);border:1px solid rgba(79,142,247,0.22);display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:18px;transition:transform 0.25s,background 0.25s}
+.step-card:hover .step-icon{transform:scale(1.12) rotate(-5deg);background:rgba(79,142,247,0.25)}
+.step-num{font-size:11px;font-weight:600;letter-spacing:0.08em;color:var(--text3);text-transform:uppercase;margin-bottom:10px}
+.step-card h3{font-size:17px;font-weight:700;color:#fff;margin-bottom:8px;letter-spacing:-0.01em}
+.step-card p{font-size:13.5px;color:var(--text2);line-height:1.6}
+
+/* ─── REFUSAL REASONS SECTION ─── */
+.refusal-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:56px 5vw}
+.refusal-inner{max-width:1160px;margin:0 auto}
+
+/* ─── GUIDE GRID ─── */
+.guide-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.guide-item{display:flex;align-items:center;gap:10px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:13px 16px;font-size:13.5px;color:var(--text2);cursor:pointer;transition:border-color 0.15s,color 0.15s,background 0.15s,transform 0.18s,padding-left 0.18s;text-decoration:none}
+.guide-item::before{content:'›';color:var(--blue);font-size:17px;font-weight:700;flex-shrink:0;transition:transform 0.18s}
+.guide-item:hover{border-color:rgba(79,142,247,0.35);color:var(--text);background:var(--bg3);transform:translateX(4px);padding-left:20px}
+.guide-item:hover::before{transform:translateX(2px)}
+
+/* ─── PRICING ─── */
+.pricing-header{text-align:center;padding:72px 5vw 0;max-width:1160px;margin:0 auto}
+.pricing-header h1{font-size:clamp(28px,4vw,46px);font-weight:800;color:#fff;letter-spacing:-0.025em;margin-bottom:10px}
+.pricing-header p{font-size:16px;color:var(--text2);margin-bottom:8px}
+.pricing-meta{font-size:13px;color:var(--text3);margin-bottom:10px}
+.pricing-tagline{font-size:14px;color:var(--text2);font-weight:500}
+.pricing-notice{display:inline-flex;align-items:center;gap:16px;margin-top:18px;flex-wrap:wrap;justify-content:center}
+.notice-pill{display:flex;align-items:center;gap:6px;font-size:12.5px;padding:6px 14px;border-radius:20px}
+.np-red{background:var(--red-dim);border:1px solid rgba(239,68,68,0.22);color:#fca5a5}
+.np-green{background:var(--green-dim);border:1px solid rgba(34,197,94,0.22);color:#86efac;cursor:pointer;transition:background 0.15s}
+.np-green:hover{background:rgba(34,197,94,0.2)}
+
+.pricing-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:36px 5vw 16px;max-width:1160px;margin:0 auto}
+.pricing-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:28px;position:relative;transition:transform 0.25s ease,box-shadow 0.25s ease,border-color 0.25s}
+.pricing-card:hover{transform:translateY(-7px);box-shadow:0 20px 50px rgba(0,0,0,0.4)}
+.pricing-card.featured{border-color:var(--blue);background:var(--bg3)}
+.pricing-card.featured:hover{box-shadow:0 20px 50px rgba(79,142,247,0.18)}
+.pricing-card.featured::before{content:'RECOMMENDED';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:10px;font-weight:700;letter-spacing:0.1em;padding:3px 14px;border-radius:20px;white-space:nowrap}
+.plan-label{font-size:10.5px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
+.plan-price{font-size:50px;font-weight:800;color:#fff;letter-spacing:-0.04em;line-height:1;margin-bottom:4px}
+.plan-note{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);margin-bottom:16px}
+.plan-desc{font-size:13.5px;color:var(--text2);line-height:1.55;margin-bottom:20px;min-height:60px}
+.plan-div{height:1px;background:var(--border);margin-bottom:16px}
+.plan-inc{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
+.plan-feats{list-style:none;display:grid;gap:8px;margin-bottom:24px}
+.plan-feats li{font-size:13px;color:var(--text2);display:flex;align-items:flex-start;gap:8px;line-height:1.45}
+.plan-feats li::before{content:'';width:16px;height:16px;border-radius:50%;background:var(--blue-dim);border:1.5px solid var(--blue);flex-shrink:0;margin-top:0px;background-image:url("data:image/svg+xml,%3Csvg width='8' height='6' viewBox='0 0 8 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3L3 5L7 1' stroke='%234f8ef7' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center}
+.plan-btn{width:100%;padding:12px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:opacity 0.15s,transform 0.15s;font-family:var(--font)}
+.plan-btn:hover{opacity:0.85;transform:translateY(-1px)}
+.pb-primary{background:var(--blue);color:#fff}
+.pb-ghost{background:rgba(255,255,255,0.05);color:var(--text);border:1px solid var(--border2)}
+.pb-ghost:hover{background:rgba(255,255,255,0.09)}
+.pricing-footer{text-align:center;padding:10px 5vw 14px;font-size:12.5px;color:var(--text3);max-width:1160px;margin:0 auto}
+
+/* ─── COMPARE TABLE ─── */
+.compare-section{padding:48px 5vw;max-width:1160px;margin:0 auto}
+.compare-section h2{font-size:22px;font-weight:700;color:#fff;letter-spacing:-0.02em;margin-bottom:18px}
+.compare-table{width:100%;border-collapse:collapse;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.compare-table th{background:var(--bg3);padding:14px 20px;text-align:left;font-size:11px;font-weight:600;letter-spacing:0.09em;text-transform:uppercase;color:var(--text3)}
+.compare-table th.apex{color:var(--blue)}
+.compare-table td{padding:14px 20px;border-top:1px solid var(--border);font-size:13.5px;color:var(--text2);transition:background 0.15s}
+.compare-table td:first-child{color:var(--text);font-weight:500}
+.compare-table tr:hover td{background:rgba(79,142,247,0.035)}
+.compare-table td.good{color:var(--green);font-weight:500}
+.compare-note{font-size:12px;color:var(--text3);margin-top:10px}
+
+/* ─── CHECKER ─── */
+.checker-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:32px;max-width:680px;margin:0 auto}
+.ck-prog{height:3px;background:var(--border);border-radius:2px;margin-bottom:20px;overflow:hidden}
+.ck-fill{height:100%;background:linear-gradient(90deg,var(--blue),#7c5cfc);transition:width 0.45s cubic-bezier(0.4,0,0.2,1)}
+.ck-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.ck-step{font-size:11px;color:var(--text3);letter-spacing:0.07em;text-transform:uppercase;font-weight:500}
+.ck-route{font-size:11px;color:var(--blue);letter-spacing:0.05em;font-weight:500}
+.ck-q{font-size:16px;font-weight:700;color:#fff;letter-spacing:-0.01em;margin-bottom:4px;line-height:1.35}
+.ck-hint{font-size:12.5px;color:var(--text3);margin-bottom:16px;line-height:1.45}
+.ck-opts{display:grid;gap:7px;margin-bottom:14px}
+.ck-opt{display:flex;align-items:flex-start;gap:11px;padding:11px 14px;border:1px solid var(--border);border-radius:8px;cursor:pointer;background:transparent;transition:border-color 0.15s,background 0.15s,transform 0.15s;animation:ckSlide 0.28s ease both}
+.ck-opt:nth-child(1){animation-delay:0s}
+.ck-opt:nth-child(2){animation-delay:0.05s}
+.ck-opt:nth-child(3){animation-delay:0.1s}
+.ck-opt:nth-child(4){animation-delay:0.15s}
+.ck-opt:nth-child(5){animation-delay:0.2s}
+.ck-opt:hover{border-color:var(--border2);background:rgba(255,255,255,0.03);transform:translateX(2px)}
+.ck-opt.sel{border-color:var(--blue);background:var(--blue-dim)}
+.ck-radio{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--border2);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
+.ck-opt.sel .ck-radio{border-color:var(--blue);background:var(--blue)}
+.ck-dot{width:6px;height:6px;background:#fff;border-radius:50%;display:none}
+.ck-opt.sel .ck-dot{display:block}
+.ck-label{font-size:13.5px;color:var(--text);line-height:1.35;font-weight:500}
+.ck-sub{font-size:11.5px;color:var(--text3);margin-top:2px}
+.ck-nav{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.ck-back{background:none;border:none;color:var(--text3);font-size:13px;cursor:pointer;padding:8px 0;font-family:var(--font);transition:color 0.15s}
+.ck-back:hover{color:var(--text)}
+.ck-next{padding:10px 22px;background:var(--blue);color:#fff;border:none;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer;opacity:0.28;pointer-events:none;transition:opacity 0.2s,transform 0.15s;font-family:var(--font)}
+.ck-next.on{opacity:1;pointer-events:all}
+.ck-next.on:hover{transform:translateY(-1px)}
+.ck-disc{font-size:11px;color:var(--text3);line-height:1.5;border-left:2px solid var(--border2);padding-left:10px;margin-bottom:14px}
+.ck-loading{text-align:center;padding:40px 0}
+.ck-spin{width:32px;height:32px;border:2px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:spin 0.75s linear infinite;margin:0 auto 14px}
+.ck-load-t{font-size:14px;color:var(--text2);font-weight:500}
+.ck-load-s{font-size:12px;color:var(--text3);margin-top:3px}
+/* shimmer loading bar */
+.ck-load-bar{height:3px;background:linear-gradient(90deg,var(--bg3) 25%,var(--blue-dim) 50%,var(--bg3) 75%);background-size:600px 100%;animation:shimmer 1.5s infinite;border-radius:2px;margin-top:18px}
+.ck-res-badge{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;padding:4px 11px;border-radius:20px;margin-bottom:10px;animation:fadeUp 0.4s ease both}
+.rb-high{background:var(--red-dim);border:1px solid rgba(239,68,68,0.28);color:#fca5a5}
+.rb-med{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.28);color:#fcd34d}
+.rb-low{background:var(--green-dim);border:1px solid rgba(34,197,94,0.28);color:#86efac}
+.ck-res-title{font-size:18px;font-weight:700;color:#fff;letter-spacing:-0.01em;margin-bottom:6px;line-height:1.3;animation:fadeUp 0.4s 0.07s ease both}
+.ck-res-intro{font-size:13px;color:var(--text2);line-height:1.55;margin-bottom:16px;animation:fadeUp 0.4s 0.14s ease both}
+.ck-risks{display:grid;gap:7px;margin-bottom:16px}
+.ck-risk{padding:11px 14px;border-radius:8px;border-left:2.5px solid;animation:fadeUp 0.4s ease both}
+.ck-risk:nth-child(1){animation-delay:0.2s}
+.ck-risk:nth-child(2){animation-delay:0.3s}
+.ck-risk:nth-child(3){animation-delay:0.4s}
+.ck-risk:nth-child(4){animation-delay:0.5s}
+.rh{background:rgba(239,68,68,0.06);border-color:var(--red)}
+.rm{background:rgba(245,158,11,0.06);border-color:var(--amber)}
+.rl{background:rgba(34,197,94,0.06);border-color:var(--green)}
+.ck-rlv{font-size:9.5px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:2px}
+.rh .ck-rlv{color:#fca5a5}.rm .ck-rlv{color:#fcd34d}.rl .ck-rlv{color:#86efac}
+.ck-rtitle{font-size:13px;font-weight:600;color:#fff;margin-bottom:2px}
+.ck-rdesc{font-size:12px;color:var(--text2);line-height:1.5}
+.ck-cta-btn{width:100%;padding:13px 20px;background:var(--blue);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;font-family:var(--font);transition:opacity 0.15s,transform 0.15s;animation:fadeUp 0.4s 0.55s ease both}
+.ck-cta-btn:hover{opacity:0.85;transform:translateY(-1px)}
+.ck-restart{width:100%;padding:9px;background:transparent;border:1px solid var(--border);border-radius:8px;color:var(--text3);font-size:12.5px;cursor:pointer;font-family:var(--font);transition:color 0.15s,border-color 0.15s}
+.ck-restart:hover{color:var(--text);border-color:var(--border2)}
+.ck-res-disc{font-size:10.5px;color:var(--text3);line-height:1.5;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+
+/* ─── GUIDES ─── */
+.guides-hero{padding:52px 5vw 28px;max-width:1160px;margin:0 auto}
+.guides-hero h1{font-size:clamp(26px,3.5vw,38px);font-weight:800;color:#fff;letter-spacing:-0.025em;margin-bottom:10px}
+.guides-hero p{font-size:15px;color:var(--text2);max-width:660px;line-height:1.65;margin-bottom:5px}
+.guides-last{font-size:12px;color:var(--text3)}
+.guides-body{padding:0 5vw 72px;max-width:1160px;margin:0 auto}
+.guide-section{margin-bottom:40px}
+.guide-sec-title{font-size:20px;font-weight:700;color:var(--blue);letter-spacing:-0.01em;margin-bottom:14px}
+.guide-cats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:32px}
+.guide-cat{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 20px;cursor:pointer;transition:border-color 0.2s,background 0.2s,transform 0.2s}
+.guide-cat:hover{border-color:var(--border2);background:var(--bg3);transform:translateY(-2px)}
+.guide-cat h3{font-size:15px;font-weight:600;color:#fff;margin-bottom:4px}
+.guide-cat p{font-size:12.5px;color:var(--text3);line-height:1.4}
+.next-steps-box{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center;margin:20px 0 32px}
+.ns-label{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:10px;font-weight:600}
+.ns-btn{display:block;background:var(--blue-dim);border:1px solid rgba(79,142,247,0.3);border-radius:8px;padding:13px 20px;color:var(--blue2);font-size:14px;font-weight:600;text-decoration:none;cursor:pointer;transition:background 0.15s}
+.ns-btn:hover{background:rgba(79,142,247,0.22)}
+.ns-note{font-size:11.5px;color:var(--text3);margin-top:6px}
+
+/* ─── FAQ ─── */
+.faq-body{padding:48px 5vw 80px;max-width:760px;margin:0 auto}
+.faq-eyebrow{display:inline-block;background:var(--bg3);border:1px solid var(--border2);color:var(--text2);font-size:12px;font-weight:500;padding:4px 12px;border-radius:20px;margin-bottom:18px}
+.faq-body h1{font-size:clamp(26px,4vw,42px);font-weight:800;color:#fff;letter-spacing:-0.03em;margin-bottom:40px}
+.faq-item{border-top:1px solid var(--border)}
+.faq-item:last-child{border-bottom:1px solid var(--border)}
+.faq-q{width:100%;background:none;border:none;text-align:left;padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:16px;cursor:pointer;color:var(--text);font-size:15px;font-weight:500;font-family:var(--font);transition:color 0.15s}
+.faq-q:hover{color:#fff}
+.faq-icon{width:28px;height:28px;border:1px solid var(--border2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--text3);font-size:18px;flex-shrink:0;transition:transform 0.25s,border-color 0.25s,color 0.25s}
+.faq-item.open .faq-icon{transform:rotate(45deg);border-color:var(--blue);color:var(--blue)}
+.faq-a{font-size:14px;color:var(--text2);line-height:1.7;padding-bottom:20px;display:none;animation:fadeUp 0.3s ease both}
+.faq-item.open .faq-a{display:block}
+
+/* ─── ABOUT ─── */
+.about-body{padding:48px 5vw 80px;max-width:800px;margin:0 auto}
+.about-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+.about-body h1{font-size:clamp(24px,3.5vw,36px);font-weight:800;color:#fff;letter-spacing:-0.025em;margin-bottom:10px}
+.about-intro{font-size:15px;color:var(--text2);line-height:1.65;margin-bottom:36px}
+.about-sec{margin-bottom:36px}
+.about-sec h2{font-size:19px;font-weight:700;color:var(--blue);letter-spacing:-0.01em;margin-bottom:12px}
+.about-sec p{font-size:14.5px;color:var(--text2);line-height:1.7;margin-bottom:10px}
+.about-sec a{color:var(--blue);text-decoration:none;font-weight:600}
+.not-list{background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.18);border-radius:10px;padding:20px 24px;display:grid;gap:9px}
+.not-item{display:flex;align-items:center;gap:10px;font-size:13.5px;color:#fca5a5;transition:transform 0.15s}
+.not-item:hover{transform:translateX(3px)}
+.not-item::before{content:'✕';color:var(--red);font-weight:700;font-size:12px;flex-shrink:0}
+
+/* ─── FLOAT CTA ─── */
+.float-cta{position:fixed;bottom:24px;right:24px;z-index:200;background:var(--blue);color:#fff;padding:12px 20px;border-radius:40px;font-size:13.5px;font-weight:600;cursor:pointer;border:none;font-family:var(--font);display:flex;align-items:center;gap:8px;white-space:nowrap;animation:ctaPulse 3s ease-in-out infinite;transition:transform 0.2s}
+.float-cta:hover{transform:translateY(-3px)}
+
+/* ─── TOAST ─── */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:10px 18px;font-size:13px;color:var(--text);opacity:0;pointer-events:none;z-index:500;white-space:nowrap;display:flex;align-items:center;gap:8px;transition:opacity 0.25s,transform 0.25s}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+
+/* ─── REVEAL ─── */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity 0.55s ease,transform 0.55s ease}
+.reveal.vis{opacity:1;transform:translateY(0)}
+.stagger .reveal:nth-child(1){transition-delay:0s}
+.stagger .reveal:nth-child(2){transition-delay:0.1s}
+.stagger .reveal:nth-child(3){transition-delay:0.2s}
+.stagger .reveal:nth-child(4){transition-delay:0.3s}
+.stagger .reveal:nth-child(5){transition-delay:0.4s}
+.stagger .reveal:nth-child(6){transition-delay:0.5s}
+
+/* ─── FOOTER ─── */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:52px 5vw 28px}
+.footer-main{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr 1fr;gap:36px;margin-bottom:40px}
+.footer-logo{font-size:16px;font-weight:700;color:#fff;margin-bottom:3px;display:flex;align-items:center;gap:8px}
+.footer-logo-icon{width:22px;height:22px;background:linear-gradient(135deg,var(--blue),#7c5cfc);border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff}
+.footer-logo-sub{font-size:10px;color:var(--text3);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;padding-left:30px}
+.footer-about{font-size:12.5px;color:var(--text3);line-height:1.65;margin-bottom:12px}
+.footer-contact{font-size:12.5px;color:var(--text3);margin-bottom:3px}
+.footer-contact a{color:var(--blue);text-decoration:none;transition:opacity 0.15s}
+.footer-contact a:hover{opacity:0.75}
+.footer-disc{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;padding:14px;margin-top:14px;font-size:11.5px;color:var(--text3);line-height:1.55}
+.footer-disc p+p{margin-top:6px}
+.footer-col h4{font-size:10.5px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:12px}
+.footer-col ul{list-style:none;display:grid;gap:7px}
+.footer-col ul li a{font-size:13px;color:var(--text3);text-decoration:none;transition:color 0.15s;cursor:pointer}
+.footer-col ul li a:hover{color:var(--text)}
+.footer-guides{max-width:1160px;margin:0 auto;border-top:1px solid var(--border);padding-top:20px;margin-bottom:20px}
+.fg-label{font-size:10.5px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3);margin-bottom:10px}
+.fg-links{display:flex;flex-wrap:wrap;gap:8px}
+.fg-links a{font-size:12px;color:var(--text3);text-decoration:none;transition:color 0.15s;cursor:pointer}
+.fg-links a:hover{color:var(--text)}
+.footer-bottom{max-width:1160px;margin:0 auto;border-top:1px solid var(--border);padding-top:20px;display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap}
+.fb-left{font-size:11.5px;color:var(--text3);line-height:1.6;max-width:640px}
+.fb-left p{margin-bottom:3px}
+.fb-right{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--text3);white-space:nowrap}
+.status-dot{width:7px;height:7px;background:var(--green);border-radius:50%;animation:blink 3s infinite}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:960px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  .hero-grid{grid-template-columns:1fr!important}
+  .hero-visual{display:none}
+  .hero{text-align:center;align-items:flex-start}
+  .hero-actions{justify-content:center}
+  .hero-sub{margin-left:auto;margin-right:auto}
+  .pricing-cards{grid-template-columns:1fr}
+  .steps-grid{grid-template-columns:1fr}
+  .stats-bar{grid-template-columns:1fr}
+  .rm-row{grid-template-columns:100px 1fr 32px}
+  .footer-main{grid-template-columns:1fr 1fr}
+  .guide-grid{grid-template-columns:1fr}
+  .guide-cats{grid-template-columns:1fr}
+  .compare-table{font-size:12px}
+  .compare-table th,.compare-table td{padding:10px 12px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="showPage('home')">
+      <div class="nav-logo-icon">AV</div>
+      <div>
+        <div class="nav-logo-text">ApexVisa UK</div>
+        <span class="nav-logo-sub">UK Visa Check</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a onclick="showPage('how')" id="nav-how">How It Works</a>
+      <a onclick="showPage('who')" id="nav-who">Who It's For</a>
+      <a onclick="showPage('pricing')" id="nav-pricing">Pricing</a>
+      <a onclick="showPage('faq')" id="nav-faq">FAQ</a>
+      <a onclick="showPage('guides')" id="nav-guides">Guides ▾</a>
+      <a onclick="showPage('about')" id="nav-about">About</a>
+      <a class="nav-cta" onclick="showPage('checker')" id="nav-checker">Start Free Check →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- SCROLL PROGRESS BAR -->
+<div class="scroll-bar"><div class="scroll-fill" id="scroll-fill"></div></div>
+
+<!-- FLOATING CTA -->
+<button class="float-cta" onclick="showPage('checker')">
+  <svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M9 12l2 2 4-4m5 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+  Check My Visa Refusal Risk Free →
+</button>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><div class="toast-dot" id="tdot"></div><span id="tmsg"></span></div>
+
+<!-- ══ HOME ══ -->
+<div class="page active" id="page-home">
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div id="particles"></div>
+    <div class="hero-grid">
+      <!-- LEFT -->
+      <div>
+        <div class="hero-badge"><div class="hero-badge-dot"></div>Updated for April 2026 Home Office Rules</div>
+        <h1>Check Your <span class="blue">UK Visa</span><br>for <span id="tw-target">Hidden Refusal Risks</span><span class="hero-cursor"></span></h1>
+        <p class="hero-sub">Answer questions about your application. We analyse your answers against current UKVI rules and show you what could cause a refusal — before you submit.</p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="showPage('checker')">Start Free Check →</button>
+          <button class="btn-secondary" onclick="showPage('how')">How It Works</button>
+        </div>
+        <p class="hero-notice">Not legal advice. Not affiliated with the UK Government or Home Office. <a onclick="showPage('about')">About this tool</a></p>
+        <div class="risk-banner">
+          <div class="rbi"><div class="dot-r"></div>UK visa fees are often substantial and non-refundable</div>
+          <div class="rbd"></div>
+          <div class="rbi" style="cursor:pointer" onclick="showPage('pricing')"><div class="dot-g"></div>Review options: £19–£69</div>
+        </div>
+      </div>
+      <!-- RIGHT — DOCUMENT SCANNER VISUAL -->
+      <div class="hero-visual">
+        <div class="doc-card doc-main">
+          <div class="doc-header">
+            <div class="doc-flag">🇬🇧</div>
+            <div><div class="doc-title">Visa Application</div><div class="doc-sub">FLR(M) · Spouse Route</div></div>
+          </div>
+          <div class="doc-scan">
+            <div class="scan-line"></div>
+            <div class="doc-row"><div class="doc-lbl">Sponsor Income</div><div class="doc-bar pass" style="width:88%"></div></div>
+            <div class="doc-row"><div class="doc-lbl">Relationship Evidence</div><div class="doc-bar warn" style="width:62%"></div></div>
+            <div class="doc-row"><div class="doc-lbl">Absence Record</div><div class="doc-bar pass" style="width:95%"></div></div>
+            <div class="doc-row"><div class="doc-lbl">Previous Refusals</div><div class="doc-bar fail" style="width:40%"></div></div>
+            <div class="doc-row"><div class="doc-lbl">eVisa Status</div><div class="doc-bar pass" style="width:78%"></div></div>
+          </div>
+          <div class="doc-stamp">RISK<br>CHECK</div>
+        </div>
+        <div class="doc-card doc-side">
+          <div class="doc-header">
+            <div class="doc-flag">📋</div>
+            <div><div class="doc-title">Risk Analysis</div><div class="doc-sub">April 2026 Rules</div></div>
+          </div>
+          <div class="doc-checks">
+            <div class="doc-check-row"><span class="doc-check-label">£29,000 income</span><span class="doc-check-pass">✓ Pass</span></div>
+            <div class="doc-check-row"><span class="doc-check-label">Relationship proof</span><span class="doc-check-warn">⚠ Review</span></div>
+            <div class="doc-check-row"><span class="doc-check-label">Absence limit</span><span class="doc-check-pass">✓ Pass</span></div>
+            <div class="doc-check-row"><span class="doc-check-label">Refusal history</span><span class="doc-check-fail">✗ Flag</span></div>
+            <div class="doc-check-row"><span class="doc-check-label">Good Character</span><span class="doc-check-pass">✓ Pass</span></div>
+          </div>
+        </div>
+        <div class="float-pill">
+          <div class="fp-icon danger">⚠</div>
+          <div>
+            <div class="fp-label">2 Risk Flags Found</div>
+            <div class="fp-sub">Before submission · Free check</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRUST STRIP -->
+  <div class="trust-strip">
+    <div class="trust-item"><svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" d="M9 12l2 2 4-4m5 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>April 2026 Immigration Rules</div>
+    <div class="trust-item"><svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>Private &amp; Confidential</div>
+    <div class="trust-item"><svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>Instant Results</div>
+    <div class="trust-item"><svg width="14" height="14" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Available 24/7</div>
+  </div>
+
+  <!-- STATS -->
+  <div class="section">
+    <div class="section-center reveal">
+      <p class="eyebrow">By the Numbers</p>
+      <h2>Why applicants check<br>before they submit</h2>
+    </div>
+    <div class="stats-bar reveal">
+      <div class="stat-cell"><div class="stat-num"><span id="c1">0</span>%</div><div class="stat-lbl">of refusals cite insufficient financial evidence</div></div>
+      <div class="stat-cell"><div class="stat-num">£<span id="c2">0</span></div><div class="stat-lbl">average cost of a refused spouse visa application</div></div>
+      <div class="stat-cell"><div class="stat-num"><span id="c3">0</span>%</div><div class="stat-lbl">of refused applicants had an avoidable evidence gap</div></div>
+    </div>
+  </div>
+
+  <!-- RISK METER -->
+  <div class="section" style="padding-top:0">
+    <div class="reveal">
+      <div class="risk-meter">
+        <div class="risk-meter-head"><div class="rm-dot"></div>Most common UK visa refusal triggers — 2026 data</div>
+        <div class="rm-rows" id="rm-rows">
+          <div class="rm-row"><div class="rm-name">Insufficient funds</div><div class="rm-track"><div class="rm-fill r" data-w="72"></div></div><div class="rm-pct">72%</div></div>
+          <div class="rm-row"><div class="rm-name">Weak relationship proof</div><div class="rm-track"><div class="rm-fill r" data-w="58"></div></div><div class="rm-pct">58%</div></div>
+          <div class="rm-row"><div class="rm-name">Document inconsistency</div><div class="rm-track"><div class="rm-fill a" data-w="44"></div></div><div class="rm-pct">44%</div></div>
+          <div class="rm-row"><div class="rm-name">Prior refusal undisclosed</div><div class="rm-track"><div class="rm-fill a" data-w="38"></div></div><div class="rm-pct">38%</div></div>
+          <div class="rm-row"><div class="rm-name">Absence limit exceeded</div><div class="rm-track"><div class="rm-fill g" data-w="29"></div></div><div class="rm-pct">29%</div></div>
+          <div class="rm-row"><div class="rm-name">Income below £29,000</div><div class="rm-track"><div class="rm-fill r" data-w="65"></div></div><div class="rm-pct">65%</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="section">
+    <div class="section-center reveal">
+      <p class="eyebrow">How It Works</p>
+      <h2>Three steps to knowing<br>your refusal risk</h2>
+      <p class="section-sub">Structured around the questions UKVI caseworkers actually ask — not generic advice.</p>
+    </div>
+    <div class="steps-grid stagger" style="margin-top:44px">
+      <div class="step-card reveal">
+        <div class="step-icon">📝</div>
+        <div class="step-num">Step 01</div>
+        <h3>Answer the questions</h3>
+        <p>Choose from our structured question set covering your visa route, financial evidence, relationship proof, travel history, and prior immigration issues.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-icon">🔍</div>
+        <div class="step-num">Step 02</div>
+        <h3>We check against 2026 rules</h3>
+        <p>Your answers are matched against current UKVI published criteria — the same assessment framework caseworkers use when reviewing applications.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-icon">📊</div>
+        <div class="step-num">Step 03</div>
+        <h3>See your risk breakdown</h3>
+        <p>Receive a flagged risk report identifying what could cause a refusal in your specific situation, with clear guidance on what to address before you submit.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- REFUSAL REASONS -->
+  <div class="refusal-section">
+    <div class="refusal-inner">
+      <h2 class="reveal" style="font-size:22px;font-weight:700;color:#fff;letter-spacing:-0.02em;margin-bottom:6px">Most common UK visa refusal reasons</h2>
+      <p class="reveal" style="font-size:14px;color:var(--text2);margin-bottom:18px">These are the refusal grounds UKVI caseworkers cite most frequently.</p>
+      <div class="guide-grid stagger">
+        <a class="guide-item reveal">UK visa refused for insufficient funds</a>
+        <a class="guide-item reveal">UK visa refused for fake or fraudulent documents</a>
+        <a class="guide-item reveal">UK visa refused for unexplained bank deposits</a>
+        <a class="guide-item reveal">UK spouse visa refused for weak relationship evidence</a>
+        <a class="guide-item reveal">UK visa refused for no travel history</a>
+        <a class="guide-item reveal">UK visa refused for previous immigration issues</a>
+        <a class="guide-item reveal">UK visa refused for income below threshold</a>
+        <a class="guide-item reveal">UK visa refused for missing financial evidence</a>
+        <a class="guide-item reveal">UK visa refused for document inconsistencies</a>
+        <a class="guide-item reveal">UK visa refused for application inconsistencies</a>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px" class="reveal">
+        <button class="btn-secondary" onclick="showPage('guides')" style="font-size:13px;padding:9px 16px">All UK Visa Guides →</button>
+        <button class="btn-secondary" onclick="showPage('guides')" style="font-size:13px;padding:9px 16px">Visa Refusal Guides →</button>
+        <button class="btn-secondary" onclick="showPage('guides')" style="font-size:13px;padding:9px 16px">Financial Requirements →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ HOW IT WORKS ══ -->
+<div class="page" id="page-how">
+  <div class="section section-center">
+    <p class="eyebrow">How It Works</p>
+    <h2>From question to risk report<br>in minutes</h2>
+    <p class="section-sub">The free check shows the opening signal. The paid audit shows the full picture.</p>
+  </div>
+  <div class="section">
+    <div class="steps-grid stagger">
+      <div class="step-card reveal"><div class="step-icon">🗺️</div><div class="step-num">Step 01</div><h3>Select your visa route</h3><p>Tell us which visa category you're applying for — Spouse/Partner, ILR, Citizenship, Skilled Worker, Student, or Visitor. Each route has different risk criteria.</p></div>
+      <div class="step-card reveal"><div class="step-icon">💬</div><div class="step-num">Step 02</div><h3>Answer structured questions</h3><p>Work through questions covering financial evidence, relationship documentation, travel history, employment, and prior immigration issues relevant to your route.</p></div>
+      <div class="step-card reveal"><div class="step-icon">🚩</div><div class="step-num">Step 03</div><h3>Review your risk flags</h3><p>Receive an instant summary of refusal risk signals identified in your answers, mapped against April 2026 UKVI published criteria and known refusal patterns.</p></div>
+    </div>
+    <div style="margin-top:40px;text-align:center" class="reveal">
+      <p style="font-size:14px;color:var(--text3);margin-bottom:18px">The free check covers the main risk signals. For a full 54-point evidence audit and PDF Fix Plan, see our paid options.</p>
+      <button class="btn-primary" onclick="showPage('pricing')">See Pricing →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ WHO IT'S FOR ══ -->
+<div class="page" id="page-who">
+  <div class="section">
+    <p class="eyebrow">Who It's For</p>
+    <h2>For anyone preparing<br>a UK visa application</h2>
+    <p class="section-sub" style="max-width:560px;margin:0">ApexVisa UK is a structured self-service tool. It works for applicants who want to understand their risk position before paying visa fees or instructing a solicitor.</p>
+    <div class="steps-grid stagger" style="margin-top:44px">
+      <div class="step-card reveal"><div class="step-icon">🌱</div><div class="step-num">First-time applicants</div><h3>New to UK immigration</h3><p>Understand what UKVI will assess before you gather documents. Identify gaps in your financial or relationship evidence early — not after a refusal.</p></div>
+      <div class="step-card reveal"><div class="step-icon">🔄</div><div class="step-num">Previously refused</div><h3>Reapplying after refusal</h3><p>Map the specific reasons your previous application was refused against your current circumstances. Understand what has changed and what still needs addressing.</p></div>
+      <div class="step-card reveal"><div class="step-icon">🧩</div><div class="step-num">Complex situations</div><h3>Non-standard cases</h3><p>Unemployed, self-employed, zero-hours contract, cash savings, criminal record, previous overstay — our complex case review covers the specific rules that apply to you.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PRICING ══ -->
+<div class="page" id="page-pricing">
+  <div class="pricing-header reveal">
+    <h1>Pick the right check for<br>your application</h1>
+    <p>Choose the level of review that matches your case and the evidence risk involved.</p>
+    <p class="pricing-meta">Updated for April 2026 Home Office rules. One-off payment. Instant results.</p>
+    <p class="pricing-tagline">The free check shows the opening signal. The paid audit shows the full picture.</p>
+    <div class="pricing-notice">
+      <div class="notice-pill np-red">⚠ UK visa fees are often substantial and non-refundable</div>
+      <div class="notice-pill np-green" onclick="showPage('pricing')">Review options: £19–£69 →</div>
+    </div>
+  </div>
+  <div class="pricing-cards stagger">
+    <div class="pricing-card reveal">
+      <div class="plan-label">Basic Risk Scan</div>
+      <div class="plan-price">£19</div>
+      <div class="plan-note">One-Time Payment</div>
+      <p class="plan-desc">High-level check for obvious red flags. A fast baseline review before you submit.</p>
+      <div class="plan-div"></div>
+      <div class="plan-inc">Included:</div>
+      <ul class="plan-feats"><li>Answer 20 questions</li><li>See the main refusal signals quickly</li><li>Get an instant summary</li></ul>
+      <button class="plan-btn pb-ghost" onclick="showToast('Redirecting to payment…','#22c55e')">Get Basic Scan – £19</button>
+    </div>
+    <div class="pricing-card featured reveal">
+      <div class="plan-label">Full Evidence Audit</div>
+      <div class="plan-price">£39</div>
+      <div class="plan-note">One-Time Payment</div>
+      <p class="plan-desc">Complete 54-point review of your financial and relationship evidence. Includes a structured PDF Fix Plan. The most affordable protection for a £2,000+ visa application.</p>
+      <div class="plan-div"></div>
+      <div class="plan-inc">Included:</div>
+      <ul class="plan-feats"><li>Answer 30 detailed questions</li><li>Receive a structured PDF Fix Plan</li><li>See what to strengthen before you apply</li></ul>
+      <button class="plan-btn pb-primary" onclick="showToast('Redirecting to payment…','#4f8ef7')">Get Full Audit – £39</button>
+    </div>
+    <div class="pricing-card reveal">
+      <div class="plan-label">Complex Case Review</div>
+      <div class="plan-price">£69</div>
+      <div class="plan-note">One-Time Payment</div>
+      <p class="plan-desc">For previous refusals, income gaps, or complicated histories. Includes priority processing and enhanced review depth.</p>
+      <div class="plan-div"></div>
+      <div class="plan-inc">Included:</div>
+      <ul class="plan-feats"><li>Answer up to 45 questions</li><li>Best for previous refusals and complex histories</li><li>Get enhanced review depth and guidance</li></ul>
+      <button class="plan-btn pb-ghost" onclick="showToast('Redirecting to payment…','#22c55e')">Get Complex Review – £69</button>
+    </div>
+  </div>
+  <div class="pricing-footer reveal">
+    Operated by ApexVisa UK Ltd · Secure Stripe checkout · Instant access after payment<br>
+    <span style="color:var(--amber)">Most people only discover evidence issues after a refusal.</span> This audit helps you review them first.
+    <br><br>Not legal advice. Not affiliated with the UK Home Office.
+  </div>
+  <div class="compare-section reveal">
+    <h2>How ApexVisa UK Compares</h2>
+    <table class="compare-table">
+      <thead><tr><th style="width:34%"></th><th>Immigration Solicitor</th><th class="apex">ApexVisa UK</th></tr></thead>
+      <tbody>
+        <tr><td>Cost</td><td>£150–£500 per consultation</td><td class="good">From £19 one-off</td></tr>
+        <tr><td>Need appointment?</td><td>Usually yes</td><td class="good">No — instant, 24/7</td></tr>
+        <tr><td>Immediate structured assessment</td><td>Not usually immediate</td><td>Yes — available straight away</td></tr>
+        <tr><td>No solicitor consultation required</td><td>Consultation usually needed</td><td>Yes — self-serve online</td></tr>
+        <tr><td>Private and confidential</td><td>Private appointment setting</td><td>Private digital assessment flow</td></tr>
+        <tr><td>Personalised refusal risk breakdown</td><td>Varies by consultation scope</td><td>Built into the report</td></tr>
+        <tr><td>Actionable improvement steps</td><td>May require follow-up advice</td><td>Included in your report</td></tr>
+      </tbody>
+    </table>
+    <p class="compare-note">ApexVisa UK is not a law firm. For complex cases or appeals, consult an IAA-registered immigration adviser.</p>
+  </div>
+</div>
+
+<!-- ══ CHECKER ══ -->
+<div class="page" id="page-checker">
+  <div style="padding:52px 5vw 80px;max-width:800px;margin:0 auto">
+    <p class="eyebrow" style="text-align:center">AI-Powered · April 2026 Rules</p>
+    <h2 style="text-align:center;font-size:clamp(24px,3.5vw,36px);font-weight:800;color:#fff;letter-spacing:-0.025em;margin-bottom:8px">Free Visa Risk Check</h2>
+    <p style="text-align:center;font-size:14px;color:var(--text2);margin-bottom:32px;line-height:1.6">ApexVisa analyses your answers against current UK visa rules to identify technical risk factors before you submit. Updated for April 2026 Immigration Rules. Not legal advice.</p>
+    <div class="checker-wrap" id="ck-app"></div>
+  </div>
+</div>
+
+<!-- ══ GUIDES ══ -->
+<div class="page" id="page-guides">
+  <div class="guides-hero reveal">
+    <h1>UK Visa Refusal &amp; Evidence Guides</h1>
+    <p>Structured compliance intelligence covering the rules, risks, and evidence requirements that determine UK visa outcomes.</p>
+    <p class="guides-last">Last reviewed: April 2026</p>
+  </div>
+  <div class="guides-body">
+    <div class="guide-section">
+      <p style="font-size:20px;font-weight:700;color:#fff;margin-bottom:14px;letter-spacing:-0.01em">Browse by Category</p>
+      <div class="guide-cats stagger">
+        <div class="guide-cat reveal"><h3>Spouse &amp; Partner Visa Guides</h3><p>Income thresholds, relationship evidence, refusal risks</p></div>
+        <div class="guide-cat reveal"><h3>Skilled Worker Visa Guides</h3><p>Salary going rates, sponsor requirements, CoS rules</p></div>
+        <div class="guide-cat reveal"><h3>Student Visa Guides</h3><p>Maintenance funds, CAS requirements, genuine student test</p></div>
+        <div class="guide-cat reveal"><h3>Visitor Visa Guides</h3><p>Financial evidence, genuine visitor test, ties to home country</p></div>
+        <div class="guide-cat reveal"><h3>Visa Refusal Guides</h3><p>All refusal scenarios across every route</p></div>
+        <div class="guide-cat reveal"><h3>Financial Requirements Guides</h3><p>Income rules, bank statements, savings calculations</p></div>
+      </div>
+    </div>
+    <div class="next-steps-box reveal">
+      <div class="ns-label">Next Steps</div>
+      <div class="ns-btn" onclick="showPage('checker')">Check for hidden refusal risks →</div>
+      <p class="ns-note">Not a law firm · Not legal advice</p>
+    </div>
+    <div class="guide-section reveal"><div class="guide-sec-title">Financial Rules</div><div class="guide-grid">
+      <a class="guide-item">The 28-Day Rule Explained</a><a class="guide-item">Bank Balance Requirements by Route</a>
+      <a class="guide-item">Cash Savings Calculation Formula</a><a class="guide-item">Large Deposit Rules</a>
+      <a class="guide-item">Proof of Funds Rules</a><a class="guide-item">Sponsor Income Requirement (2026)</a>
+      <a class="guide-item">Category A Income Rules</a><a class="guide-item">Category B Income Rules</a>
+      <a class="guide-item">Self-Employment Income Calculation</a><a class="guide-item">Student Maintenance Funds</a>
+    </div></div>
+    <div class="guide-section reveal"><div class="guide-sec-title">Refusal Reasons</div><div class="guide-grid">
+      <a class="guide-item">Insufficient Funds</a><a class="guide-item">Fake or Fraudulent Documents</a>
+      <a class="guide-item">Unexplained Large Deposits</a><a class="guide-item">Weak Relationship Evidence</a>
+      <a class="guide-item">Travel History Gaps</a><a class="guide-item">Immigration History Problems</a>
+      <a class="guide-item">Income Below Threshold</a><a class="guide-item">Missing Financial Evidence</a>
+      <a class="guide-item">Document Mismatch</a><a class="guide-item">Application Inconsistencies</a>
+    </div></div>
+    <div class="guide-section reveal"><div class="guide-sec-title">Applicant Situations</div><div class="guide-grid">
+      <a class="guide-item">If Unemployed</a><a class="guide-item">After Previous Refusal</a>
+      <a class="guide-item">With Criminal Record</a><a class="guide-item">If Self-Employed</a>
+      <a class="guide-item">After Previous Overstay</a><a class="guide-item">With Low Bank Balance</a>
+      <a class="guide-item">Without Travel History</a><a class="guide-item">Using Cash Savings</a>
+      <a class="guide-item">On Zero-Hours Contract</a><a class="guide-item">With a New Job</a>
+    </div></div>
+    <div class="guide-section reveal"><div class="guide-sec-title">Evidence Requirements</div><div class="guide-grid">
+      <a class="guide-item">Bank Statement Requirements</a><a class="guide-item">Proof of Relationship Examples</a>
+      <a class="guide-item">Tenancy Agreement Evidence</a><a class="guide-item">Cover Letter Guide</a>
+      <a class="guide-item">Genuine Relationship Evidence Checklist</a><a class="guide-item">Employment Letter Format</a>
+      <a class="guide-item">Sponsor Letter Format</a><a class="guide-item">Self-Employment Evidence</a>
+      <a class="guide-item">Document Translation Rules</a><a class="guide-item">Evidence Bundle Organisation</a>
+    </div></div>
+  </div>
+</div>
+
+<!-- ══ FAQ ══ -->
+<div class="page" id="page-faq">
+  <div class="faq-body">
+    <div class="faq-eyebrow">Support</div>
+    <h1>Frequently asked questions</h1>
+    <div id="faq-list">
+      <div class="faq-item"><button class="faq-q">Is this legal advice?<span class="faq-icon">+</span></button><p class="faq-a">No. ApexVisa UK is an automated information tool. It is not a law firm and does not provide legal advice or act as your legal representative. Results are for preliminary guidance only.</p></div>
+      <div class="faq-item"><button class="faq-q">Where do you get your rules from?<span class="faq-icon">+</span></button><p class="faq-a">Our assessment criteria are structured around published UK Immigration Rules, Home Office policy guidance, and UKVI published guidance documents, updated to April 2026. Always verify current requirements on GOV.UK.</p></div>
+      <div class="faq-item"><button class="faq-q">Can this guarantee my visa will be approved?<span class="faq-icon">+</span></button><p class="faq-a">No. ApexVisa UK provides an informational risk analysis based on your answers. No digital tool can guarantee a visa outcome. Our reports are designed to help you identify and address risk factors before submission.</p></div>
+      <div class="faq-item"><button class="faq-q">What happens after I pay?<span class="faq-icon">+</span></button><p class="faq-a">After completing your payment through our secure Stripe checkout, you will immediately access your full risk report or PDF Fix Plan depending on the tier selected. No waiting. No appointment needed.</p></div>
+      <div class="faq-item"><button class="faq-q">Do you store my data?<span class="faq-icon">+</span></button><p class="faq-a">We take data privacy seriously. Please review our Privacy Policy for full details on how your data is handled, stored, and protected. We do not sell your data to third parties.</p></div>
+      <div class="faq-item"><button class="faq-q">Can I use this if I have a complex history?<span class="faq-icon">+</span></button><p class="faq-a">Yes. Our Complex Case Review (£69) is specifically designed for applicants with previous refusals, immigration history issues, criminal records, self-employment income, or other non-standard circumstances.</p></div>
+      <div class="faq-item"><button class="faq-q">Does this submit my application?<span class="faq-icon">+</span></button><p class="faq-a">No. ApexVisa UK is a pre-application risk assessment tool only. It does not file, submit, or interact with UKVI or the Home Office in any way.</p></div>
+      <div class="faq-item"><button class="faq-q">Is ApexVisa UK affiliated with the Home Office?<span class="faq-icon">+</span></button><p class="faq-a">No. ApexVisa UK is an independent commercial tool. It is not affiliated with the UK Government, the Home Office, UK Visas and Immigration (UKVI), or any government body.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ABOUT ══ -->
+<div class="page" id="page-about">
+  <div class="about-body">
+    <p class="about-eyebrow">About &amp; Legal Disclaimer</p>
+    <h1>About ApexVisa UK</h1>
+    <p class="about-intro">What ApexVisa UK is, how the risk audit works, and important legal disclaimers you should read before using this tool.</p>
+    <div class="about-sec reveal"><h2>What ApexVisa UK Is</h2><p>ApexVisa UK is a structured risk assessment tool for UK visa applicants. It provides a questionnaire-based audit that generates a risk score and flagged areas based on your answers. The tool covers the Spouse/Partner, Skilled Worker, Visitor, Student, ILR, and citizenship visa routes.</p><p>ApexVisa UK is not affiliated with the UK Government, the Home Office, UK Visas and Immigration (UKVI), or any government body. It is an independent commercial tool.</p></div>
+    <div class="about-sec reveal"><h2>What ApexVisa UK Is Not</h2>
+      <div class="not-list">
+        <div class="not-item">Not a law firm</div>
+        <div class="not-item">Not a regulated immigration adviser (not IAA-registered)</div>
+        <div class="not-item">Not a solicitor or legal representative</div>
+        <div class="not-item">Not affiliated with the UK Government or Home Office</div>
+        <div class="not-item">Not a source of legal advice</div>
+        <div class="not-item">Not a guarantee of visa approval</div>
+      </div>
+    </div>
+    <div class="about-sec reveal"><h2>Legal Disclaimer</h2><p>The information provided by ApexVisa UK — including all risk scores, flagged items, report content, and website content — is for general informational purposes only. Nothing on this website or in any ApexVisa UK report constitutes legal advice, immigration advice, or a guarantee of any immigration outcome.</p><p>UK immigration law is complex and changes frequently. We strongly recommend consulting a regulated immigration adviser (IAA-registered) or an immigration solicitor before submitting any UK visa application.</p></div>
+    <div class="about-sec reveal"><h2>Methodology and Information Sources</h2><p>The ApexVisa UK risk audit is based on publicly available UK immigration rules, Home Office policy guidance, and published UKVI guidance documents. Our assessment criteria are structured around known refusal patterns and published eligibility requirements for each visa route.</p></div>
+    <div class="about-sec reveal"><h2>Finding Regulated Immigration Help</h2><p>To find a regulated immigration adviser or immigration solicitor, visit the official IAA register at <a href="#">gov.uk/find-an-immigration-adviser</a>. Only use advisers who are IAA-registered or solicitors regulated by the Solicitors Regulation Authority (SRA).</p></div>
+    <div class="about-sec reveal"><h2>Contact</h2><p>For enquiries about ApexVisa UK, contact us at: <a href="mailto:support@apexvisa.co.uk">support@apexvisa.co.uk</a></p></div>
+    <div class="about-sec reveal"><h2>Regulatory Disclaimer</h2><p>ApexVisa UK provides informational risk analysis based on published UK Immigration Rules. We do not provide immigration advice within the meaning of the Immigration and Asylum Act 1999. For regulated immigration advice, consult an adviser registered with the Immigration Advice Authority (IAA).</p></div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-main">
+    <div>
+      <div class="footer-logo"><div class="footer-logo-icon">AV</div>ApexVisa UK</div>
+      <div class="footer-logo-sub">UK Visa Check</div>
+      <p class="footer-about">Answer questions about your visa. We check your answers and show you what could cause refusal. Not affiliated with the UK Government or Home Office.</p>
+      <div class="footer-contact"><a href="mailto:support@apexvisa.co.uk">support@apexvisa.co.uk</a></div>
+      <div class="footer-contact">Instagram: @apexvisauk</div>
+      <div class="footer-disc">
+        <p>ApexVisa UK provides informational risk analysis based on published UK Immigration Rules. We do not provide immigration advice within the meaning of the Immigration and Asylum Act 1999.</p>
+        <p>ApexVisa UK is not IAA-registered. We are an automated information tool, not a legal representative.</p>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Platform</h4><ul><li><a onclick="showPage('how')">How it Works</a></li><li><a onclick="showPage('pricing')">Pricing</a></li><li><a onclick="showPage('faq')">FAQ</a></li><li><a>Sample Report</a></li><li><a>ApexVisa Review</a></li></ul></div>
+    <div class="footer-col"><h4>Tools</h4><ul><li><a onclick="showPage('checker')">Visa Chance Checker</a></li><li><a onclick="showPage('checker')">Visa Risk Audit</a></li><li><a onclick="showPage('guides')">Refusal Reasons</a></li><li><a>Avoid Refusal</a></li><li><a>Document Checklist</a></li><li><a>Spouse Income Check</a></li></ul></div>
+    <div class="footer-col"><h4>Visa Fees &amp; Info</h4><ul><li><a>Spouse Visa Fees</a></li><li><a>Skilled Worker Fees</a></li><li><a>Student Visa Fees</a></li><li><a>Visitor Visa Fees</a></li><li><a>ILR Fees</a></li><li><a onclick="showPage('about')">About &amp; Legal</a></li></ul></div>
+    <div class="footer-col"><h4>Legal</h4><ul><li><a>Privacy Policy</a></li><li><a>Terms of Service</a></li><li><a>Refund Policy</a></li><li><a onclick="showPage('about')">Risk Notice</a></li></ul></div>
+  </div>
+  <div class="footer-guides">
+    <div class="fg-label">Popular UK Visa Guides</div>
+    <div class="fg-links">
+      <a>28 Day Rule Explained</a><span style="color:var(--text3)">·</span>
+      <a>Bank Balance Required</a><span style="color:var(--text3)">·</span>
+      <a>Cash Savings Calculation</a><span style="color:var(--text3)">·</span>
+      <a>Visa Refusal Reasons</a><span style="color:var(--text3)">·</span>
+      <a>Proof of Funds Rules</a><span style="color:var(--text3)">·</span>
+      <a>Bank Statement Rules</a><span style="color:var(--text3)">·</span>
+      <a>Common Refusal Mistakes</a><span style="color:var(--text3)">·</span>
+      <a>Spouse Visa Guides</a><span style="color:var(--text3)">·</span>
+      <a onclick="showPage('guides')">All Guides Index</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="fb-left">
+      <p>© 2026 ApexVisa UK. Automated risk assessments only — not immigration advice.</p>
+      <p>ApexVisa UK provides informational risk analysis based on published UK Immigration Rules. We do not provide immigration advice within the meaning of the Immigration and Asylum Act 1999.</p>
+      <p>Not affiliated with the UK Home Office.</p>
+    </div>
+    <div class="fb-right"><div class="status-dot"></div>SYSTEM OPERATIONAL</div>
+  </div>
+</footer>
+
+<script>
+/* ═══════════════════════════════
+   PARTICLES
+═══════════════════════════════ */
+(function(){
+  const el=document.getElementById('particles');
+  if(!el)return;
+  for(let i=0;i<28;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    p.style.cssText=`
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      animation-duration:${8+Math.random()*14}s;
+      animation-delay:${Math.random()*10}s;
+      width:${1+Math.random()*2}px;
+      height:${1+Math.random()*2}px;
+      opacity:${0.2+Math.random()*0.5};
+      background:${Math.random()>0.5?'#4f8ef7':'#7c5cfc'}`;
+    el.appendChild(p);
+  }
+})();
+
+/* ═══════════════════════════════
+   TYPEWRITER
+═══════════════════════════════ */
+(function(){
+  const phrases=['Hidden Refusal Risks','Income Threshold Issues','Evidence Weaknesses','2026 Rule Changes','Prior Refusal Impact'];
+  let pi=0,ci=0,deleting=false;
+  const t=document.getElementById('tw-target');
+  if(!t)return;
+  function tick(){
+    const phrase=phrases[pi];
+    if(deleting){
+      ci--;
+      t.textContent=phrase.slice(0,ci);
+      if(ci===0){deleting=false;pi=(pi+1)%phrases.length;setTimeout(tick,600);return;}
+      setTimeout(tick,40);
+    } else {
+      ci++;
+      t.textContent=phrase.slice(0,ci);
+      if(ci===phrase.length){deleting=true;setTimeout(tick,2200);return;}
+      setTimeout(tick,65);
+    }
+  }
+  setTimeout(tick,1800);
+})();
+
+/* ═══════════════════════════════
+   SCROLL PROGRESS
+═══════════════════════════════ */
+window.addEventListener('scroll',()=>{
+  const sf=document.getElementById('scroll-fill');
+  if(!sf)return;
+  const scrolled=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight);
+  sf.style.width=(scrolled*100)+'%';
+});
+
+/* ═══════════════════════════════
+   PAGE ROUTING
+═══════════════════════════════ */
+const PAGES={home:'page-home',how:'page-how',who:'page-who',pricing:'page-pricing',checker:'page-checker',guides:'page-guides',faq:'page-faq',about:'page-about'};
+const NAVIDS={how:'nav-how',who:'nav-who',pricing:'nav-pricing',faq:'nav-faq',guides:'nav-guides',about:'nav-about',checker:'nav-checker'};
+let checkerReady=false;
+
+function showPage(id){
+  Object.values(PAGES).forEach(p=>{const e=document.getElementById(p);if(e)e.classList.remove('active');});
+  const target=document.getElementById(PAGES[id]);
+  if(target){target.classList.add('active');}
+  window.scrollTo({top:0,behavior:'smooth'});
+  Object.values(NAVIDS).forEach(n=>{const e=document.getElementById(n);if(e)e.classList.remove('active');});
+  if(NAVIDS[id]){const e=document.getElementById(NAVIDS[id]);if(e)e.classList.add('active');}
+  if(id==='checker'&&!checkerReady){initChecker();checkerReady=true;}
+  // re-trigger reveals on new page
+  setTimeout(()=>{
+    document.querySelectorAll('#'+PAGES[id]+' .reveal').forEach(el=>el.classList.remove('vis'));
+    triggerReveals();
+    triggerMeters();
+    triggerCounters();
+  },50);
+}
+
+/* ═══════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════ */
+function triggerReveals(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});
+  },{threshold:0.07});
+  document.querySelectorAll('.page.active .reveal:not(.vis)').forEach(el=>obs.observe(el));
+}
+triggerReveals();
+
+/* ═══════════════════════════════
+   RISK METER BARS
+═══════════════════════════════ */
+function triggerMeters(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.querySelectorAll('.rm-fill').forEach(b=>{
+          b.style.width=b.dataset.w+'%';
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.3});
+  document.querySelectorAll('.risk-meter').forEach(el=>obs.observe(el));
+}
+triggerMeters();
+
+/* ═══════════════════════════════
+   ANIMATED COUNTERS
+═══════════════════════════════ */
+function animateCount(el,target,duration,prefix){
+  let start=null;
+  function step(ts){
+    if(!start)start=ts;
+    const progress=Math.min((ts-start)/duration,1);
+    const ease=1-Math.pow(1-progress,3);
+    el.textContent=Math.floor(ease*target)+(prefix||'');
+    if(progress<1)requestAnimationFrame(step);
+    else el.textContent=target+(prefix||'');
+  }
+  requestAnimationFrame(step);
+}
+
+function triggerCounters(){
+  const c1=document.getElementById('c1'),c2=document.getElementById('c2'),c3=document.getElementById('c3');
+  if(!c1)return;
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        animateCount(c1,68,1800);
+        animateCount(c2,2400,2000);
+        animateCount(c3,74,1600);
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.4});
+  const bar=document.querySelector('.stats-bar');
+  if(bar)obs.observe(bar);
+}
+triggerCounters();
+
+/* ═══════════════════════════════
+   FAQ
+═══════════════════════════════ */
+document.addEventListener('click',e=>{
+  const btn=e.target.closest('.faq-q');
+  if(!btn)return;
+  const item=btn.closest('.faq-item');
+  const was=item.classList.contains('open');
+  item.closest('#faq-list,.faq-list').querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!was)item.classList.add('open');
+});
+
+/* ═══════════════════════════════
+   TOAST
+═══════════════════════════════ */
+function showToast(msg,color){
+  const t=document.getElementById('toast');
+  const d=document.getElementById('tdot');
+  const m=document.getElementById('tmsg');
+  d.style.background=color||'var(--blue)';
+  m.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+/* ═══════════════════════════════
+   RISK CHECKER
+═══════════════════════════════ */
+const QUESTIONS=[
+  {id:'visa_type',q:'Which visa route are you applying for?',hint:'Select the route that best matches your situation.',opts:[
+    {v:'spouse',l:'Spouse / partner visa (FLR(M) or entry clearance)',s:'Marriage or civil partnership to UK citizen or settled person'},
+    {v:'ilr',l:'Indefinite Leave to Remain (ILR)',s:'Settlement after 5 years on a qualifying route'},
+    {v:'citizenship',l:'British citizenship (naturalisation)',s:'After holding ILR or settled status'},
+    {v:'flr',l:'Further Leave to Remain (FLR)',s:'Extending existing leave in a non-spouse category'},
+    {v:'visit',l:'Visit visa (Standard Visitor)',s:'Short stay, tourism, family visit or business'},
+  ]},
+  {id:'current_status',q:'What is your current immigration status?',hint:'Status errors are a leading cause of refusal.',opts:[
+    {v:'valid',l:'Valid leave — more than 28 days remaining',s:null},
+    {v:'expiring',l:'Valid leave but expiring within 28 days',s:'Time-sensitive — Section 3C protection at risk'},
+    {v:'outside',l:'Currently outside the UK',s:null},
+    {v:'euss',l:'EU Settlement Scheme (pre-settled or settled)',s:null},
+    {v:'overstayed',l:'Leave has already expired',s:'Will need careful disclosure'},
+  ]},
+  {id:'absences',q:'Total days outside the UK in the last 5 years?',hint:'Affects ILR, citizenship and continuous residence calculations.',opts:[
+    {v:'u90',l:'Under 90 days total',s:'Well within standard thresholds'},
+    {v:'90_180',l:'90 – 180 days',s:'Acceptable for most routes'},
+    {v:'180_450',l:'180 – 450 days',s:'Approaching citizenship limits'},
+    {v:'over450',l:'Over 450 days',s:'Likely disqualifies citizenship; ILR risk'},
+    {v:'na',l:'Not applicable — applying from outside UK',s:null},
+  ]},
+  {id:'income',q:'Does the UK sponsor meet the income requirement?',hint:'The Minimum Income Requirement is £29,000 gross/year for spouse/partner routes.',opts:[
+    {v:'yes',l:'Yes — above £29,000 with documentation',s:'Strong position'},
+    {v:'borderline',l:'Meets threshold but only just, or multiple sources',s:'Evidence quality critical'},
+    {v:'savings',l:'Using savings only (£88,500 threshold)',s:'Specific rules apply'},
+    {v:'below',l:'Income is below £29,000 gross',s:'Likely refusal risk'},
+    {v:'na',l:'Income requirement does not apply to my route',s:null},
+  ]},
+  {id:'criminal',q:'Anything to disclose regarding criminal history?',hint:'Includes cautions, fixed penalties, overseas convictions and road traffic offences under 2025 Good Character guidance.',opts:[
+    {v:'nothing',l:'Nothing to disclose',s:null},
+    {v:'traffic',l:'Minor road traffic offences',s:'Now disclosable under Feb 2025 guidance'},
+    {v:'caution',l:'Police caution or conditional discharge',s:'Disclose and seek advice'},
+    {v:'conviction',l:'Criminal conviction (UK or overseas)',s:'Significant Good Character implications'},
+    {v:'civil',l:'Immigration civil penalty or previous refusal',s:'Must be disclosed; high scrutiny'},
+  ]},
+  {id:'refusals',q:'Have you ever had a visa refused or curtailed?',hint:'Includes any refused visa from any country.',opts:[
+    {v:'never',l:'No — no refusals or curtailments',s:null},
+    {v:'uk',l:'Previously refused a UK visa',s:'Must be disclosed; affects scrutiny'},
+    {v:'other',l:'Refused a visa for another country',s:'Disclosable on most UK applications'},
+    {v:'curtailed',l:'Previous UK leave was curtailed',s:'Significant disclosure obligation'},
+  ]},
+];
+
+let ckA={},ckS=0;
+
+function initChecker(){ckA={};ckS=0;renderChecker();}
+
+function renderChecker(){
+  const app=document.getElementById('ck-app');
+  if(!app)return;
+  const q=QUESTIONS[ckS],total=QUESTIONS.length,sel=ckA[q.id];
+  const pct=Math.round((ckS/total)*100);
+  const routeLabel={spouse:'Spouse Visa',ilr:'ILR',citizenship:'Citizenship',flr:'FLR',visit:'Visit Visa'};
+  app.innerHTML=`
+    <div class="ck-prog"><div class="ck-fill" style="width:${pct}%"></div></div>
+    <div class="ck-meta">
+      <span class="ck-step">Step ${ckS+1} of ${total}</span>
+      ${ckA.visa_type?`<span class="ck-route">${routeLabel[ckA.visa_type]||''}</span>`:''}
+    </div>
+    <div class="ck-q">${q.q}</div>
+    <div class="ck-hint">${q.hint}</div>
+    <div class="ck-opts">
+      ${q.opts.map(o=>`
+        <div class="ck-opt${sel===o.v?' sel':''}" onclick="ckSel('${q.id}','${o.v}')">
+          <div class="ck-radio"><div class="ck-dot"></div></div>
+          <div><div class="ck-label">${o.l}</div>${o.s?`<div class="ck-sub">${o.s}</div>`:''}</div>
+        </div>`).join('')}
+    </div>
+    ${ckS===0?`<p class="ck-disc">ApexVisa analyses your answers against current UK visa rules to identify technical risk factors. Updated April 2026. Not legal advice.</p>`:''}
+    <div class="ck-nav">
+      ${ckS>0?`<button class="ck-back" onclick="ckBack()">← Back</button>`:`<span></span>`}
+      <button class="ck-next${sel?' on':''}" onclick="ckNext()">${ckS===total-1?'Analyse application →':'Continue →'}</button>
+    </div>`;
+}
+
+function ckSel(id,val){ckA[id]=val;renderChecker();}
+function ckBack(){if(ckS>0){ckS--;renderChecker();}}
+function ckNext(){
+  if(!ckA[QUESTIONS[ckS].id])return;
+  if(ckS<QUESTIONS.length-1){ckS++;renderChecker();}
+  else ckAnalyse();
+}
+
+function ckAnalyse(){
+  document.getElementById('ck-app').innerHTML=`
+    <div class="ck-loading">
+      <div class="ck-spin"></div>
+      <div class="ck-load-t">Analysing your application…</div>
+      <div class="ck-load-s">Checking against April 2026 UKVI criteria</div>
+      <div class="ck-load-bar"></div>
+    </div>`;
+  const summary=QUESTIONS.map(q=>{const o=q.opts.find(x=>x.v===ckA[q.id]);return `${q.q}\nAnswer: ${o?o.l:'(not answered)'}`;}).join('\n\n');
+  const prompt=`You are a UK immigration risk analyst. Analyse these answers against April 2026 UK immigration rules.\n\n${summary}\n\nRespond ONLY with valid JSON (no fences): {"overall":"high"|"medium"|"low","headline":"max 15 words","intro":"2 sentences max 40 words","risks":[{"level":"high"|"medium"|"low","title":"max 6 words","detail":"max 35 words referencing 2026 rules"}]}\n\n2-4 risk items. Reference: £29,000 MIR, 450-day limit, Feb 2025 Good Character, eVisa, Earned Settlement. Frame as risk identification only. JSON only.`;
+  fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})})
+  .then(r=>r.json()).then(d=>{
+    const txt=d.content.map(b=>b.text||'').join('');
+    const res=JSON.parse(txt.replace(/```json|```/g,'').trim());
+    ckResult(res);
+  }).catch(()=>ckFallback());
+}
+
+function ckResult(r){
+  const app=document.getElementById('ck-app');
+  const bc={high:'rb-high',medium:'rb-med',low:'rb-low'}[r.overall]||'rb-med';
+  const bl={high:'High risk',medium:'Medium risk',low:'Low risk'}[r.overall]||'Review needed';
+  app.innerHTML=`
+    <div class="ck-prog"><div class="ck-fill" style="width:100%"></div></div>
+    <div class="ck-meta"><span class="ck-step">Assessment complete</span></div>
+    <div class="ck-res-badge ${bc}">${bl}</div>
+    <div class="ck-res-title">${r.headline}</div>
+    <div class="ck-res-intro">${r.intro}</div>
+    <div class="ck-risks">${r.risks.map(ri=>`
+      <div class="ck-risk r${ri.level.charAt(0)}">
+        <div class="ck-rlv">${ri.level} risk</div>
+        <div class="ck-rtitle">${ri.title}</div>
+        <div class="ck-rdesc">${ri.detail}</div>
+      </div>`).join('')}
+    </div>
+    <button class="ck-cta-btn" onclick="showPage('pricing')"><span>See full audit options — from £19</span><span>→</span></button>
+    <button class="ck-restart" onclick="ckRestart()">Start again with different answers</button>
+    <p class="ck-res-disc">Not legal advice. Based on publicly available UKVI criteria as of April 2026. Always consult an IAA-regulated adviser before submitting.</p>`;
+}
+
+function ckFallback(){
+  document.getElementById('ck-app').innerHTML=`
+    <div class="ck-meta"><span class="ck-step">Assessment complete</span></div>
+    <div class="ck-res-title" style="margin:12px 0 8px">Your answers have been recorded</div>
+    <div class="ck-res-intro">Unable to connect to analysis service. See our paid audit options for a full structured review.</div>
+    <button class="ck-cta-btn" onclick="showPage('pricing')" style="margin-top:16px"><span>View audit options</span><span>→</span></button>
+    <button class="ck-restart" onclick="ckRestart()">Try again</button>`;
+}
+
+function ckRestart(){ckA={};ckS=0;renderChecker();}
+</script>
+</body>
+</html>
