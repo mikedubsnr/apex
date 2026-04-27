@@ -453,6 +453,45 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(11,15,30,0.9
 .guide-cats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:32px}
 .guide-cat{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 20px;cursor:pointer;transition:border-color 0.2s,background 0.2s,transform 0.2s}
 .guide-cat:hover{border-color:var(--border2);background:var(--bg3);transform:translateY(-2px)}
+
+
+/* ─── CATEGORY PAGES ─── */
+.cat-breadcrumb{font-size:13px;color:var(--text3);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.cat-breadcrumb span{color:var(--blue);cursor:pointer;transition:opacity 0.15s}
+.cat-breadcrumb span:hover{opacity:0.75}
+.cat-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+.cat-alert{display:flex;align-items:flex-start;gap:12px;background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.22);border-radius:10px;padding:16px 18px;margin-bottom:28px;font-size:13.5px;color:var(--text2);line-height:1.6}
+.cat-alert-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.cat-alert strong{color:#fcd34d}
+.cat-guide-item{flex-direction:column;align-items:flex-start!important;gap:4px!important;padding:14px 16px!important}
+.gi-title{font-size:13.5px;font-weight:600;color:var(--text);line-height:1.3}
+.gi-sub{font-size:12px;color:var(--text3);line-height:1.4;margin-top:3px}
+.cat-guide-item:hover .gi-title{color:#fff}
+.cat-cta-box{background:linear-gradient(135deg,rgba(79,142,247,0.1),rgba(124,92,252,0.08));border:1px solid rgba(79,142,247,0.25);border-radius:14px;padding:28px;display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:8px;flex-wrap:wrap}
+.cat-cta-text{font-size:14px;color:var(--text2);line-height:1.6}
+.cat-cta-text strong{color:#fff;display:block;font-size:16px;margin-bottom:4px}
+
+
+/* ─── CATEGORY PAGES ─── */
+.cat-breadcrumb{font-size:13px;color:var(--text3);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.cat-breadcrumb span{color:var(--blue);cursor:pointer;transition:opacity 0.15s}
+.cat-breadcrumb span:hover{opacity:0.75}
+.cat-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+.cat-alert{display:flex;align-items:flex-start;gap:12px;background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.22);border-radius:10px;padding:16px 18px;margin-bottom:28px;font-size:13.5px;color:var(--text2);line-height:1.6}
+.cat-alert-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.cat-alert strong{color:#fcd34d}
+.cat-guide-item{flex-direction:column;align-items:flex-start!important;gap:4px!important;padding:14px 16px!important}
+.gi-title{font-size:13.5px;font-weight:600;color:var(--text);line-height:1.3}
+.gi-sub{font-size:12px;color:var(--text3);line-height:1.4;margin-top:3px}
+.cat-guide-item:hover .gi-title{color:#fff}
+.cat-cta-box{background:linear-gradient(135deg,rgba(79,142,247,0.1),rgba(124,92,252,0.08));border:1px solid rgba(79,142,247,0.25);border-radius:14px;padding:28px;display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:8px;flex-wrap:wrap}
+.cat-cta-text{font-size:14px;color:var(--text2);line-height:1.6}
+.cat-cta-text strong{color:#fff;display:block;font-size:16px;margin-bottom:4px}
+
+.guide-cat{position:relative}
+.guide-cat-arrow{position:absolute;top:16px;right:16px;font-size:16px;color:var(--blue);opacity:0;transition:opacity 0.2s,transform 0.2s}
+.guide-cat:hover .guide-cat-arrow{opacity:1;transform:translateX(3px)}
+
 .guide-cat h3{font-size:15px;font-weight:600;color:#fff;margin-bottom:4px}
 .guide-cat p{font-size:12.5px;color:var(--text3);line-height:1.4}
 .next-steps-box{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center;margin:20px 0 32px}
@@ -997,12 +1036,12 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:52px 5vw
     <div class="guide-section">
       <p style="font-size:20px;font-weight:700;color:#fff;margin-bottom:14px;letter-spacing:-0.01em">Browse by Category</p>
       <div class="guide-cats stagger">
-        <div class="guide-cat reveal"><h3>Spouse &amp; Partner Visa Guides</h3><p>Income thresholds, relationship evidence, refusal risks</p></div>
-        <div class="guide-cat reveal"><h3>Skilled Worker Visa Guides</h3><p>Salary going rates, sponsor requirements, CoS rules</p></div>
-        <div class="guide-cat reveal"><h3>Student Visa Guides</h3><p>Maintenance funds, CAS requirements, genuine student test</p></div>
-        <div class="guide-cat reveal"><h3>Visitor Visa Guides</h3><p>Financial evidence, genuine visitor test, ties to home country</p></div>
-        <div class="guide-cat reveal"><h3>Visa Refusal Guides</h3><p>All refusal scenarios across every route</p></div>
-        <div class="guide-cat reveal"><h3>Financial Requirements Guides</h3><p>Income rules, bank statements, savings calculations</p></div>
+        <div class="guide-cat reveal" onclick="showCatPage('spouse')"><div class="guide-cat-arrow">→</div><h3>Spouse &amp; Partner Visa Guides</h3><p>Income thresholds, relationship evidence, refusal risks</p></div>
+        <div class="guide-cat reveal" onclick="showCatPage('skilled')"><div class="guide-cat-arrow">→</div><h3>Skilled Worker Visa Guides</h3><p>Salary going rates, sponsor requirements, CoS rules</p></div>
+        <div class="guide-cat reveal" onclick="showCatPage('student')"><div class="guide-cat-arrow">→</div><h3>Student Visa Guides</h3><p>Maintenance funds, CAS requirements, genuine student test</p></div>
+        <div class="guide-cat reveal" onclick="showCatPage('visitor')"><div class="guide-cat-arrow">→</div><h3>Visitor Visa Guides</h3><p>Financial evidence, genuine visitor test, ties to home country</p></div>
+        <div class="guide-cat reveal" onclick="showCatPage('refusal')"><div class="guide-cat-arrow">→</div><h3>Visa Refusal Guides</h3><p>All refusal scenarios across every route</p></div>
+        <div class="guide-cat reveal" onclick="showCatPage('financial')"><div class="guide-cat-arrow">→</div><h3>Financial Requirements Guides</h3><p>Income rules, bank statements, savings calculations</p></div>
       </div>
     </div>
     <div class="next-steps-box reveal">
@@ -1298,6 +1337,301 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:52px 5vw
   </div>
 </div>
 
+
+<!-- ══════════════════════════════════
+     CATEGORY DETAIL PAGES
+══════════════════════════════════ -->
+
+<!-- SPOUSE & PARTNER -->
+<div class="page" id="page-cat-spouse">
+  <div class="guides-hero">
+    <div class="cat-breadcrumb"><span onclick="showPage('library')">Guides</span> › Spouse &amp; Partner</div>
+    <div class="cat-eyebrow">Spouse &amp; Partner Visa</div>
+    <h1>Spouse &amp; Partner Visa Guides</h1>
+    <p>Everything you need to understand the UK Spouse Visa and Partner Visa routes — from the £29,000 income threshold to relationship evidence, refusal reasons, and ILR.</p>
+    <p class="guides-last">Last reviewed: April 2026</p>
+  </div>
+  <div class="guides-body">
+    <div class="cat-alert">
+      <div class="cat-alert-icon">⚠</div>
+      <div><strong>2026 Update:</strong> The Minimum Income Requirement rose to £29,000 in April 2024. Transitional Protection applies only if you applied before 11 April 2024. All new applicants must meet the current threshold.</div>
+    </div>
+    <div class="guide-section reveal"><div class="guide-sec-title">Core Guides</div><div class="guide-grid">
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Spouse Visa Income Requirement 2026</div><div class="gi-sub">The £29,000 threshold, what counts, and how to evidence it</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Genuine &amp; Subsisting Relationship Test</div><div class="gi-sub">What caseworkers assess and what evidence passes</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">FLR(M) — Extending Your Spouse Visa</div><div class="gi-sub">In-country extension guide and Section 3C protection</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Entry Clearance Spouse Visa Guide</div><div class="gi-sub">Applying from outside the UK — the full process</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Relationship Evidence Checklist</div><div class="gi-sub">Photos, messages, joint finances, cohabitation proof</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Savings Route — Using £88,500</div><div class="gi-sub">When savings can substitute for income, and the rules</div></div></a>
+    </div></div>
+    <div class="guide-section reveal"><div class="guide-sec-title">Income &amp; Financial Evidence</div><div class="guide-grid">
+      <a class="guide-item">£29,000 Threshold — What Counts as Income</a>
+      <a class="guide-item">Transitional Protection Explained</a>
+      <a class="guide-item">Category A Income (employed 6+ months)</a>
+      <a class="guide-item">Category B Income (employed under 6 months)</a>
+      <a class="guide-item">Self-Employment Income for Spouse Visa</a>
+      <a class="guide-item">Universal Credit &amp; Benefits — What Counts</a>
+      <a class="guide-item">Multiple Income Sources Combined</a>
+      <a class="guide-item">Cash Savings £88,500 Route</a>
+    </div></div>
+    <div class="guide-section reveal"><div class="guide-sec-title">Refusal &amp; Appeals</div><div class="guide-grid">
+      <a class="guide-item">Spouse Visa Refused — What Next</a>
+      <a class="guide-item">Weak Relationship Evidence Refusal</a>
+      <a class="guide-item">Income Below Threshold Refusal</a>
+      <a class="guide-item">Reapplying After Spouse Visa Refusal</a>
+      <a class="guide-item">Administrative Review vs Appeal</a>
+      <a class="guide-item">Spouse Visa Curtailed — What to Do</a>
+    </div></div>
+    <div class="guide-section reveal"><div class="guide-sec-title">Settlement &amp; Next Steps</div><div class="guide-grid">
+      <a class="guide-item">ILR on Spouse Visa Route</a>
+      <a class="guide-item">5-Year Probationary Period Explained</a>
+      <a class="guide-item">Absence Limit on Spouse Visa Route</a>
+      <a class="guide-item">Naturalisation After Spouse ILR</a>
+      <a class="guide-item">Fiancé Visa (Entry Clearance)</a>
+      <a class="guide-item">Partner Visa vs Spouse Visa Difference</a>
+    </div></div>
+    <div class="cat-cta-box reveal">
+      <div class="cat-cta-text"><strong>Check your spouse visa for risk factors</strong><br>Our free risk checker identifies the issues most likely to cause a refusal on your specific application.</div>
+      <button class="btn-primary" onclick="showPage('checker')">Start Free Risk Check →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SKILLED WORKER -->
+<div class="page" id="page-cat-skilled">
+  <div class="guides-hero">
+    <div class="cat-breadcrumb"><span onclick="showPage('library')">Guides</span> › Skilled Worker</div>
+    <div class="cat-eyebrow">Skilled Worker Visa</div>
+    <h1>Skilled Worker Visa Guides</h1>
+    <p>Complete guidance on the UK Skilled Worker route — salary thresholds, Certificate of Sponsorship, going rates, dependants, and the path to ILR.</p>
+    <p class="guides-last">Last reviewed: April 2026</p>
+  </div>
+  <div class="guides-body">
+    <div class="cat-alert">
+      <div class="cat-alert-icon">⚠</div>
+      <div><strong>2026 Update:</strong> The general salary threshold is £38,700/year. Shortage occupation discounts were removed. Health &amp; Care workers have a separate threshold of £29,000.</div>
+    </div>
+    <div class="guide-section reveal"><div class="guide-sec-title">Core Guides</div><div class="guide-grid">
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Skilled Worker Salary Threshold 2026</div><div class="gi-sub">£38,700 general threshold — what counts and what doesn't</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Certificate of Sponsorship (CoS) Explained</div><div class="gi-sub">What it is, how your employer gets one, and what you need</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Going Rate by Occupation Code</div><div class="gi-sub">How to check your SOC code salary requirement</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Skilled Worker ILR Route</div><div class="gi-sub">Qualifying for settlement after 5 years</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Health &amp; Care Worker Visa Route</div><div class="gi-sub">Separate rules for NHS and care sector workers</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Changing Employer on Skilled Worker Visa</div><div class="gi-sub">What you can and cannot do mid-visa</div></div></a>
+    </div></div>
+    <div class="guide-section reveal"><div class="guide-sec-title">Eligibility &amp; Requirements</div><div class="guide-grid">
+      <a class="guide-item">Eligible Jobs List (RQF Level 3+)</a>
+      <a class="guide-item">Sponsor Licence — What Employers Need</a>
+      <a class="guide-item">English Language Requirement</a>
+      <a class="guide-item">Skilled Worker with No Prior UK Experience</a>
+      <a class="guide-item">Part-Time Skilled Worker Rules</a>
+      <a class="guide-item">Skilled Worker Dependants Guide</a>
+      <a class="guide-item">Multiple Jobs on Skilled Worker Visa</a>
+      <a class="guide-item">Absence Rules on Skilled Worker Visa</a>
+    </div></div>
+    <div class="guide-section reveal"><div class="guide-sec-title">Refusal Reasons</div><div class="guide-grid">
+      <a class="guide-item">Skilled Worker Visa Refused — Top Reasons</a>
+      <a class="guide-item">CoS Assigned Incorrectly</a>
+      <a class="guide-item">Salary Below Going Rate</a>
+      <a class="guide-item">Sponsor Licence Revoked</a>
+      <a class="guide-item">Skills Level Not Met</a>
+      <a class="guide-item">Reapplying After Skilled Worker Refusal</a>
+    </div></div>
+    <div class="cat-cta-box reveal">
+      <div class="cat-cta-text"><strong>Check your Skilled Worker application</strong><br>Identify salary, sponsorship, or documentation gaps before you submit.</div>
+      <button class="btn-primary" onclick="showPage('checker')">Start Free Risk Check →</button>
+    </div>
+  </div>
+</div>
+
+<!-- STUDENT -->
+<div class="page" id="page-cat-student">
+  <div class="guides-hero">
+    <div class="cat-breadcrumb"><span onclick="showPage('library')">Guides</span> › Student Visa</div>
+    <div class="cat-eyebrow">Student Visa</div>
+    <h1>Student Visa Guides</h1>
+    <p>Everything you need to apply for a UK Student Visa — maintenance funds, CAS requirements, the genuine student test, bank statements, and what causes refusals.</p>
+    <p class="guides-last">Last reviewed: April 2026</p>
+  </div>
+  <div class="guides-body">
+    <div class="cat-alert">
+      <div class="cat-alert-icon">⚠</div>
+      <div><strong>2026 Update:</strong> Maintenance funds for students in London are £1,334/month. Outside London: £1,023/month. Funds must be held for 28 consecutive days before the application date.</div>
+    </div>
+    <div class="guide-section reveal"><div class="guide-sec-title">Core Guides</div><div class="guide-grid">
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Student Visa Maintenance Funds 2026</div><div class="gi-sub">London vs outside London — exact amounts and how to evidence</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">CAS Number — What It Is &amp; How to Get One</div><div class="gi-sub">Your university issues this — here's what you need to know</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Genuine Student Test Explained</div><div class="gi-sub">What caseworkers assess and how to prepare your statement</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Student Visa Bank Statement Rules</div><div class="gi-sub">28-day rule, acceptable banks, and format requirements</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Student to Graduate Visa Route</div><div class="gi-sub">Switching after completing your degree — eligibility and timing</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Extending Your Student Visa in the UK</div><div class="gi-sub">Applying in-country for further study</div></div></a>
+    </div></div>
+    <div class="guide-section reveal"><div class="guide-sec-title">Requirements &amp; Rules</div><div class="guide-grid">
+      <a class="guide-item">English Language Requirement for Students</a>
+      <a class="guide-item">ATAS Certificate — When Required</a>
+      <a class="guide-item">Part-Time Work Rules (20hrs/week)</a>
+      <a class="guide-item">Student Visa Dependants Rules</a>
+      <a class="guide-item">Acceptable Institutions (Student Sponsor Register)</a>
+      <a class="guide-item">Parental Consent for Under-18 Students</a>
+    </div></div>
+    <div class="guide-section reveal"><div class="guide-sec-title">Refusal Reasons</div><div class="guide-grid">
+      <a class="guide-item">Student Visa Refused — Top Reasons</a>
+      <a class="guide-item">Genuine Student Test Failed</a>
+      <a class="guide-item">Insufficient Maintenance Funds</a>
+      <a class="guide-item">28-Day Rule Not Met</a>
+      <a class="guide-item">CAS Expired or Invalid</a>
+      <a class="guide-item">Reapplying After Student Visa Refusal</a>
+    </div></div>
+    <div class="cat-cta-box reveal">
+      <div class="cat-cta-text"><strong>Check your Student Visa application</strong><br>Identify maintenance fund, CAS, or genuine student test issues before you submit.</div>
+      <button class="btn-primary" onclick="showPage('checker')">Start Free Risk Check →</button>
+    </div>
+  </div>
+</div>
+
+<!-- VISITOR -->
+<div class="page" id="page-cat-visitor">
+  <div class="guides-hero">
+    <div class="cat-breadcrumb"><span onclick="showPage('library')">Guides</span> › Visitor Visa</div>
+    <div class="cat-eyebrow">Visitor Visa</div>
+    <h1>Visitor Visa Guides</h1>
+    <p>Guidance on the UK Standard Visitor Visa — the genuine visitor test, financial evidence, ties to home country, ETA requirements, and avoiding common refusal grounds.</p>
+    <p class="guides-last">Last reviewed: April 2026</p>
+  </div>
+  <div class="guides-body">
+    <div class="cat-alert">
+      <div class="cat-alert-icon">⚠</div>
+      <div><strong>2026 Update:</strong> Electronic Travel Authorisation (ETA) is now required for EU, US, Canadian, and Australian nationals before visiting the UK. Apply before travel at gov.uk/get-electronic-travel-authorisation.</div>
+    </div>
+    <div class="guide-section reveal"><div class="guide-sec-title">Core Guides</div><div class="guide-grid">
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Standard Visitor Visa Guide 2026</div><div class="gi-sub">Who needs one, how to apply, and what to include</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Genuine Visitor Test Explained</div><div class="gi-sub">The three things a caseworker assesses on every visitor application</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Ties to Home Country — What Counts</div><div class="gi-sub">Employment, family, property, financial ties — what to evidence</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Financial Evidence for Visitor Visa</div><div class="gi-sub">Bank statements, sponsorship letters, and how much is enough</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Electronic Travel Authorisation (ETA)</div><div class="gi-sub">Who needs one, how to apply, and cost</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Visitor Visa with Previous Refusal</div><div class="gi-sub">How to strengthen your reapplication</div></div></a>
+    </div></div>
+    <div class="guide-section reveal"><div class="guide-sec-title">Types of Visitor Visit</div><div class="guide-grid">
+      <a class="guide-item">Family Visit Visa Guide</a>
+      <a class="guide-item">Business Visitor Visa Guide</a>
+      <a class="guide-item">Medical Treatment Visitor Visa</a>
+      <a class="guide-item">Marriage Visitor Visa</a>
+      <a class="guide-item">Multiple-Entry Visitor Visa</a>
+      <a class="guide-item">Permitted Paid Engagements</a>
+    </div></div>
+    <div class="guide-section reveal"><div class="guide-sec-title">Refusal Reasons</div><div class="guide-grid">
+      <a class="guide-item">Visitor Visa Refused — Top Reasons</a>
+      <a class="guide-item">Insufficient Ties to Home Country</a>
+      <a class="guide-item">Intention to Work Suspected</a>
+      <a class="guide-item">Insufficient Financial Evidence</a>
+      <a class="guide-item">Previous Immigration Breach</a>
+      <a class="guide-item">Reapplying After Visitor Visa Refusal</a>
+    </div></div>
+    <div class="cat-cta-box reveal">
+      <div class="cat-cta-text"><strong>Check your Visitor Visa application</strong><br>Find out what refusal risk factors exist in your specific situation before you apply.</div>
+      <button class="btn-primary" onclick="showPage('checker')">Start Free Risk Check →</button>
+    </div>
+  </div>
+</div>
+
+<!-- REFUSAL -->
+<div class="page" id="page-cat-refusal">
+  <div class="guides-hero">
+    <div class="cat-breadcrumb"><span onclick="showPage('library')">Guides</span> › Refusal Reasons</div>
+    <div class="cat-eyebrow">Visa Refusal Guides</div>
+    <h1>UK Visa Refusal Reasons &amp; Guides</h1>
+    <p>Understand exactly why UK visa applications are refused — and what you can do about it. These are the grounds UKVI caseworkers cite most frequently across all routes.</p>
+    <p class="guides-last">Last reviewed: April 2026</p>
+  </div>
+  <div class="guides-body">
+    <div class="guide-section reveal"><div class="guide-sec-title">Financial Refusal Grounds</div><div class="guide-grid">
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Refused for Insufficient Funds</div><div class="gi-sub">What counts as sufficient and how to prove it</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Refused for Unexplained Bank Deposits</div><div class="gi-sub">Large or irregular deposits — how caseworkers view them</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Refused for Income Below Threshold</div><div class="gi-sub">Spouse visa £29,000 and Skilled Worker £38,700 rules</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Refused for Missing Financial Evidence</div><div class="gi-sub">What documents are mandatory and what is optional</div></div></a>
+      <a class="guide-item">28-Day Rule Not Met</a>
+      <a class="guide-item">Bank Statements Not in Required Format</a>
+      <a class="guide-item">Savings Not Held Long Enough</a>
+      <a class="guide-item">Third-Party Funds Not Properly Evidenced</a>
+    </div></div>
+    <div class="guide-section reveal"><div class="guide-sec-title">Document &amp; Identity Refusal Grounds</div><div class="guide-grid">
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Refused for Fake or Fraudulent Documents</div><div class="gi-sub">The most serious refusal ground — consequences and reapplication</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Refused for Document Inconsistencies</div><div class="gi-sub">Name mismatches, date errors, translation issues</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Refused for Application Inconsistencies</div><div class="gi-sub">Contradictions between your application and supporting documents</div></div></a>
+      <a class="guide-item">Deception or Misrepresentation</a>
+      <a class="guide-item">Wrong Documents Submitted</a>
+      <a class="guide-item">Documents Not Translated Correctly</a>
+    </div></div>
+    <div class="guide-section reveal"><div class="guide-sec-title">Relationship &amp; Personal Refusal Grounds</div><div class="guide-grid">
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Refused for Weak Relationship Evidence</div><div class="gi-sub">What caseworkers look for and what passes the genuine test</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Refused for Previous Immigration Issues</div><div class="gi-sub">Overstay, curtailment, and prior refusal — disclosure rules</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Refused for No Travel History</div><div class="gi-sub">How to address a thin travel record in your application</div></div></a>
+      <a class="guide-item">Sponsor Credibility Issues</a>
+      <a class="guide-item">Relationship Breakdown During Processing</a>
+      <a class="guide-item">Refused Due to Sponsor's Immigration Status</a>
+    </div></div>
+    <div class="guide-section reveal"><div class="guide-sec-title">After a Refusal</div><div class="guide-grid">
+      <a class="guide-item">Can I Reapply After a UK Visa Refusal?</a>
+      <a class="guide-item">Administrative Review — How It Works</a>
+      <a class="guide-item">Appeal vs Reapplication</a>
+      <a class="guide-item">How a Refusal Affects Future Applications</a>
+      <a class="guide-item">Disclosure Obligations After Refusal</a>
+      <a class="guide-item">Strengthening a Reapplication</a>
+    </div></div>
+    <div class="cat-cta-box reveal">
+      <div class="cat-cta-text"><strong>Identify your refusal risks before you apply</strong><br>Our free checker flags the specific grounds most likely to affect your application.</div>
+      <button class="btn-primary" onclick="showPage('checker')">Start Free Risk Check →</button>
+    </div>
+  </div>
+</div>
+
+<!-- FINANCIAL -->
+<div class="page" id="page-cat-financial">
+  <div class="guides-hero">
+    <div class="cat-breadcrumb"><span onclick="showPage('library')">Guides</span> › Financial Rules</div>
+    <div class="cat-eyebrow">Financial Requirements</div>
+    <h1>Financial Rules &amp; Evidence Guides</h1>
+    <p>Detailed guidance on every financial requirement across UK visa routes — income thresholds, bank statement rules, savings calculations, and what caseworkers actually check.</p>
+    <p class="guides-last">Last reviewed: April 2026</p>
+  </div>
+  <div class="guides-body">
+    <div class="cat-alert">
+      <div class="cat-alert-icon">ℹ</div>
+      <div><strong>Key 2026 Thresholds:</strong> Spouse visa sponsor income £29,000/yr · Skilled Worker general salary £38,700/yr · Student maintenance London £1,334/month · Student outside London £1,023/month · Savings route (spouse) £88,500.</div>
+    </div>
+    <div class="guide-section reveal"><div class="guide-sec-title">Bank Statement Rules</div><div class="guide-grid">
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">The 28-Day Rule Explained</div><div class="gi-sub">Funds must be held continuously — here's exactly how it works</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Bank Statement Format Requirements</div><div class="gi-sub">Official vs printed — what UKVI will and won't accept</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Unexplained Large Deposits — Rules</div><div class="gi-sub">When deposits raise flags and how to explain them</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Online Bank Statements — Are They Accepted?</div><div class="gi-sub">Monzo, Starling, Revolut — which digital banks are accepted</div></div></a>
+      <a class="guide-item">Minimum Balance Required by Route</a>
+      <a class="guide-item">Statements in Foreign Currency</a>
+    </div></div>
+    <div class="guide-section reveal"><div class="guide-sec-title">Income Evidence</div><div class="guide-grid">
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Category A Income Rules</div><div class="gi-sub">Employed for 6+ months with the same employer</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Category B Income Rules</div><div class="gi-sub">Employed less than 6 months or changed employer</div></div></a>
+      <a class="guide-item cat-guide-item"><div><div class="gi-title">Self-Employment Income Calculation</div><div class="gi-sub">SA302, tax year overview, and what counts</div></div></a>
+      <a class="guide-item">Payslip Requirements</a>
+      <a class="guide-item">P60 and P45 for Visa Applications</a>
+      <a class="guide-item">Employer Letter Format &amp; Requirements</a>
+      <a class="guide-item">Zero-Hours Contract Income</a>
+      <a class="guide-item">Director / Shareholder Income</a>
+    </div></div>
+    <div class="guide-section reveal"><div class="guide-sec-title">Savings &amp; Third-Party Funds</div><div class="guide-grid">
+      <a class="guide-item">Cash Savings — £88,500 Route (Spouse)</a>
+      <a class="guide-item">Cash Savings Calculation Formula</a>
+      <a class="guide-item">Acceptable Sources of Savings</a>
+      <a class="guide-item">Third-Party Sponsor — Rules &amp; Evidence</a>
+      <a class="guide-item">Joint Savings with Partner</a>
+      <a class="guide-item">Gifted Funds — Are They Accepted?</a>
+    </div></div>
+    <div class="cat-cta-box reveal">
+      <div class="cat-cta-text"><strong>Check your financial evidence</strong><br>The free risk check identifies specific gaps in your financial evidence before you submit.</div>
+      <button class="btn-primary" onclick="showPage('checker')">Start Free Risk Check →</button>
+    </div>
+  </div>
+</div>
+
 <!-- ══ FAQ ══ -->
 <div class="page" id="page-faq">
   <div class="faq-body">
@@ -1445,7 +1779,7 @@ window.addEventListener('scroll',()=>{
 /* ═══════════════════════════════
    PAGE ROUTING
 ═══════════════════════════════ */
-const PAGES={home:'page-home',how:'page-how',who:'page-who',pricing:'page-pricing',checker:'page-checker',guides:'page-guides',library:'page-library',faq:'page-faq',about:'page-about'};
+const PAGES={home:'page-home',how:'page-how',who:'page-who',pricing:'page-pricing',checker:'page-checker',guides:'page-guides',library:'page-library',faq:'page-faq',about:'page-about','cat-spouse':'page-cat-spouse','cat-skilled':'page-cat-skilled','cat-student':'page-cat-student','cat-visitor':'page-cat-visitor','cat-refusal':'page-cat-refusal','cat-financial':'page-cat-financial'};
 const NAVIDS={how:'nav-how',who:'nav-who',pricing:'nav-pricing',faq:'nav-faq',guides:'nav-guides',library:'nav-library',about:'nav-about',checker:'nav-checker'};
 let checkerReady=false;
 
@@ -1843,6 +2177,31 @@ function openGuide(section) {
       setTimeout(() => { el.style.background = ''; }, 1200);
     }
   }, 200);
+}
+
+
+
+/* ═══════════════════════════════
+   CATEGORY DETAIL PAGES
+═══════════════════════════════ */
+const CAT_PAGES = ['spouse','skilled','student','visitor','refusal','financial'];
+
+function showCatPage(cat) {
+  // Hide all pages
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  // Show this category page
+  const el = document.getElementById('page-cat-' + cat);
+  if (el) {
+    el.classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+    // Trigger reveals
+    setTimeout(() => {
+      el.querySelectorAll('.reveal').forEach(r => {
+        r.classList.remove('vis');
+      });
+      triggerReveals();
+    }, 50);
+  }
 }
 
 </script>
