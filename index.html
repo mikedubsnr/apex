@@ -687,7 +687,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:52px 5vw
         <div class="risk-banner">
           <div class="rbi"><div class="dot-r"></div>UK visa fees are often substantial and non-refundable</div>
           <div class="rbd"></div>
-          <div class="rbi" style="cursor:pointer" onclick="showPage('pricing')"><div class="dot-g"></div>Review options: £19–£69</div>
+          <div class="rbi" style="cursor:pointer" onclick="showPage('pricing')"><div class="dot-g"></div>Review options: £14.99–£49.99</div>
         </div>
       </div>
       <!-- RIGHT — DOCUMENT SCANNER VISUAL -->
@@ -867,13 +867,13 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:52px 5vw
     <p class="pricing-tagline">The free check shows the opening signal. The paid audit shows the full picture.</p>
     <div class="pricing-notice">
       <div class="notice-pill np-red">⚠ UK visa fees are often substantial and non-refundable</div>
-      <div class="notice-pill np-green" onclick="showPage('pricing')">Review options: £19–£69 →</div>
+      <div class="notice-pill np-green" onclick="showPage('pricing')">Review options: £14.99–£49.99 →</div>
     </div>
   </div>
   <div class="pricing-cards stagger">
     <div class="pricing-card reveal">
       <div class="plan-label">Basic Risk Scan</div>
-      <div class="plan-price">£19</div>
+      <div class="plan-price">£14.99</div>
       <div class="plan-note">One-Time Payment</div>
       <p class="plan-desc">High-level check for obvious red flags. A fast baseline review before you submit.</p>
       <div class="plan-div"></div>
@@ -883,7 +883,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:52px 5vw
     </div>
     <div class="pricing-card featured reveal">
       <div class="plan-label">Full Evidence Audit</div>
-      <div class="plan-price">£39</div>
+      <div class="plan-price">£29.99</div>
       <div class="plan-note">One-Time Payment</div>
       <p class="plan-desc">Complete 54-point review of your financial and relationship evidence. Includes a structured PDF Fix Plan. The most affordable protection for a £2,000+ visa application.</p>
       <div class="plan-div"></div>
@@ -893,7 +893,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:52px 5vw
     </div>
     <div class="pricing-card reveal">
       <div class="plan-label">Complex Case Review</div>
-      <div class="plan-price">£69</div>
+      <div class="plan-price">£49.99</div>
       <div class="plan-note">One-Time Payment</div>
       <p class="plan-desc">For previous refusals, income gaps, or complicated histories. Includes priority processing and enhanced review depth.</p>
       <div class="plan-div"></div>
@@ -912,7 +912,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:52px 5vw
     <table class="compare-table">
       <thead><tr><th style="width:34%"></th><th>Immigration Solicitor</th><th class="apex">ApexVisa UK</th></tr></thead>
       <tbody>
-        <tr><td>Cost</td><td>£150–£500 per consultation</td><td class="good">From £19 one-off</td></tr>
+        <tr><td>Cost</td><td>£150–£500 per consultation</td><td class="good">From £14.99 one-off</td></tr>
         <tr><td>Need appointment?</td><td>Usually yes</td><td class="good">No — instant, 24/7</td></tr>
         <tr><td>Immediate structured assessment</td><td>Not usually immediate</td><td>Yes — available straight away</td></tr>
         <tr><td>No solicitor consultation required</td><td>Consultation usually needed</td><td>Yes — self-serve online</td></tr>
@@ -1527,7 +1527,7 @@ function ckResult(r){
         <div class="ck-rdesc">${ri.detail}</div>
       </div>`).join('')}
     </div>
-    <button class="ck-cta-btn" onclick="showPage('pricing')"><span>See full audit options — from £19</span><span>→</span></button>
+    <button class="ck-cta-btn" onclick="showPage('pricing')"><span>See full audit options — from £14.99</span><span>→</span></button>
     <button class="ck-restart" onclick="ckRestart()">Start again with different answers</button>
     <p class="ck-res-disc">Not legal advice. Based on publicly available UKVI criteria as of April 2026. Always consult an IAA-regulated adviser before submitting.</p>`;
 }
@@ -1549,9 +1549,9 @@ function ckRestart(){ckA={};ckS=0;renderChecker();}
 ═══════════════════════════════ */
 const STRIPE_PK = 'pk_test_51TQVyGE3hvzl2R0ASLxJWj6tzHDmz6vj0tSbwj4l64Olsx2Z2qRqnbvs9ZBDxRcP0BFIQCzMvIJlFBMY5fTC18hC0014lXLtJF';
 const PLANS = {
-  basic:   { name:'Basic Pre-Check',    price:'£19', note:'You will pay £19 today.',  btnId:'buy_btn_1TQqFsE3hvzl2R0AvxReuACq' },
-  audit:   { name:'Professional Audit', price:'£39', note:'You will pay £39 today.',  btnId:'buy_btn_1TQqFOE3hvzl2R0AYjGml9QS' },
-  complex: { name:'Professional Plus',  price:'£69', note:'You will pay £69 today.',  btnId:'buy_btn_1TQqD1E3hvzl2R0AHMD55PSo' },
+  basic:   { name:'Basic Pre-Check',    price:'£14.99', note:'You will pay £14.99 today.',  btnId:'buy_btn_1TQvoNE3hvzl2R0ANiwFhPX4' },
+  audit:   { name:'Professional Audit', price:'£29.99', note:'You will pay £29.99 today.',  btnId:'buy_btn_1TQvokE3hvzl2R0AYC5g0oJq' },
+  complex: { name:'Professional Plus',  price:'£49.99', note:'You will pay £49.99 today.',  btnId:'buy_btn_1TQvqEE3hvzl2R0AzbFYJmWe' },
 };
 
 let activePlan = null;
@@ -1675,8 +1675,8 @@ document.addEventListener('keydown', function(e) {
         <div class="plan-card-label">Selected Plan</div>
         <div class="plan-card-name" id="co-name">Basic Pre-Check</div>
         <div class="plan-card-desc">One-off payment. Secure Stripe checkout and instant access after payment.</div>
-        <div class="plan-card-price" id="co-price">£19</div>
-        <div class="plan-card-price-note" id="co-note">You will pay £19 today.</div>
+        <div class="plan-card-price" id="co-price">£14.99</div>
+        <div class="plan-card-price-note" id="co-note">You will pay £14.99 today.</div>
       </div>
 
       <!-- Visa Route Selector -->
