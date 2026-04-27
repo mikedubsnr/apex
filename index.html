@@ -1547,10 +1547,11 @@ function ckRestart(){ckA={};ckS=0;renderChecker();}
 /* ═══════════════════════════════
    SECURE CHECKOUT MODAL
 ═══════════════════════════════ */
+const STRIPE_PK = 'pk_test_51TQVyGE3hvzl2R0ASLxJWj6tzHDmz6vj0tSbwj4l64Olsx2Z2qRqnbvs9ZBDxRcP0BFIQCzMvIJlFBMY5fTC18hC0014lXLtJF';
 const PLANS = {
-  basic:   { name:'Basic Pre-Check',    price:'£19', note:'You will pay £19 today.',  url:'https://buy.stripe.com/test_14A8wPbU5e15as7dgR1B600' },
-  audit:   { name:'Professional Audit', price:'£39', note:'You will pay £39 today.',  url:'https://buy.stripe.com/test_4gM00je2daOT8jZ6St1B601' },
-  complex: { name:'Professional Plus',  price:'£69', note:'You will pay £69 today.',  url:'https://buy.stripe.com/test_aFa14nbU5f5943J6St1B602' },
+  basic:   { name:'Basic Pre-Check',    price:'£19', note:'You will pay £19 today.',  btnId:'buy_btn_1TQqFsE3hvzl2R0AvxReuACq' },
+  audit:   { name:'Professional Audit', price:'£39', note:'You will pay £39 today.',  btnId:'buy_btn_1TQqFOE3hvzl2R0AYjGml9QS' },
+  complex: { name:'Professional Plus',  price:'£69', note:'You will pay £69 today.',  btnId:'buy_btn_1TQqD1E3hvzl2R0AHMD55PSo' },
 };
 
 let activePlan = null;
@@ -1589,9 +1590,60 @@ function proceedToStripe() {
   if (!activeRoute || !activePlan) return;
   const plan = PLANS[activePlan];
   closeCheckout();
-  // Build URL with prefilled client reference (visa route)
-  const ref = encodeURIComponent(activeRoute.replace(/\s+/g, '-').toLowerCase());
-  window.location.href = plan.url + '?client_reference_id=' + ref;
+
+  // Remove any previous injected button
+  const old = document.getElementById('stripe-modal-injector');
+  if (old) old.remove();
+
+  // Create overlay container
+  const overlay = document.createElement('div');
+  overlay.id = 'stripe-modal-injector';
+  overlay.style.cssText = [
+    'position:fixed','inset:0','z-index:9999',
+    'background:rgba(4,6,16,0.85)','backdrop-filter:blur(8px)',
+    'display:flex','align-items:center','justify-content:center',
+    'flex-direction:column','gap:16px'
+  ].join(';');
+
+  // Close button
+  const closeBtn = document.createElement('button');
+  closeBtn.textContent = '✕  Cancel';
+  closeBtn.style.cssText = 'background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.6);padding:8px 20px;border-radius:8px;font-size:13px;cursor:pointer;font-family:inherit';
+  closeBtn.onclick = () => overlay.remove();
+  overlay.addEventListener('click', e => { if(e.target===overlay) overlay.remove(); });
+
+  // Label
+  const label = document.createElement('div');
+  label.textContent = 'Redirecting to secure checkout…';
+  label.style.cssText = 'color:rgba(255,255,255,0.5);font-size:13px;font-family:inherit;text-align:center';
+
+  // Stripe buy button element
+  const btn = document.createElement('stripe-buy-button');
+  btn.setAttribute('buy-button-id', plan.btnId);
+  btn.setAttribute('publishable-key', STRIPE_PK);
+  btn.style.cssText = 'display:block;min-width:300px';
+
+  overlay.appendChild(label);
+  overlay.appendChild(btn);
+  overlay.appendChild(closeBtn);
+  document.body.appendChild(overlay);
+
+  // Auto-click the Stripe button once it has rendered
+  let attempts = 0;
+  const tryClick = setInterval(() => {
+    attempts++;
+    const shadow = btn.shadowRoot;
+    const inner  = shadow && shadow.querySelector('button, a, [role="button"]');
+    if (inner) {
+      clearInterval(tryClick);
+      inner.click();
+    } else if (attempts > 40) {
+      // Fallback: show the button visually so user can click
+      clearInterval(tryClick);
+      label.textContent = 'Click below to complete your payment:';
+      btn.style.transform = 'scale(1.05)';
+    }
+  }, 100);
 }
 
 document.addEventListener('keydown', function(e) {
