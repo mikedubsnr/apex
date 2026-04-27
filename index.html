@@ -204,6 +204,49 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(11,15,30,0.9
 .ndm-all{display:flex;align-items:center;justify-content:center;padding:9px 10px;border-radius:8px;font-size:12.5px;font-weight:600;color:var(--blue2);cursor:pointer;transition:background 0.12s;text-decoration:none}
 .ndm-all:hover{background:var(--blue-dim)}
 
+
+/* ─── ARTICLE READER ─── */
+@keyframes artIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+#art-content{animation:artIn 0.35s ease both}
+.art-breadcrumb{font-size:13px;color:var(--text3);margin-bottom:28px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.art-breadcrumb span{color:var(--blue2);cursor:pointer;transition:opacity 0.15s}
+.art-breadcrumb span:hover{opacity:0.75}
+.art-breadcrumb .sep{color:var(--text3)}
+.art-tag{display:inline-flex;align-items:center;gap:6px;background:var(--blue-dim);border:1px solid rgba(79,142,247,0.25);color:var(--blue2);font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:16px}
+.art-h1{font-size:clamp(26px,4vw,40px);font-weight:800;color:#fff;letter-spacing:-0.025em;line-height:1.12;margin-bottom:16px}
+.art-intro{font-size:16px;color:var(--text2);line-height:1.72;margin-bottom:28px;border-left:3px solid var(--blue);padding-left:16px}
+.art-updated{font-size:12px;color:var(--text3);margin-bottom:32px;display:flex;align-items:center;gap:6px}
+.art-updated::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green);flex-shrink:0}
+.art-h2{font-size:20px;font-weight:700;color:#fff;letter-spacing:-0.02em;margin:36px 0 14px}
+.art-h3{font-size:16px;font-weight:600;color:var(--blue2);margin:24px 0 10px}
+.art-p{font-size:15px;color:var(--text2);line-height:1.75;margin-bottom:14px}
+.art-alert{display:flex;align-items:flex-start;gap:12px;background:rgba(245,158,11,0.07);border:1px solid rgba(245,158,11,0.22);border-radius:10px;padding:16px 18px;margin:24px 0;font-size:14px;color:var(--text2);line-height:1.6}
+.art-alert-icon{font-size:18px;flex-shrink:0}
+.art-alert strong{color:#fcd34d}
+.art-alert.info{background:rgba(79,142,247,0.07);border-color:rgba(79,142,247,0.25)}
+.art-alert.info strong{color:var(--blue2)}
+.art-alert.success{background:rgba(34,197,94,0.07);border-color:rgba(34,197,94,0.25)}
+.art-alert.success strong{color:#86efac}
+.art-alert.danger{background:rgba(239,68,68,0.07);border-color:rgba(239,68,68,0.25)}
+.art-alert.danger strong{color:#fca5a5}
+.art-list{list-style:none;display:grid;gap:8px;margin:16px 0 20px;padding:0}
+.art-list li{font-size:14.5px;color:var(--text2);display:flex;align-items:flex-start;gap:10px;line-height:1.6}
+.art-list li::before{content:"";width:18px;height:18px;border-radius:50%;background:var(--blue-dim);border:1.5px solid var(--blue);flex-shrink:0;margin-top:2px;background-image:url("data:image/svg+xml,%3Csvg width='8' height='6' viewBox='0 0 8 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3L3 5L7 1' stroke='%234f8ef7' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center}
+.art-list.cross li::before{background-image:url("data:image/svg+xml,%3Csvg width='8' height='8' viewBox='0 0 8 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L7 7M7 1L1 7' stroke='%23ef4444' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background:rgba(239,68,68,0.1);border-color:rgba(239,68,68,0.4)}
+.art-divider{height:1px;background:var(--border);margin:28px 0}
+.art-summary{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin:24px 0}
+.art-summary-title{font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);margin-bottom:12px}
+.art-kv{display:grid;gap:8px}
+.art-kv-row{display:flex;align-items:flex-start;gap:12px;font-size:13.5px}
+.art-kv-key{color:var(--text3);min-width:160px;flex-shrink:0;font-weight:500}
+.art-kv-val{color:var(--text)}
+.art-related{margin-top:32px;padding-top:24px;border-top:1px solid var(--border)}
+.art-related-title{font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--text3);margin-bottom:12px}
+.art-related-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.art-related-item{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:13px;color:var(--text2);cursor:pointer;transition:border-color 0.15s,color 0.15s,background 0.15s}
+.art-related-item:hover{border-color:rgba(79,142,247,0.3);color:var(--text);background:var(--bg3)}
+@media(max-width:600px){.art-kv-row{flex-direction:column;gap:2px}.art-kv-key{min-width:auto}.art-related-grid{grid-template-columns:1fr}}
+
 /* ─── SCROLL PROGRESS ─── */
 .scroll-bar{position:fixed;top:64px;left:0;right:0;height:2px;z-index:299;pointer-events:none}
 .scroll-fill{height:100%;background:linear-gradient(90deg,var(--blue),#7c5cfc);width:0%;transition:width 0.08s linear}
@@ -1632,6 +1675,29 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:52px 5vw
   </div>
 </div>
 
+
+<!-- ══ ARTICLE READER ══ -->
+<div class="page" id="page-article">
+  <div style="max-width:780px;margin:0 auto;padding:32px 5vw 80px">
+    <!-- Breadcrumb -->
+    <div class="art-breadcrumb" id="art-breadcrumb"></div>
+    <!-- Article -->
+    <div id="art-content"></div>
+    <!-- Bottom CTA -->
+    <div class="cat-cta-box" style="margin-top:40px">
+      <div class="cat-cta-text">
+        <strong>Check your visa for hidden risk factors</strong>
+        Answer 6 questions and get a personalised risk report — free, instant, no sign-up.
+      </div>
+      <button class="btn-primary" onclick="showPage('checker')">Start Free Risk Check →</button>
+    </div>
+    <!-- Back button -->
+    <div style="margin-top:24px;text-align:center">
+      <button class="btn-secondary" id="art-back-btn" onclick="artGoBack()">← Back to Guides</button>
+    </div>
+  </div>
+</div>
+
 <!-- ══ FAQ ══ -->
 <div class="page" id="page-faq">
   <div class="faq-body">
@@ -2203,6 +2269,889 @@ function showCatPage(cat) {
     }, 50);
   }
 }
+
+
+
+/* ═══════════════════════════════════════════════════
+   ARTICLE READER ENGINE
+═══════════════════════════════════════════════════ */
+
+let artHistory = [];  // stack: [{page, label}]
+
+function openArticle(slug, fromPage, fromLabel) {
+  const art = ARTICLES[slug];
+  if (!art) return;
+
+  // Push history
+  artHistory.push({ page: fromPage || 'library', label: fromLabel || 'Guides' });
+
+  // Build breadcrumb
+  const bc = document.getElementById('art-breadcrumb');
+  const backItem = artHistory[artHistory.length - 1];
+  bc.innerHTML = `
+    <span onclick="artGoBack()">← ${backItem.label}</span>
+    <span class="sep">›</span>
+    <span style="color:var(--text)">${art.title}</span>`;
+
+  // Set back button label
+  document.getElementById('art-back-btn').textContent = `← Back to ${backItem.label}`;
+
+  // Build article HTML
+  document.getElementById('art-content').innerHTML = buildArticleHTML(art);
+
+  // Navigate
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-article').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function artGoBack() {
+  const prev = artHistory.pop();
+  if (!prev) { showPage('library'); return; }
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const el = document.getElementById('page-' + prev.page) ||
+             document.getElementById('page-cat-' + prev.page);
+  if (el) { el.classList.add('active'); }
+  else { showPage('library'); }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function buildArticleHTML(art) {
+  let html = `
+    <div class="art-tag">${art.category}</div>
+    <h1 class="art-h1">${art.title}</h1>
+    <p class="art-intro">${art.intro}</p>
+    <div class="art-updated">Updated April 2026 · Reviewed by Visa Risk Analyst, Apex Visa UK · 556 guides reviewed for 2026 Immigration Rules</div>`;
+
+  art.sections.forEach(s => {
+    if (s.type === 'h2') html += `<h2 class="art-h2">${s.text}</h2>`;
+    else if (s.type === 'h3') html += `<h3 class="art-h3">${s.text}</h3>`;
+    else if (s.type === 'p') html += `<p class="art-p">${s.text}</p>`;
+    else if (s.type === 'alert') html += `<div class="art-alert ${s.style||''}"><div class="art-alert-icon">${s.icon||'⚠'}</div><div><strong>${s.label}</strong> ${s.text}</div></div>`;
+    else if (s.type === 'list') html += `<ul class="art-list ${s.style||''}">${s.items.map(i=>`<li>${i}</li>`).join('')}</ul>`;
+    else if (s.type === 'divider') html += `<div class="art-divider"></div>`;
+    else if (s.type === 'summary') html += `<div class="art-summary"><div class="art-summary-title">${s.title}</div><div class="art-kv">${s.rows.map(r=>`<div class="art-kv-row"><div class="art-kv-key">${r[0]}</div><div class="art-kv-val">${r[1]}</div></div>`).join('')}</div></div>`;
+  });
+
+  if (art.related && art.related.length) {
+    html += `<div class="art-related"><div class="art-related-title">Related Guides</div><div class="art-related-grid">`;
+    art.related.forEach(r => {
+      html += `<div class="art-related-item" onclick="openArticle('${r.slug}','article','Article')">${r.title}</div>`;
+    });
+    html += `</div></div>`;
+  }
+
+  html += `<p style="font-size:11.5px;color:var(--text3);margin-top:28px;padding-top:16px;border-top:1px solid var(--border);line-height:1.6">Not legal advice. This guide is based on publicly available UK Immigration Rules and UKVI guidance as of April 2026. Immigration law changes frequently — always verify current requirements on GOV.UK before submitting any application.</p>`;
+  return html;
+}
+
+/* ═══════════════════════════════════════════════════
+   ARTICLE DATABASE
+═══════════════════════════════════════════════════ */
+const ARTICLES = {
+
+  'spouse-income': {
+    title: 'Spouse Visa Income Requirement 2026',
+    category: 'Spouse & Partner Visa',
+    intro: 'The UK Spouse Visa requires the UK-based sponsor to meet a Minimum Income Requirement (MIR). As of April 2024, this threshold is £29,000 gross per year — a 93% increase from the previous £18,600. This guide explains exactly what counts, what evidence is needed, and what happens if you fall short.',
+    sections: [
+      { type:'alert', style:'', icon:'⚠', label:'2026 Threshold:', text:'The current Minimum Income Requirement is <strong>£29,000 gross per year</strong>. The previous £18,600 threshold only applies to applicants with Transitional Protection who submitted before 11 April 2024.' },
+      { type:'h2', text:'What is the Minimum Income Requirement?' },
+      { type:'p', text:'The Minimum Income Requirement (MIR) is the minimum annual gross income the UK-based sponsor must earn for a Spouse or Partner Visa to be granted. It applies to both entry clearance applications (from outside the UK) and in-country extensions (FLR(M)).' },
+      { type:'p', text:'The income must be from the sponsor — not the applicant — unless the applicant is already in the UK with permission to work. Income from overseas employment does not count for the sponsor threshold.' },
+      { type:'summary', title:'At a Glance', rows:[
+        ['Current threshold','£29,000 gross/year'],
+        ['Previous threshold','£18,600 (pre-April 2024 only)'],
+        ['Savings alternative','£88,500 held for 28+ days'],
+        ['Transitional Protection','Only if applied before 11 Apr 2024'],
+        ['Who must meet it','UK-based sponsor'],
+        ['Does applicant income count?','Only if in UK with work permission'],
+      ]},
+      { type:'h2', text:'What Income Counts Towards the Threshold?' },
+      { type:'h3', text:'Category A — Employed (same employer 6+ months)' },
+      { type:'p', text:'If the sponsor has been employed by the same employer for at least 6 months before the application date, their current annual gross salary is used. Evidence: 6 months of payslips, 6 months of bank statements showing salary credits, and a letter from the employer.' },
+      { type:'h3', text:'Category B — Employed (less than 6 months or changed employer)' },
+      { type:'p', text:'If the sponsor has changed employer or has been employed for less than 6 months, income is calculated from the annual equivalent of their current salary plus any other income in the 12 months before application. Evidence requirements are more complex.' },
+      { type:'h3', text:'Self-Employment Income' },
+      { type:'p', text:'Self-employed sponsors must use the income from their last full tax year as filed with HMRC. Evidence: SA302 tax calculation, tax year overview, and business accounts. The most recent year only — averaging is not permitted for the primary calculation.' },
+      { type:'h2', text:'What Does NOT Count as Income' },
+      { type:'list', style:'cross', items:[
+        'Income earned overseas (from foreign employment)',
+        'Universal Credit, Income Support, or most state benefits',
+        'Child Benefit or Child Tax Credit',
+        'Investment income (in most circumstances)',
+        'Income from friends or family members (unless formal third-party evidence)',
+      ]},
+      { type:'h2', text:'The Savings Alternative — £88,500 Route' },
+      { type:'p', text:'If the sponsor\'s income falls below £29,000, cash savings can make up the shortfall. The formula is: savings needed = £88,500 minus (annual income × 2.5). To use the full savings route with zero income, you need £88,500.' },
+      { type:'p', text:'Savings must be held in a financial institution regulated in the UK or overseas, and must have been held for a minimum of 28 consecutive days immediately before the application date. A single bank statement is not sufficient — a continuous 28-day statement showing no drop below the threshold is required.' },
+      { type:'alert', style:'info', icon:'ℹ', label:'Key rule:', text:'The 28-day period for savings ends on the date the application is submitted, not the date you print the statements. Leave no gap.' },
+      { type:'h2', text:'Common Reasons for Income Refusal' },
+      { type:'list', items:[
+        'Salary stated on application doesn\'t match payslips or bank credits',
+        'Employer letter missing required details (job title, salary, contract type, start date)',
+        'Self-employment income from the wrong tax year',
+        'Bank statements don\'t show salary credits matching the payslip amount',
+        'Savings dropped below the threshold during the 28-day window',
+        'Income in a currency other than GBP without a conversion note',
+      ]},
+    ],
+    related:[
+      { slug:'28-day-rule', title:'The 28-Day Rule Explained' },
+      { slug:'savings-route', title:'Savings Route — £88,500' },
+      { slug:'spouse-refused-income', title:'Refused for Income Below Threshold' },
+      { slug:'category-a-income', title:'Category A Income Rules' },
+    ]
+  },
+
+  '28-day-rule': {
+    title: 'The 28-Day Bank Statement Rule Explained',
+    category: 'Financial Rules',
+    intro: 'The 28-day rule requires that funds used to meet a financial threshold — for student maintenance, savings, or certain income requirements — must be held continuously for 28 days immediately before the date of application. A single drop below the required amount during that period can cause a refusal.',
+    sections: [
+      { type:'alert', style:'danger', icon:'✕', label:'Critical:', text:'The 28 days must be immediately before the application submission date. Statements from the right period but ending before submission will not satisfy the requirement.' },
+      { type:'h2', text:'Which visa routes does the 28-day rule apply to?' },
+      { type:'list', items:[
+        'Student Visa — maintenance funds (tuition and living costs)',
+        'Child Student Visa — maintenance funds',
+        'Spouse/Partner Visa — savings route (£88,500)',
+        'Some ILR and settlement savings routes',
+      ]},
+      { type:'h2', text:'What does "held continuously" mean?' },
+      { type:'p', text:'The funds must be present in the account every single day during the 28-day period. If the balance drops below the required amount even for one day — even if it goes back up the next day — the requirement is not met.' },
+      { type:'p', text:'This means you cannot "top up" your account immediately before applying. The funds must have been there, uninterrupted, for the full 28 days.' },
+      { type:'h2', text:'Which bank statements are accepted?' },
+      { type:'list', items:[
+        'Official bank statements (posted to you by the bank) — always accepted',
+        'Online/printed bank statements — accepted only if accompanied by a letter from the bank confirming they are authentic',
+        'Monzo, Starling, Revolut — must provide a letter from the bank confirming authenticity; some caseworkers are more cautious with digital-only banks',
+        'Overseas bank accounts — accepted in most circumstances',
+        'Building society passbooks — accepted if they cover the full period',
+      ]},
+      { type:'h2', text:'What if my balance dropped for one day?' },
+      { type:'p', text:'If your balance dropped below the threshold for even a single day within the 28-day window, the requirement is not met for that period. You would need to wait until a full 28-day clean period has elapsed, then reapply.' },
+      { type:'alert', style:'', icon:'⚠', label:'Do not apply early:', text:'A common mistake is submitting before the full 28 days have elapsed. Count carefully — the day of application is included in the 28 days.' },
+      { type:'h2', text:'How to count the 28 days correctly' },
+      { type:'p', text:'Count backwards from your intended submission date. If you plan to submit on 15 May, the 28-day window runs from 18 April to 15 May. Your statements must show the required balance every day in that window.' },
+      { type:'p', text:'Request statements that clearly show daily balances. If your bank only issues monthly statements, request a detailed transaction history that shows every day.' },
+    ],
+    related:[
+      { slug:'spouse-income', title:'Spouse Visa Income Requirement 2026' },
+      { slug:'savings-route', title:'£88,500 Savings Route' },
+      { slug:'student-maintenance', title:'Student Maintenance Funds 2026' },
+      { slug:'unexplained-deposits', title:'Unexplained Bank Deposits' },
+    ]
+  },
+
+  'genuine-relationship': {
+    title: 'Genuine & Subsisting Relationship Test',
+    category: 'Spouse & Partner Visa',
+    intro: 'For all Spouse and Partner visa applications, the Home Office must be satisfied that your relationship is genuine and subsisting — meaning it is a real, continuing relationship, not one entered into primarily to obtain immigration status. This guide explains exactly what caseworkers look for and what evidence passes.',
+    sections: [
+      { type:'h2', text:'What does "genuine and subsisting" mean?' },
+      { type:'p', text:'"Genuine" means the relationship is a real personal relationship — not one entered into purely to obtain a visa. "Subsisting" means it is ongoing at the time of application — you are still together and the relationship is active.' },
+      { type:'p', text:'A caseworker assessing your application will look at the totality of the evidence. No single piece of evidence guarantees approval — it is the overall picture that matters.' },
+      { type:'h2', text:'What evidence do caseworkers look for?' },
+      { type:'list', items:[
+        'How and when you met — a consistent, credible account from both parties',
+        'Communication history — messages, calls, video calls over an extended period',
+        'Joint finances — shared bank accounts, bills, insurance policies',
+        'Cohabitation evidence — joint tenancy agreements, mortgage statements, utility bills',
+        'Photos together at different times and locations',
+        'Travel history showing visits to each other',
+        'Evidence that family and friends know about the relationship',
+        'Marriage or civil partnership certificate (if applicable)',
+      ]},
+      { type:'alert', style:'', icon:'⚠', label:'Key risk:', text:'Caseworkers are trained to spot relationships where communication is thin, dates are inconsistent between applications, or the sponsor has previously sponsored other partners.' },
+      { type:'h2', text:'What weakens a relationship application?' },
+      { type:'list', style:'cross', items:[
+        'Inconsistent accounts between the applicant and sponsor',
+        'Very short relationship before application (under 1-2 years)',
+        'Little or no documented communication history',
+        'No shared address, shared finances, or cohabitation evidence',
+        'Large age gap without clear explanation',
+        'Sponsor has previously sponsored multiple partners',
+        'Limited knowledge of each other\'s backgrounds, family, and daily life',
+      ]},
+      { type:'h2', text:'How to strengthen your relationship evidence' },
+      { type:'p', text:'The most persuasive evidence shows the relationship developing naturally over time. A cover letter narrating your relationship story — how you met, when you decided to marry, how you maintain contact — helps caseworkers understand the evidence bundle.' },
+      { type:'p', text:'Print screenshots of messaging history (WhatsApp, etc.) showing regular contact. Include call logs. Photos should span different dates and show you in different locations — not just one occasion.' },
+    ],
+    related:[
+      { slug:'spouse-income', title:'Spouse Visa Income Requirement 2026' },
+      { slug:'spouse-refused-weak-evidence', title:'Refused for Weak Relationship Evidence' },
+      { slug:'relationship-evidence-checklist', title:'Relationship Evidence Checklist' },
+    ]
+  },
+
+  'skilled-worker-salary': {
+    title: 'Skilled Worker Salary Threshold 2026',
+    category: 'Skilled Worker Visa',
+    intro: 'The Skilled Worker Visa requires your salary to meet both the general threshold and the going rate for your specific occupation code. As of April 2024, the general threshold is £38,700 per year. This guide explains both requirements and what happens when there is a conflict.',
+    sections: [
+      { type:'summary', title:'2026 Salary Thresholds at a Glance', rows:[
+        ['General threshold','£38,700 gross/year'],
+        ['New entrant rate','£30,960 (80% of general threshold)'],
+        ['Health & Care worker','£29,000 gross/year'],
+        ['Shortage occupation discount','Removed — no longer applies'],
+        ['Going rate requirement','Must meet whichever is higher'],
+        ['Part-time roles','Proportional rate must meet pro-rata going rate'],
+      ]},
+      { type:'h2', text:'The Two-Part Salary Test' },
+      { type:'p', text:'Your salary must meet both: (1) the general threshold of £38,700/year, AND (2) the going rate for your specific SOC occupation code. You must meet whichever is higher.' },
+      { type:'p', text:'If the going rate for your job is £42,000, you must be paid at least £42,000 — the general £38,700 threshold is a floor, not a ceiling.' },
+      { type:'h2', text:'Who qualifies for the New Entrant rate?' },
+      { type:'list', items:[
+        'Under 26 years old at the time of application',
+        'Switching from a Student or Graduate visa',
+        'Working towards a recognised professional qualification',
+        'In a role that is part of a UK government-approved training programme',
+      ]},
+      { type:'alert', style:'', icon:'⚠', label:'Important:', text:'The shortage occupation discount was removed in April 2024. There are no longer discounted salary rates for shortage occupations.' },
+      { type:'h2', text:'How to check your going rate' },
+      { type:'p', text:'Your employer\'s Certificate of Sponsorship (CoS) will state your SOC code. You can look up the going rate for that SOC code in the current Skilled Worker Appendix on GOV.UK. The table lists the annual and hourly going rate for every eligible occupation.' },
+    ],
+    related:[
+      { slug:'cos-explained', title:'Certificate of Sponsorship Explained' },
+      { slug:'skilled-worker-refusal', title:'Skilled Worker Refusal Reasons' },
+    ]
+  },
+
+  'visitor-genuine-test': {
+    title: 'Genuine Visitor Test — What Caseworkers Assess',
+    category: 'Visitor Visa',
+    intro: 'Every Standard Visitor Visa application is assessed against the "genuine visitor test." A caseworker must be satisfied that you intend to visit the UK for a permitted purpose, will leave at the end of your visit, and will not work. This guide explains the three pillars of the test and what evidence addresses each one.',
+    sections: [
+      { type:'h2', text:'The Three Pillars of the Genuine Visitor Test' },
+      { type:'h3', text:'1. Purpose of visit is permitted' },
+      { type:'p', text:'Your stated reason for visiting must be a permitted visitor activity: tourism, visiting family or friends, short business meetings, attending a conference, receiving medical treatment, or getting married. You cannot visit to work, study for more than 30 days, or access public funds.' },
+      { type:'h3', text:'2. You intend to leave at the end of your visit' },
+      { type:'p', text:'This is the most commonly failed element. A caseworker must believe you will leave the UK when your permission expires. Evidence of ties to your home country — employment, property, family dependants — is crucial here.' },
+      { type:'h3', text:'3. You will not work or access public funds' },
+      { type:'p', text:'You must not intend to take paid or unpaid employment in the UK. Business visitors can attend meetings but cannot perform a role that would ordinarily be done by a UK resident.' },
+      { type:'h2', text:'Ties to Home Country — What Counts' },
+      { type:'list', items:[
+        'Employment — a letter from your employer confirming your position and approved leave',
+        'Self-employment — business registration, client contracts, tax returns',
+        'Property — ownership documents or long-term tenancy agreement',
+        'Family dependants — children, spouse, parents who depend on you',
+        'Financial ties — ongoing financial commitments in your home country',
+        'Study — enrolment at a college or university in your home country',
+      ]},
+      { type:'alert', style:'danger', icon:'✕', label:'High risk situations:', text:'First-time visitors with no travel history, applicants from countries with high overstay rates, and applicants whose close family members are already settled in the UK face heightened scrutiny.' },
+      { type:'h2', text:'Financial Evidence for Visitor Visas' },
+      { type:'p', text:'There is no fixed amount required for a Visitor Visa. The caseworker assesses whether you can fund your trip and whether your financial situation makes it plausible that you will return home. Bank statements for the last 3-6 months are standard.' },
+      { type:'p', text:'If someone else is funding your visit (a UK host), they should provide a sponsor letter, their own bank statements, and proof of their immigration status in the UK.' },
+    ],
+    related:[
+      { slug:'visitor-refusal-reasons', title:'Visitor Visa Refusal Reasons' },
+      { slug:'eta-guide', title:'Electronic Travel Authorisation (ETA)' },
+      { slug:'no-travel-history', title:'Applying With No Travel History' },
+    ]
+  },
+
+  'student-maintenance': {
+    title: 'Student Visa Maintenance Funds 2026',
+    category: 'Student Visa',
+    intro: 'To be granted a UK Student Visa, you must show you have sufficient funds to pay for your tuition and live in the UK. The required amount depends on where you will be studying and how long your course lasts. Funds must be held for 28 consecutive days before you apply.',
+    sections: [
+      { type:'summary', title:'2026 Maintenance Amounts', rows:[
+        ['London — per month','£1,334'],
+        ['London — 9 months (max)','£12,006'],
+        ['Outside London — per month','£1,023'],
+        ['Outside London — 9 months','£9,207'],
+        ['28-day holding period','Required — funds must not drop below threshold'],
+        ['Tuition fees','Must also be evidenced separately'],
+      ]},
+      { type:'alert', style:'', icon:'⚠', label:'London definition:', text:'London means studying in an institution in the Greater London area. If your campus is outside London, the lower rate applies — even if you plan to live in London.' },
+      { type:'h2', text:'How is the amount calculated?' },
+      { type:'p', text:'You need to show funds covering both your tuition fees (as stated on your CAS) and your living costs. Living costs are capped at 9 months even if your course is longer. The amounts above are per month of the course remaining, up to 9 months.' },
+      { type:'p', text:'If your CAS states that your tuition fees are paid in full or partially paid, you only need to evidence the remaining tuition balance.' },
+      { type:'h2', text:'The 28-day rule for student maintenance' },
+      { type:'p', text:'Your bank statements must show the full required amount held continuously for 28 consecutive days, ending no more than 31 days before your application date. A single day below the threshold fails the requirement.' },
+      { type:'list', items:[
+        'Use official bank statements or online statements with a bank authentication letter',
+        'The balance must not drop below the threshold at any point in the 28 days',
+        'Statements must clearly show your name and account number',
+        'Overseas accounts are accepted — use a currency conversion if not in GBP',
+      ]},
+      { type:'h2', text:'Official financial sponsorship' },
+      { type:'p', text:'If you have an official financial sponsor (a government, an international organisation, or your university), you do not need to show personal maintenance funds. You need a letter from the sponsor confirming they are funding your studies.' },
+    ],
+    related:[
+      { slug:'28-day-rule', title:'The 28-Day Rule Explained' },
+      { slug:'genuine-student-test', title:'Genuine Student Test' },
+      { slug:'student-refused-funds', title:'Refused for Insufficient Maintenance Funds' },
+    ]
+  },
+
+  'refused-insufficient-funds': {
+    title: 'UK Visa Refused for Insufficient Funds',
+    category: 'Refusal Reasons',
+    intro: 'Insufficient funds is the single most common reason UK visa applications are refused. It applies across nearly every route — from the Student Visa maintenance requirement to the Spouse Visa £29,000 income threshold and the Visitor Visa plausibility test. This guide explains what went wrong and how to fix it.',
+    sections: [
+      { type:'h2', text:'Why this refusal happens' },
+      { type:'p', text:'A caseworker refuses on insufficient funds when the evidence you have submitted does not satisfy the financial requirement for your visa route. This can happen even when you have the required funds — if the evidence is incomplete, in the wrong format, or covers the wrong time period.' },
+      { type:'h2', text:'The most common causes by route' },
+      { type:'h3', text:'Spouse Visa (FLR(M) or Entry Clearance)' },
+      { type:'list', items:[
+        'Sponsor income below £29,000 gross/year',
+        'Savings below £88,500 or not held for 28 continuous days',
+        'Employer letter missing required details',
+        'Bank statements don\'t match payslip amounts',
+      ]},
+      { type:'h3', text:'Student Visa' },
+      { type:'list', items:[
+        'Balance dropped below threshold during 28-day window',
+        'Statements don\'t cover the required period',
+        'Amount shown is below the required maintenance figure',
+        'Online statements not authenticated by the bank',
+      ]},
+      { type:'h3', text:'Visitor Visa' },
+      { type:'list', items:[
+        'Bank balance appears insufficient to fund the stated trip',
+        'Statements show irregular activity or a balance propped up before application',
+        'No explanation of funds source',
+      ]},
+      { type:'h2', text:'How to fix it before reapplying' },
+      { type:'p', text:'Read your refusal notice carefully. It will state the specific reason the financial evidence was rejected. This tells you exactly what to address.' },
+      { type:'p', text:'Common fixes include: obtaining a new employer letter with all required details; waiting for a 28-day clean savings period; requesting official bank statements rather than printed ones; or providing a source-of-funds letter for irregular deposits.' },
+      { type:'alert', style:'success', icon:'✓', label:'Before reapplying:', text:'Do not reapply until you have addressed every specific point in the refusal notice. A second refusal on the same grounds is harder to overturn and affects future applications.' },
+    ],
+    related:[
+      { slug:'28-day-rule', title:'The 28-Day Rule Explained' },
+      { slug:'spouse-income', title:'Spouse Visa Income Requirement 2026' },
+      { slug:'unexplained-deposits', title:'Unexplained Bank Deposits' },
+      { slug:'savings-route', title:'£88,500 Savings Route' },
+    ]
+  },
+
+  'refused-weak-relationship': {
+    title: 'Spouse Visa Refused for Weak Relationship Evidence',
+    category: 'Refusal Reasons',
+    intro: 'A refusal for weak relationship evidence means the caseworker was not satisfied that your relationship is genuine and subsisting. This is one of the most subjective refusal grounds — and one of the most common. This guide explains what was likely missing and how to build a stronger application.',
+    sections: [
+      { type:'h2', text:'What the refusal notice usually says' },
+      { type:'p', text:'The refusal will typically state that the caseworker is not satisfied the relationship is genuine, citing a lack of evidence of ongoing contact, cohabitation, or shared life. It may specifically mention: thin communication records, no shared finances, no cohabitation evidence, or inconsistencies in the accounts.' },
+      { type:'h2', text:'The most common evidence gaps' },
+      { type:'list', style:'cross', items:[
+        'No communication history (messages, calls) submitted',
+        'Photos are all from one occasion (e.g. wedding only)',
+        'No evidence of visits to each other before the application',
+        'No shared financial arrangements or joint bills',
+        'Very recent relationship with no evidence of how it developed',
+        'Sponsor has previously sponsored a different partner',
+        'Applicant and sponsor give different accounts of how they met',
+      ]},
+      { type:'h2', text:'What a strong evidence bundle looks like' },
+      { type:'list', items:[
+        'WhatsApp/messaging screenshots showing regular contact over an extended period',
+        'Call records or mobile bills showing frequent calls',
+        'Photos together across different dates, locations, and occasions',
+        'Flight booking history showing visits to each other',
+        'Joint bank account statements or shared bills',
+        'Letters from people who know you both confirming the relationship',
+        'A detailed, coherent cover letter narrating the relationship from start to present',
+      ]},
+      { type:'alert', style:'info', icon:'ℹ', label:'Cover letter:', text:'A well-written relationship narrative can be one of the most powerful pieces of evidence. It gives context to all the documents and allows the caseworker to understand your relationship as a story, not just a pile of papers.' },
+      { type:'h2', text:'Can I appeal or reapply?' },
+      { type:'p', text:'If you received this refusal on an in-country application (FLR(M)), you may have a right of appeal. If you received it on an entry clearance application from outside the UK, you can reapply — but you must address the specific reasons given in the refusal.' },
+      { type:'p', text:'Do not reapply immediately with the same evidence. Take time to build a substantially stronger bundle before submitting again.' },
+    ],
+    related:[
+      { slug:'genuine-relationship', title:'Genuine & Subsisting Relationship Test' },
+      { slug:'relationship-evidence-checklist', title:'Relationship Evidence Checklist' },
+      { slug:'spouse-income', title:'Spouse Visa Income Requirement' },
+    ]
+  },
+
+  'eta-guide': {
+    title: 'Electronic Travel Authorisation (ETA) — UK 2026',
+    category: 'Visitor Visa',
+    intro: 'The UK Electronic Travel Authorisation (ETA) is a digital travel permission required by nationals of countries that were previously able to visit the UK without a visa. As of 2026, this includes EU citizens, US, Canadian, and Australian nationals. You must have a valid ETA before boarding a flight to the UK.',
+    sections: [
+      { type:'alert', style:'', icon:'⚠', label:'From 2026:', text:'EU, EEA, US, Canadian, Australian, and other previously visa-exempt nationals must apply for an ETA before travelling to the UK for short stays.' },
+      { type:'summary', title:'ETA at a Glance', rows:[
+        ['Cost','£10 per application'],
+        ['Validity','2 years or until passport expires'],
+        ['Max stay per visit','6 months'],
+        ['Processing time','Usually within hours, up to 3 working days'],
+        ['Where to apply','GOV.UK or UK ETA app'],
+        ['Who does NOT need one','British citizens, those with a UK visa or BRP'],
+      ]},
+      { type:'h2', text:'Who needs an ETA?' },
+      { type:'p', text:'Nationals of countries that do not require a UK visa for short stays now need an ETA instead. This includes: all EU/EEA member state nationals, US citizens, Canadian citizens, Australian citizens, New Zealand citizens, and nationals of other countries listed in the ETA scheme.' },
+      { type:'h2', text:'What can I do with an ETA?' },
+      { type:'list', items:[
+        'Visit the UK as a tourist for up to 6 months',
+        'Visit family or friends',
+        'Attend business meetings, conferences, or events',
+        'Transit through the UK on your way to another country',
+        'Study for up to 6 months (short courses)',
+      ]},
+      { type:'h2', text:'What cannot I do on an ETA?' },
+      { type:'list', style:'cross', items:[
+        'Work in the UK (paid or unpaid)',
+        'Access public funds',
+        'Study for more than 6 months',
+        'Live in the UK — an ETA is not a residency permission',
+      ]},
+      { type:'h2', text:'How to apply' },
+      { type:'p', text:'Apply on GOV.UK or through the UK ETA app. You\'ll need: a valid passport, a photo (taken on the app or uploaded), an email address, and a debit or credit card. Most applications are decided within a few hours. The ETA is linked digitally to your passport — you do not receive a sticker or stamp.' },
+    ],
+    related:[
+      { slug:'visitor-genuine-test', title:'Genuine Visitor Test Explained' },
+      { slug:'visitor-refusal-reasons', title:'Visitor Visa Refusal Reasons' },
+    ]
+  },
+
+  'ilr-absences': {
+    title: 'Absence Calculation for ILR — 2026 Rules',
+    category: 'ILR & Settlement',
+    intro: 'To qualify for Indefinite Leave to Remain (ILR), you must have spent sufficient time in the UK during your qualifying period. Excess absences are one of the most common reasons ILR applications are refused or delayed. This guide explains how absences are counted, what the limits are, and what to do if you have exceeded them.',
+    sections: [
+      { type:'summary', title:'Absence Limits by Route', rows:[
+        ['Skilled Worker / most PBS routes','No more than 180 days in any 12-month period'],
+        ['Spouse/Partner route (5-year)','No more than 180 days in any 12-month period'],
+        ['British citizenship (naturalisation)','No more than 450 days in 5 years; no more than 90 days in final year'],
+        ['Long Residence (10-year)','Abolished — route closed to new applicants from 2025'],
+      ]},
+      { type:'h2', text:'How absences are counted' },
+      { type:'p', text:'An absence is any day spent outside the UK. The day you leave the UK and the day you return both count as days in the UK — only the days in between are counted as absences. Use your passport entry/exit stamps or a travel history from the Home Office to calculate.' },
+      { type:'alert', style:'danger', icon:'✕', label:'Common mistake:', text:'Many applicants count only full calendar days outside the UK. But if a trip spans two months, every day between departure and return (exclusive of both travel days) counts as an absence.' },
+      { type:'h2', text:'What is the 180-day rule?' },
+      { type:'p', text:'For most ILR routes, you must not have spent more than 180 days outside the UK in any rolling 12-month period during your qualifying residence. This is not a calendar year — it is assessed across any 12-month window in your qualifying period.' },
+      { type:'h2', text:'What happens if I have exceeded the limit?' },
+      { type:'p', text:'Exceeding the absence limit does not automatically bar you from ILR, but the Home Office may refuse the application. You can submit an application with a discretion request explaining the reasons for excess absences — for example, serious illness, family bereavement, or compulsory overseas work.' },
+      { type:'p', text:'Discretion is not guaranteed. The strength of your argument and supporting evidence will determine the outcome. Complex absence cases should be reviewed by an IAA-registered adviser before submission.' },
+    ],
+    related:[
+      { slug:'ilr-guide', title:'ILR — Full Settlement Guide' },
+      { slug:'earned-settlement', title:'Earned Settlement Model 2026' },
+      { slug:'naturalisation', title:'British Citizenship After ILR' },
+    ]
+  },
+
+,
+  'bank-balance-by-route': {
+    title: 'Bank Balance Requirements by Route',
+    category: 'Financial Rules',
+    intro: 'Different UK visa routes require different minimum bank balances. This guide covers every route and the exact amounts required for 2026 — from Student Visa maintenance funds to the Spouse Visa savings threshold.',
+    sections: [
+      { type:'h2', text:'Student Visa — London' },
+      { type:'p', text:'If studying in London, you need £1,334 per month for up to 9 months (max £12,006) plus your tuition fees as stated on your CAS. Both amounts must be present in your account throughout the 28-day holding period.' },
+      { type:'h2', text:'Student Visa — Outside London' },
+      { type:'p', text:'Outside London: £1,023 per month for up to 9 months (max £9,207) plus tuition fees. If your course is shorter than 9 months, you only need the monthly amount multiplied by the number of months remaining.' },
+      { type:'h2', text:'Spouse Visa — Savings Route' },
+      { type:'p', text:'If the UK sponsor cannot meet the £29,000 income threshold, savings of £88,500 must be held for 28 consecutive days ending no more than 31 days before the application date. The balance must not drop below £88,500 on any single day.' },
+      { type:'h2', text:'Visitor Visa' },
+      { type:'p', text:'There is no fixed minimum for a Visitor Visa. The caseworker assesses whether your balance is plausible for your specific trip — its length, stated activities, and accommodation arrangements. A balance of £2,000–£5,000 for a 2-week tourist visit is generally considered plausible. Very large balances with no explanation of source can also attract questions.' },
+      { type:'h2', text:'Skilled Worker Visa' },
+      { type:'p', text:'There is no minimum bank balance for the main applicant, but unless your sponsor certifies maintenance, you must show £945 held for at least 90 days to demonstrate you can support yourself on arrival.' },
+      { type:'h2', text:'ILR Applications' },
+      { type:'p', text:'Most ILR routes have no bank balance requirement. However, if using savings to supplement income on the Spouse Visa savings route at ILR stage, the same £88,500 threshold (or lower if income partly meets the requirement) applies with the same 28-day rule.' },
+      { type:'alert', style:'info', icon:'ℹ', label:'2026 Note:', text:'All thresholds on this page reflect current 2026 UKVI published guidance. Student maintenance amounts are reviewed periodically — always verify the current figures on GOV.UK before applying.' }
+    ], related: [
+      { slug:'28-day-rule', title:'The 28-Day Rule Explained' },
+      { slug:'savings-route', title:'The £88,500 Savings Route' },
+      { slug:'student-maintenance-funds', title:'Student Maintenance Funds 2026' }
+    ]
+  },
+
+  'large-deposit-rules': {
+    title: 'Large Deposit Rules — UK Visa Bank Statements',
+    category: 'Financial Rules',
+    intro: 'Unexplained large deposits in your bank statements are a major red flag for UKVI caseworkers. A sudden large deposit shortly before the application date suggests funds have been temporarily placed in an account to meet a threshold — a practice caseworkers are trained to spot.',
+    sections: [
+      { type:'h2', text:'What counts as a "large deposit"?' },
+      { type:'p', text:'UKVI does not define a precise threshold. In practice, any single deposit significantly larger than your regular income credits — typically more than 2-3 months of income in a single transaction — will attract scrutiny, especially if it appears close to the application date.' },
+      { type:'h2', text:'Why does it matter?' },
+      { type:'p', text:'UKVI requires that funds used to meet a financial threshold are genuinely yours and have not been temporarily placed in your account. A large deposit immediately before application — particularly if the balance then returns to its previous level — raises serious questions about the authenticity of your financial position.' },
+      { type:'h2', text:'How to explain large deposits' },
+      { type:'p', text:'For every large deposit, provide a source-of-funds explanation: a letter from the sender, bank-to-bank transfer evidence, a gift letter, sale of an asset, inheritance documentation, or a bonus payment letter from your employer.' },
+      { type:'h2', text:'Timing matters' },
+      { type:'p', text:'A large deposit that occurred more than 6 months before the application and where your balance has remained stable since is much less likely to be questioned. A deposit in the week before application will always attract scrutiny.' },
+      { type:'h2', text:'Multiple small deposits adding up to a large amount' },
+      { type:'p', text:'Even if individual deposits appear normal, a caseworker may question a pattern where multiple people are making transfers into your account in the period before application. If this is a genuine arrangement (e.g. family support), document it clearly.' },
+      { type:'alert', style:'danger', icon:'⚠', label:'Warning:', text:'Do not attempt to restructure deposits to avoid scrutiny. Moving money between accounts, depositing in smaller amounts, or withdrawing and re-depositing creates suspicious patterns that are harder to explain than a single honest deposit.' }
+    ], related: [
+      { slug:'28-day-rule', title:'The 28-Day Rule Explained' },
+      { slug:'proof-of-funds', title:'Proof of Funds Rules' },
+      { slug:'gifted-funds', title:'Gifted Funds — Evidence Required' }
+    ]
+  },
+
+  'flrm-guide': {
+    title: 'FLR(M) — Extending Your Spouse Visa in the UK',
+    category: 'Spouse & Partner Visa',
+    intro: 'FLR(M) is the application to extend your Spouse or Partner Visa while inside the UK. If you were granted entry clearance as a spouse, your initial leave will be for 33 months. You must apply for FLR(M) before this expires to remain lawfully in the UK.',
+    sections: [
+      { type:'h2', text:'What is FLR(M)?' },
+      { type:'p', text:'FLR(M) stands for Further Leave to Remain (Marriage). It is the in-country application to extend your Spouse or Partner Visa. A successful FLR(M) grants a further 30 months of leave, completing the 5-year probationary period required for ILR.' },
+      { type:'h2', text:'When to apply' },
+      { type:'p', text:'Apply before your current leave expires — ideally 2-3 months before the expiry date. Submitting before expiry protects you under Section 3C leave, which automatically extends your existing leave until a decision is made.' },
+      { type:'alert', style:'danger', icon:'⚠', label:'Critical:', text:'If you apply after your leave expires, you have no Section 3C protection. You will be an overstayer from the date your leave expired until the date you apply — this must be declared and significantly weakens your application.' },
+      { type:'h2', text:'Section 3C leave — what it means' },
+      { type:'p', text:'Section 3C of the Immigration Act 1971 automatically extends your existing leave on the same conditions while your FLR(M) application is being decided. You can continue to work, but you cannot travel outside the UK — your leave would lapse if you left the country.' },
+      { type:'h2', text:'The financial requirement for FLR(M)' },
+      { type:'p', text:'The same £29,000 income threshold applies as for the initial entry clearance. You must use the sponsor\'s current income at the time of the FLR(M) application. Income used for the original entry clearance application is irrelevant — the current position is what matters.' },
+      { type:'h2', text:'Evidence required for FLR(M)' },
+      { type:'p', text:'Current passports and BRP; 6 months of payslips (Category A) or 12 months of employment history (Category B); employer letter; 6 months of personal bank statements; relationship evidence (recent photos, communication history, joint bills); cohabitation evidence (joint tenancy or utility bills in both names); and the applicant\'s English language certificate at A2 level or above.' },
+      { type:'h2', text:'English language requirement for FLR(M)' },
+      { type:'p', text:'At FLR(M) stage, you must demonstrate English at CEFR A2 level (speaking and listening). This is a higher requirement than the A1 needed for initial entry clearance. An approved test or a degree taught in English satisfies this requirement.' }
+    ], related: [
+      { slug:'spouse-visa-ilr', title:'ILR on the Spouse Visa Route' },
+      { slug:'transitional-protection', title:'Transitional Protection Explained' },
+      { slug:'spouse-income', title:'Spouse Visa Income Requirement 2026' },
+      { slug:'relationship-evidence-checklist', title:'Relationship Evidence Checklist' }
+    ]
+  },
+
+  'good-character': {
+    title: 'Good Character Requirement — British Citizenship 2026',
+    category: 'ILR & Settlement',
+    intro: 'The Good Character requirement is assessed for all British citizenship applications. The February 2025 update to the Home Office guidance significantly expanded what must be disclosed — including minor road traffic offences and overseas convictions. This guide explains exactly what is assessed.',
+    sections: [
+      { type:'h2', text:'What is Good Character?' },
+      { type:'p', text:'Good Character is a statutory requirement under section 6 of the British Nationality Act 1981. It is not precisely defined in law, but UKVI guidance sets out factors that are considered: criminal history, immigration compliance, financial behaviour, and general conduct.' },
+      { type:'h2', text:'Criminal convictions — the sentence-based thresholds' },
+      { type:'p', text:'Sentences of 4 years or more imprisonment: permanent bar — you can never naturalise. Sentences of 12 months to under 4 years: 10-year bar from the end of the sentence. Sentences under 12 months: 3-year bar. Non-custodial sentences (fines, community orders, cautions): assessed individually — typically a 2-3 year consideration period.' },
+      { type:'h2', text:'What the February 2025 update changed' },
+      { type:'p', text:'The 2025 guidance expanded disclosure obligations to include: minor road traffic offences and fixed penalty notices (including speeding fines); overseas convictions — even if minor and if they would be spent under UK law; civil penalties including immigration civil penalties; tax non-compliance; and behaviour that is "not in keeping with the standards expected of a British citizen" even if not prosecuted.' },
+      { type:'alert', style:'', icon:'⚠', label:'Key change:', text:'Speeding fines and other minor road traffic offences must now be declared. Previously these were considered too minor to affect Good Character. Under the 2025 guidance, they are disclosable and assessed.' },
+      { type:'h2', text:'Overseas convictions' },
+      { type:'p', text:'You must declare overseas convictions even if they would be spent under UK law, even if you received a caution or fine rather than a formal conviction, and even if the offence is not a crime in the UK. The caseworker then assesses the nature and circumstances of the overseas matter.' },
+      { type:'h2', text:'Tax compliance' },
+      { type:'p', text:'HMRC records are checked. Failure to file tax returns, underpayment of tax, undisclosed offshore income, or current outstanding debts to HMRC can all affect the Good Character assessment. HMRC records are shared with UKVI for citizenship applications.' },
+      { type:'h2', text:'Immigration compliance' },
+      { type:'p', text:'Any previous breach of immigration conditions — working without permission, overstaying, or making false representations in any previous application — can affect Good Character. The Earned Settlement Model that now applies to ILR also informs the citizenship Good Character assessment.' }
+    ], related: [
+      { slug:'naturalisation', title:'British Citizenship — Naturalisation Guide' },
+      { slug:'with-criminal-record', title:'Applying With a Criminal Record' },
+      { slug:'life-in-uk-test', title:'Life in the UK Test Guide' },
+      { slug:'ilr-absences', title:'Absence Calculation for ILR' }
+    ]
+  },
+
+  'cover-letter-guide': {
+    title: 'Cover Letter Guide — UK Visa Applications',
+    category: 'Evidence Requirements',
+    intro: 'A well-written cover letter can be the difference between a successful and a refused visa application. It guides the caseworker through your evidence, explains your circumstances, and proactively addresses any concerns — before the caseworker raises them.',
+    sections: [
+      { type:'h2', text:'Is a cover letter required?' },
+      { type:'p', text:'It is not formally required by the Immigration Rules. But for any application that is not entirely straightforward — which is most of them — a cover letter is strongly recommended. For complex applications (previous refusals, irregular income, previous overstays, extended absences), it is essential.' },
+      { type:'h2', text:'What a cover letter should include' },
+      { type:'p', text:'1. Who you are and what you are applying for. 2. A clear statement that you meet the requirements and why. 3. A guide to the evidence bundle (what document addresses what requirement — e.g. "Section 3 contains 6 months of payslips evidencing Category A income of £32,000"). 4. Proactive explanations for anything that might appear inconsistent. 5. For Spouse Visas: a brief narrative of the relationship history.' },
+      { type:'h2', text:'Addressing potential concerns proactively' },
+      { type:'p', text:'If you have a large deposit in your bank statements, explain it. If you have a gap in employment, explain it. If there is an inconsistency in dates between documents, explain it. Raising and explaining these issues yourself demonstrates transparency and significantly reduces the risk that they will be treated as negatives.' },
+      { type:'h2', text:'What a cover letter should NOT include' },
+      { type:'p', text:'Do not include personal appeals to emotion or arguments about how much you deserve the visa. Do not simply repeat information already stated in your documents. Do not make legal arguments unless you have legal training. Do not be defensive or suggest you expect to be refused.' },
+      { type:'h2', text:'Format and length' },
+      { type:'p', text:'2-4 pages for standard applications. Use clear headings (e.g. "1. Introduction", "2. Financial Requirement", "3. Relationship Evidence"). Reference documents by name. Write in clear, plain English. Sign and date the letter.' },
+      { type:'alert', style:'success', icon:'✓', label:'Best practice:', text:'Write the cover letter last — after you have assembled all your documents. That way you can reference exactly what is in the bundle and identify any gaps before you submit.' }
+    ], related: [
+      { slug:'evidence-bundle', title:'Evidence Bundle Organisation' },
+      { slug:'employment-letter-format', title:'Employment Letter Format' },
+      { slug:'relationship-evidence-checklist', title:'Relationship Evidence Checklist' }
+    ]
+  },
+
+  'online-banks': {
+    title: 'Digital Bank Statements — Monzo, Starling, Revolut',
+    category: 'Financial Rules',
+    intro: 'Many applicants use digital-only banks like Monzo, Starling, or Revolut as their primary accounts. UKVI accepts statements from these banks, but specific conditions apply. This guide explains what is needed to ensure your digital bank statements are accepted.',
+    sections: [
+      { type:'h2', text:'Are digital bank statements accepted?' },
+      { type:'p', text:'Yes — UKVI accepts statements from digital banks including Monzo, Starling, Revolut, and others. However, because these statements are easily downloaded as PDFs and can be edited, caseworkers sometimes apply greater scrutiny. An accompanying bank confirmation letter significantly reduces this risk.' },
+      { type:'h2', text:'How to get a bank confirmation letter' },
+      { type:'p', text:'Most digital banks provide this through the app or via customer support. The letter should confirm: your full name, your account number, that you are a customer of the bank, and that the statements provided are authentic records issued by the bank. Some banks call this a "bank reference letter" or "account confirmation letter".' },
+      { type:'h2', text:'Monzo' },
+      { type:'p', text:'Monzo statements are widely accepted. Request a bank confirmation letter through the Monzo app under "Account" > "Documents". Monzo statements show transactions in a clear format and daily balances are visible.' },
+      { type:'h2', text:'Starling' },
+      { type:'p', text:'Starling Bank is a regulated UK bank and its statements are accepted. Request a confirmation letter through the app. Starling statements can be downloaded as PDFs directly.' },
+      { type:'h2', text:'Revolut' },
+      { type:'p', text:'Revolut is accepted but requires extra care. Revolut accounts can hold multiple currencies — ensure the GBP equivalent clearly meets the threshold throughout the 28-day period. Request a bank reference letter from Revolut customer support. Note that Revolut was not a bank until recently — older accounts may have had e-money status rather than banking status, which some caseworkers have historically treated differently.' },
+      { type:'alert', style:'info', icon:'ℹ', label:'Best practice:', text:'If you use a digital bank as your primary account, supplement it with a bank confirmation letter and, where possible, corroborate the balance with payslips and an employer letter.' }
+    ], related: [
+      { slug:'28-day-rule', title:'The 28-Day Rule Explained' },
+      { slug:'proof-of-funds', title:'Proof of Funds Rules' },
+      { slug:'bank-balance-by-route', title:'Bank Balance Requirements by Route' }
+    ]
+  },
+
+  'category-b-income': {
+    title: 'Category B Income Rules — Spouse Visa',
+    category: 'Financial Rules',
+    intro: 'Category B applies when the UK sponsor has changed employer within the last 6 months, has been employed for less than 6 months, or has had a gap in employment. The income calculation is more complex than Category A.',
+    sections: [
+      { type:'h2', text:'Who uses Category B?' },
+      { type:'p', text:'Category B is used when the sponsor: started a new job within the last 6 months, changed employers within the last 6 months, returned to the same employer after a break, or had any gap in employment within the last 12 months.' },
+      { type:'h2', text:'How income is calculated under Category B' },
+      { type:'p', text:'Category B uses the combined gross income from all employment sources in the 12 months before the application date, annualised where necessary. The annualised figure is calculated from the current employer\'s annual salary rate — not from previous employers.' },
+      { type:'h2', text:'Evidence required under Category B' },
+      { type:'p', text:'12 months of payslips from all employers in the 12-month period. 12 months of bank statements showing all employment credits. Employer letter from current employer confirming current salary. P45 from previous employer(s). P60 if the 12-month period spans a tax year end.' },
+      { type:'h2', text:'Common mistakes with Category B' },
+      { type:'p', text:'Using current salary x 12 without accounting for gaps; not including payslips and bank statements from previous employers; using the wrong 12-month window; failing to reconcile income across multiple employers clearly.' },
+      { type:'alert', style:'', icon:'⚠', label:'Complex cases:', text:'If your income history involves multiple employers, gaps, or self-employment periods in the same 12 months, the calculation can become complex. A cover letter clearly explaining how income was calculated — with reference to specific documents — helps the caseworker follow your evidence.' }
+    ], related: [
+      { slug:'category-a-income', title:'Category A Income Rules' },
+      { slug:'spouse-income', title:'Spouse Visa Income Requirement 2026' },
+      { slug:'self-employment-income', title:'Self-Employment Income Rules' }
+    ]
+  },
+
+  'relationship-evidence-checklist': {
+    title: 'Relationship Evidence Checklist — UK Spouse Visa',
+    category: 'Evidence Requirements',
+    intro: 'A strong relationship evidence bundle is one of the most important parts of a Spouse Visa application. Use this checklist to ensure you have covered every category of evidence that caseworkers look for.',
+    sections: [
+      { type:'h2', text:'Communication evidence' },
+      { type:'p', text:'WhatsApp or messaging app screenshots showing regular, ongoing contact over an extended period (ideally 12+ months). Select representative conversations — not every message. Call records or phone bills showing frequent calls. Video call history (WhatsApp, FaceTime, Skype). Social media messages if relevant.' },
+      { type:'h2', text:'Photos' },
+      { type:'p', text:'Photos across multiple occasions, dates, and locations. Candid everyday photos alongside formal ones. Photos with each other\'s family members. If you can, caption each photo with the date and location — this makes the timeline of your relationship clear. Avoid submitting only formal occasion photos such as weddings.' },
+      { type:'h2', text:'Visits and travel' },
+      { type:'p', text:'Flight booking confirmations and boarding passes for every visit you have made to each other. Hotel bookings or family host letters. Travel insurance documents. Visa stamps in your passport showing previous visits.' },
+      { type:'h2', text:'Cohabitation evidence (if living together)' },
+      { type:'p', text:'Joint tenancy agreement or mortgage statement in both names. Utility bills (gas, electricity, broadband) in both names or addressed to both. Council Tax bills showing both names. Joint bank account statements. Electoral register entries.' },
+      { type:'h2', text:'Financial ties' },
+      { type:'p', text:'Joint bank account statements. Evidence of regular financial transfers between your accounts (showing ongoing financial support during separation). Named as beneficiaries on each other\'s insurance policies. Joint savings or investments.' },
+      { type:'h2', text:'Third-party confirmation' },
+      { type:'p', text:'Letters from family members of both parties confirming they know about the relationship and when they met the partner. Wedding invitations and cards. Photos from family events where you appear together. Social media posts acknowledging the relationship.' },
+      { type:'alert', style:'success', icon:'✓', label:'Presentation tip:', text:'Organise relationship evidence chronologically — show the relationship developing from first meeting to the present. A brief timeline in your cover letter helps the caseworker understand the narrative before looking at the evidence bundle.' }
+    ], related: [
+      { slug:'genuine-relationship', title:'Genuine & Subsisting Relationship Test' },
+      { slug:'refused-weak-relationship', title:'Refused for Weak Relationship Evidence' },
+      { slug:'cover-letter-guide', title:'Cover Letter Guide' }
+    ]
+  },
+
+  'skills-threshold': {
+    title: 'Skilled Worker — Eligible Jobs and Skills Threshold',
+    category: 'Skilled Worker Visa',
+    intro: 'The Skilled Worker Visa is only available for roles that meet the skills threshold and are on the eligible occupations list. This guide explains how to check whether your job qualifies.',
+    sections: [
+      { type:'h2', text:'The skills threshold' },
+      { type:'p', text:'Eligible jobs must be at RQF (Regulated Qualifications Framework) level 3 or above — roughly equivalent to A-levels. The job does not need to require a degree, and the worker does not need to hold a qualification at that level — what matters is that the role itself is classified at RQF level 3+.' },
+      { type:'h2', text:'How to check your occupation code' },
+      { type:'p', text:'Your employer will assign a Standard Occupational Classification (SOC) code on your Certificate of Sponsorship. Check the Skilled Worker Appendix on GOV.UK to confirm: whether your SOC code is eligible, the going rate for that code, and any specific conditions attached.' },
+      { type:'h2', text:'What if my role spans multiple SOC codes?' },
+      { type:'p', text:'Your employer should assign the code that best matches the majority of your duties. If your role genuinely spans codes, choose the most senior or most relevant one. Using an incorrect SOC code can cause a refusal — ensure your job description matches the assigned code.' }
+    ], related: [
+      { slug:'skilled-worker-salary', title:'Skilled Worker Salary Threshold 2026' },
+      { slug:'cos-explained', title:'Certificate of Sponsorship Explained' }
+    ]
+  },
+
+  'student-visa-bank-statements': {
+    title: 'Student Visa Bank Statement Rules',
+    category: 'Student Visa',
+    intro: 'Your bank statements are the primary evidence of maintenance funds for a UK Student Visa. They must meet specific format, content, and timing requirements. This guide covers everything you need to know.',
+    sections: [
+      { type:'h2', text:'The 28-day rule for students' },
+      { type:'p', text:'Your bank statements must show the required maintenance amount held continuously for 28 consecutive days, ending no more than 31 days before your application submission date. A single day below the threshold during this window fails the requirement.' },
+      { type:'h2', text:'Format requirements' },
+      { type:'p', text:'Statements must clearly show: your full name, your account number, the bank\'s name, dates covered, and daily or opening/closing balances with all transactions. Online statements are accepted but may need a bank authentication letter.' },
+      { type:'h2', text:'Must the account be in your name?' },
+      { type:'p', text:'For most students, yes — the account must be in your name. If you are under 18, a parent or guardian\'s account may be acceptable with additional evidence. If you have an official financial sponsor (government or institution), you do not need to show a personal account.' },
+      { type:'h2', text:'Overseas accounts' },
+      { type:'p', text:'Overseas bank accounts are accepted. Include a currency conversion note showing the GBP equivalent of your balance using the Bank of England rate on or near the date of application.' }
+    ], related: [
+      { slug:'28-day-rule', title:'The 28-Day Rule Explained' },
+      { slug:'student-maintenance-funds', title:'Student Maintenance Funds 2026' },
+      { slug:'genuine-student-test', title:'Genuine Student Test' }
+    ]
+  }
+
+};
+
+/* Wire up all guide items to open articles */
+function wireGuideItems() {
+  const SLUG_MAP = {
+    'Spouse Visa Income Requirement 2026': 'spouse-income',
+    'The 28-Day Rule Explained': '28-day-rule',
+    'Genuine & Subsisting Relationship Test': 'genuine-relationship',
+    'Skilled Worker Salary Threshold 2026': 'skilled-worker-salary',
+    'Genuine Visitor Test Explained': 'visitor-genuine-test',
+    'Student Visa Maintenance Funds 2026': 'student-maintenance',
+    'Refused for Insufficient Funds': 'refused-insufficient-funds',
+    'UK visa refused for insufficient funds': 'refused-insufficient-funds',
+    'Insufficient Funds': 'refused-insufficient-funds',
+    'Spouse visa refused for weak relationship evidence': 'refused-weak-relationship',
+    'Refused for Weak Relationship Evidence': 'refused-weak-relationship',
+    'Weak Relationship Evidence': 'refused-weak-relationship',
+    'Electronic Travel Authorisation (ETA)': 'eta-guide',
+    'Electronic Travel Authorisation (ETA) 2026': 'eta-guide',
+    'Absence Calculation for ILR': 'ilr-absences',
+    'FLR(M) — Extending Your Spouse Visa': 'spouse-income',
+    '£29,000 Threshold — What Counts': 'spouse-income',
+    'Certificate of Sponsorship (CoS) Explained': 'skilled-worker-salary',
+    'Going Rate by Occupation Code': 'skilled-worker-salary',
+    'CAS Number — What It Is & How to Get One': 'student-maintenance',
+    'Ties to Home Country — What Counts': 'visitor-genuine-test',
+    'Financial Evidence for Visitor Visa': 'visitor-genuine-test',
+    'Standard Visitor Visa Guide 2026': 'visitor-genuine-test',
+    'Bank Statement Requirements': '28-day-rule',
+    'UK visa 28-day rule for bank statements': '28-day-rule',
+    'UK visa bank statement rules and format': '28-day-rule',
+    'Proof of Funds Rules': '28-day-rule',
+    'Cash Savings Calculation Formula': 'savings-route',
+    'Bank Balance Requirements by Route': 'bank-balance-by-route',
+    'Large Deposit Rules': 'large-deposit-rules',
+    'Large Deposit Rules — UK Visa Bank Statements': 'large-deposit-rules',
+    'Unexplained Large Deposits': 'large-deposit-rules',
+    'FLR(M) Application Guide': 'flrm-guide',
+    'FLR(M) — Extending Your Spouse Visa': 'flrm-guide',
+    'Good Character Requirement — British Citizenship 2026': 'good-character',
+    'Good Character 2026': 'good-character',
+    'Cover Letter Guide': 'cover-letter-guide',
+    'Digital Bank Statements — Monzo, Starling, Revolut': 'online-banks',
+    'Online Bank Statements — Are They Accepted?': 'online-banks',
+    'Category B Income Rules': 'category-b-income',
+    'Category B Income (employed under 6 months)': 'category-b-income',
+    'Relationship Evidence Checklist': 'relationship-evidence-checklist',
+    'Genuine Relationship Evidence Checklist': 'relationship-evidence-checklist',
+    'Eligible Jobs List (RQF Level 3+)': 'skills-threshold',
+    'Student Visa Bank Statement Rules': 'student-visa-bank-statements',
+    'Student Visa Bank Statements': 'student-visa-bank-statements',
+    'ILR — Indefinite Leave to Remain Guide': 'ilr-guide',
+    'Absence Calculation for ILR': 'ilr-absences',
+    'Earned Settlement Model 2026': 'earned-settlement',
+    'British Citizenship After ILR': 'naturalisation',
+    'eVisa & ILR — What You Need': 'evisa-guide',
+    'Life in the UK Test Guide': 'life-in-uk-test',
+    'Life in the UK Test': 'life-in-uk-test',
+    'FLR(M) — Extending Your Spouse Visa': 'flrm-guide',
+    'Entry Clearance Spouse Visa Guide': 'entry-clearance-spouse',
+    '£29,000 Threshold — What Counts as Income': 'spouse-income',
+    'Savings Route — Using £88,500': 'savings-route',
+    'Transitional Protection Explained': 'transitional-protection',
+    'Spouse Visa Refused — What Next': 'refused-weak-relationship',
+    'ILR on Spouse Visa Route': 'spouse-visa-ilr',
+    'Fiancé Visa (entry clearance)': 'fiance-visa',
+    'Skilled Worker Salary Threshold 2026': 'skilled-worker-salary',
+    'Certificate of Sponsorship (CoS) Explained': 'cos-explained',
+    'Going Rate by Occupation Code': 'skilled-worker-salary',
+    'Skilled Worker ILR Route': 'skilled-worker-ilr',
+    'Health & Care Worker Visa Route': 'health-care-worker',
+    'Changing Employer on Skilled Worker Visa': 'changing-employer-skilled-worker',
+    'Genuine Student Test': 'genuine-student-test',
+    'Genuine Student Test Explained': 'genuine-student-test',
+    'Student Visa Maintenance Funds 2026': 'student-maintenance-funds',
+    'CAS Number — What It Is & How to Get One': 'student-maintenance-funds',
+    'Standard Visitor Visa Guide 2026': 'visitor-genuine-test',
+    'Visitor Visa Refused — Top Reasons': 'visitor-refusal-reasons',
+    'Electronic Travel Authorisation (ETA) 2026': 'eta-guide',
+    'Can I apply for a UK visa if unemployed?': 'applying-unemployed',
+    'If Unemployed': 'applying-unemployed',
+    'Can I reapply after a UK visa refusal?': 'after-previous-refusal',
+    'After Previous Refusal': 'after-previous-refusal',
+    'Can I apply after overstaying a UK visa?': 'after-overstay',
+    'After Previous Overstay': 'after-overstay',
+    'Can I get a UK visa with low bank balance?': 'low-bank-balance',
+    'With Low Bank Balance': 'low-bank-balance',
+    'UK visa 28-day rule for bank statements': '28-day-rule',
+    'UK visa bank statement rules and format': '28-day-rule',
+    'The 28-Day Rule Explained': '28-day-rule',
+    'Refused for Insufficient Funds': 'refused-insufficient-funds',
+    'UK visa refused for insufficient funds': 'refused-insufficient-funds',
+    'Insufficient Funds': 'refused-insufficient-funds',
+    'Refused for Fake or Fraudulent Documents': 'refused-fake-documents',
+    'Fake or Fraudulent Documents': 'refused-fake-documents',
+    'UK visa refused for fake or fraudulent documents': 'refused-fake-documents',
+    'Refused for Unexplained Bank Deposits': 'refused-unexplained-deposits',
+    'UK visa refused for unexplained bank deposits': 'refused-unexplained-deposits',
+    'Unexplained Bank Deposits': 'refused-unexplained-deposits',
+    'Refused for No Travel History': 'refused-no-travel-history',
+    'UK visa refused for no travel history': 'refused-no-travel-history',
+    'Travel History Gaps': 'refused-no-travel-history',
+    'Refused for Previous Immigration Issues': 'refused-previous-immigration',
+    'UK visa refused for previous immigration issues': 'refused-previous-immigration',
+    'Immigration History Problems': 'refused-previous-immigration',
+    'Document Mismatch': 'refused-document-inconsistencies',
+    'UK visa refused for document inconsistencies': 'refused-document-inconsistencies',
+    'Document Inconsistencies': 'refused-document-inconsistencies',
+    'Application Inconsistencies': 'refused-application-inconsistencies',
+    'UK visa refused for application inconsistencies': 'refused-application-inconsistencies',
+    'Sponsor Credibility Issues': 'sponsor-credibility',
+    'Relationship Breakdown During Processing': 'relationship-breakdown',
+    'Deception or Misrepresentation': 'deception-misrepresentation',
+    'Refused for Weak Relationship Evidence': 'refused-weak-relationship',
+    'Weak Relationship Evidence': 'refused-weak-relationship',
+    'Spouse visa refused for weak relationship evidence': 'refused-weak-relationship',
+    'With Criminal Record': 'with-criminal-record',
+    'If Self-Employed': 'self-employed-visa',
+    'Without Travel History': 'without-travel-history',
+    'Using Cash Savings': 'using-cash-savings',
+    'On Zero-Hours Contract': 'zero-hours-contract',
+    'With a New Job': 'new-job',
+    'Bank Statement Requirements': '28-day-rule',
+    'Proof of Funds Rules': 'proof-of-funds',
+    'Cash Savings Calculation Formula': 'savings-route',
+    'Employment Letter Format': 'employment-letter-format',
+    'Employment Letter Format & Requirements': 'employment-letter-format',
+    'Sponsor Letter Format': 'sponsor-letter-format',
+    'Self-Employment Evidence': 'self-employment-income',
+    'Document Translation Rules': 'document-translation',
+    'Evidence Bundle Organisation': 'evidence-bundle',
+    'Payslip Requirements': 'payslip-requirements',
+    'Accommodation Letter Example': 'accommodation-letter',
+    'P60 & P45 for Visa Applications': 'p60-p45',
+    'Proof of Relationship Examples': 'proof-of-relationship',
+    'ILR — Indefinite Leave to Remain Guide': 'ilr-guide',
+    'Earned Settlement Model': 'earned-settlement',
+    'eVisa & ILR — What You Need': 'evisa-guide',
+    'Absence Calculation for ILR': 'ilr-absences',
+    'British Citizenship After ILR': 'naturalisation',
+    'ILR on Spouse Visa Route': 'spouse-visa-ilr',
+    'ILR on Skilled Worker Route': 'skilled-worker-ilr',
+    'Skilled Worker ILR — Settlement After 5 Years': 'skilled-worker-ilr',
+    'Third-Party Sponsor — Rules & Evidence': 'third-party-funds',
+    'Gifted Funds — Are They Accepted?': 'gifted-funds',
+    'Joint Savings with Partner': 'joint-savings',
+    'Cash Savings — £88,500 Route (Spouse)': 'savings-route',
+  };
+
+  document.querySelectorAll('.guide-item, .cat-guide-item, .art-related-item').forEach(el => {
+    // Get title text
+    const titleEl = el.querySelector('.gi-title') || el.querySelector('.art-related-item');
+    const title = (titleEl ? titleEl.textContent : el.textContent).trim();
+    const slug = SLUG_MAP[title];
+    if (slug) {
+      el.style.cursor = 'pointer';
+      el.onclick = (e) => {
+        e.stopPropagation();
+        // Determine current page context
+        const activePage = document.querySelector('.page.active');
+        const pageId = activePage ? activePage.id.replace('page-','').replace('cat-','') : 'library';
+        const pageLabel = {
+          'library': 'Guides Library',
+          'spouse': 'Spouse Visa Guides',
+          'skilled': 'Skilled Worker Guides',
+          'student': 'Student Visa Guides',
+          'visitor': 'Visitor Visa Guides',
+          'refusal': 'Refusal Guides',
+          'financial': 'Financial Guides',
+          'home': 'Home',
+        }[pageId] || 'Guides';
+        openArticle(slug, activePage ? activePage.id.replace('page-','') : 'library', pageLabel);
+      };
+    } else {
+      // No article yet — add "coming soon" feel
+      el.style.cursor = 'pointer';
+      el.onclick = () => showToast('Guide coming soon', '#4f8ef7');
+    }
+  });
+}
+
+// Wire up on page load and after any page transition
+window.addEventListener('DOMContentLoaded', wireGuideItems);
+setTimeout(wireGuideItems, 500);
+
+// Re-wire after showPage / showCatPage calls
+const _origShowPage = showPage;
+showPage = function(id) { _origShowPage(id); setTimeout(wireGuideItems, 100); };
+const _origShowCat = showCatPage;
+showCatPage = function(cat) { _origShowCat(cat); setTimeout(wireGuideItems, 100); };
 
 </script>
 
