@@ -1548,11 +1548,10 @@ function ckRestart(){ckA={};ckS=0;renderChecker();}
    SECURE CHECKOUT MODAL
 ═══════════════════════════════ */
 const PLANS = {
-  basic:   { name:'Basic Pre-Check',    price:'£19', note:'You will pay £19 today.',  btnId:'buy_btn_1TQqD1E3hvzl2R0AHMD55PSo'  },
-  audit:   { name:'Professional Audit', price:'£39', note:'You will pay £39 today.',  btnId:'buy_btn_1TQqFOE3hvzl2R0AYjGml9QS'  },
-  complex: { name:'Professional Plus',  price:'£69', note:'You will pay £69 today.',  btnId:'buy_btn_1TQqFsE3hvzl2R0AvxReuACq'  },
+  basic:   { name:'Basic Pre-Check',    price:'£19', note:'You will pay £19 today.',  url:'https://buy.stripe.com/test_14A8wPbU5e15as7dgR1B600' },
+  audit:   { name:'Professional Audit', price:'£39', note:'You will pay £39 today.',  url:'https://buy.stripe.com/test_4gM00je2daOT8jZ6St1B601' },
+  complex: { name:'Professional Plus',  price:'£69', note:'You will pay £69 today.',  url:'https://buy.stripe.com/test_aFa14nbU5f5943J6St1B602' },
 };
-const STRIPE_PK = 'pk_test_51TQVyGE3hvzl2R0ASLxJWj6tzHDmz6vj0tSbwj4l64Olsx2Z2qRqnbvs9ZBDxRcP0BFIQCzMvIJlFBMY5fTC18hC0014lXLtJF';
 
 let activePlan = null;
 let activeRoute = null;
@@ -1589,14 +1588,10 @@ function selectRoute(btn, route) {
 function proceedToStripe() {
   if (!activeRoute || !activePlan) return;
   const plan = PLANS[activePlan];
-  // Build a temporary stripe-buy-button and auto-click it
-  const wrap = document.getElementById('stripe-injector');
-  wrap.innerHTML = '<stripe-buy-button buy-button-id="' + plan.btnId + '" publishable-key="' + STRIPE_PK + '" client-reference-id="' + activeRoute.replace(/\s+/g,'-') + '"></stripe-buy-button>';
   closeCheckout();
-  setTimeout(() => {
-    const el = wrap.querySelector('stripe-buy-button');
-    if (el) el.click();
-  }, 400);
+  // Build URL with prefilled client reference (visa route)
+  const ref = encodeURIComponent(activeRoute.replace(/\s+/g, '-').toLowerCase());
+  window.location.href = plan.url + '?client_reference_id=' + ref;
 }
 
 document.addEventListener('keydown', function(e) {
