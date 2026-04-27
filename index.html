@@ -57,6 +57,125 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(11,15,30,0.9
 .nav-cta{background:var(--blue)!important;color:#fff!important;padding:8px 16px!important;border-radius:8px!important;font-weight:600!important;font-size:13px!important;transition:opacity 0.15s,transform 0.15s!important}
 .nav-cta:hover{opacity:0.85!important;transform:translateY(-1px)!important}
 
+
+/* ─── APEX VISA LOGO — ULTRA PREMIUM ─── */
+@keyframes logoFloat{
+  0%,100%{transform:translateY(0px) rotate(0deg)}
+  30%{transform:translateY(-4px) rotate(0.4deg)}
+  70%{transform:translateY(-2px) rotate(-0.3deg)}
+}
+@keyframes logoIntro{
+  0%{opacity:0;transform:scale(0.7) translateY(10px) rotate(-8deg);filter:brightness(0)}
+  40%{opacity:1;filter:brightness(1.6)}
+  70%{transform:scale(1.06) translateY(-2px) rotate(1deg)}
+  85%{transform:scale(0.98) translateY(0px) rotate(-0.3deg)}
+  100%{opacity:1;transform:scale(1) translateY(0px) rotate(0deg);filter:brightness(1)}
+}
+@keyframes goldSweep{
+  0%{x:-120px;opacity:0}
+  10%{opacity:1}
+  80%{opacity:0.8}
+  100%{x:280px;opacity:0}
+}
+@keyframes logoGlowPulse{
+  0%,100%{filter:drop-shadow(0 0 0px rgba(245,200,66,0))}
+  50%{filter:drop-shadow(0 0 14px rgba(245,200,66,0.45)) drop-shadow(0 0 28px rgba(245,200,66,0.15))}
+}
+@keyframes ringSparkle{
+  0%,100%{stroke-dashoffset:0;opacity:0.7}
+  50%{stroke-dashoffset:-40;opacity:1}
+}
+@keyframes planeTrail{
+  0%{opacity:0;transform:translate(0,0)}
+  20%{opacity:1}
+  100%{opacity:0;transform:translate(8px,-8px)}
+}
+@keyframes textShimmer{
+  0%{background-position:-200% center}
+  100%{background-position:200% center}
+}
+@keyframes subtitleFade{
+  0%,100%{opacity:0.55}50%{opacity:0.85}
+}
+
+.nav-logo{position:relative}
+.nav-logo-svg-wrap{
+  position:relative;
+  flex-shrink:0;
+  animation:logoIntro 1.2s cubic-bezier(0.34,1.56,0.64,1) 0.2s both,
+            logoFloat 6s ease-in-out 1.5s infinite,
+            logoGlowPulse 4s ease-in-out 2s infinite;
+  cursor:pointer;
+}
+.nav-logo:hover .nav-logo-svg-wrap{
+  filter:drop-shadow(0 0 18px rgba(245,200,66,0.6)) drop-shadow(0 0 36px rgba(245,200,66,0.25));
+  animation:logoFloat 6s ease-in-out infinite,logoGlowPulse 4s ease-in-out infinite;
+  transform:scale(1.1);
+  transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1),filter 0.3s ease;
+}
+.nav-logo-text-wrap{display:flex;flex-direction:column;gap:2px}
+.nav-logo-text{
+  font-size:16px;font-weight:800;letter-spacing:0.08em;
+  background:linear-gradient(90deg,#c8973c 0%,#f5c842 30%,#fff8e1 50%,#f5c842 70%,#c8973c 100%);
+  background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:logoIntro 1.2s cubic-bezier(0.34,1.56,0.64,1) 0.4s both,textShimmer 3.5s linear 2s infinite;
+}
+.nav-logo-sub{
+  font-size:9px;color:rgba(245,200,66,0.5);letter-spacing:0.18em;text-transform:uppercase;
+  display:block;line-height:1;
+  animation:logoIntro 1.2s ease 0.55s both,subtitleFade 4s ease-in-out 2s infinite;
+}
+
+
+/* ══════════════════════════════
+   SECURE CHECKOUT MODAL
+══════════════════════════════ */
+@keyframes modalIn{from{opacity:0;transform:scale(0.94) translateY(16px)}to{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes overlayIn{from{opacity:0}to{opacity:1}}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(4,6,16,0.82);backdrop-filter:blur(8px);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;animation:overlayIn 0.25s ease both}
+.modal-overlay.open{display:flex}
+.modal-box{background:#0f1424;border:1px solid rgba(255,255,255,0.1);border-radius:20px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto;position:relative;animation:modalIn 0.3s ease both}
+.modal-box::-webkit-scrollbar{width:4px}
+.modal-box::-webkit-scrollbar-track{background:transparent}
+.modal-box::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:2px}
+
+/* Modal header */
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid rgba(255,255,255,0.07)}
+.modal-head-left{display:flex;align-items:center;gap:9px}
+.modal-shield{width:28px;height:28px;background:linear-gradient(135deg,rgba(79,142,247,0.2),rgba(124,92,252,0.2));border:1px solid rgba(79,142,247,0.3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px}
+.modal-head-title{font-size:13px;font-weight:700;color:#fff;letter-spacing:0.1em;text-transform:uppercase}
+.modal-close{width:30px;height:30px;background:rgba(255,255,255,0.06);border:none;border-radius:50%;color:rgba(255,255,255,0.5);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.15s,color 0.15s;font-family:inherit}
+.modal-close:hover{background:rgba(255,255,255,0.12);color:#fff}
+
+/* Selected plan card */
+.modal-body{padding:20px 24px;display:grid;gap:16px}
+.plan-card{border:1px solid rgba(79,142,247,0.35);border-radius:14px;padding:20px;background:rgba(79,142,247,0.04);position:relative;overflow:hidden}
+.plan-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),#7c5cfc)}
+.plan-card-label{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue2);margin-bottom:6px}
+.plan-card-name{font-size:20px;font-weight:700;color:#fff;margin-bottom:6px;letter-spacing:-0.01em}
+.plan-card-desc{font-size:13px;color:var(--text2);line-height:1.5;margin-bottom:16px}
+.plan-card-price{font-size:44px;font-weight:800;color:#fff;letter-spacing:-0.04em;line-height:1;margin-bottom:4px}
+.plan-card-price-note{font-size:12.5px;color:var(--text3)}
+
+/* Route selector */
+.route-card{border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:20px;background:rgba(255,255,255,0.025)}
+.route-card-title{font-size:16px;font-weight:700;color:#fff;letter-spacing:-0.01em;margin-bottom:6px}
+.route-card-sub{font-size:13px;color:var(--text2);line-height:1.5;margin-bottom:18px}
+.route-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.route-btn{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:12px 8px;color:rgba(255,255,255,0.8);font-size:13px;font-weight:500;cursor:pointer;text-align:center;transition:background 0.15s,border-color 0.15s,color 0.15s,transform 0.15s;font-family:inherit;line-height:1.3}
+.route-btn:hover{background:rgba(79,142,247,0.1);border-color:rgba(79,142,247,0.4);color:#fff;transform:translateY(-1px)}
+.route-btn.selected{background:rgba(79,142,247,0.18);border-color:var(--blue);color:#fff}
+
+/* Proceed section */
+.modal-proceed{padding:0 24px 24px;display:grid;gap:10px}
+.proceed-btn{width:100%;padding:14px 20px;background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity 0.15s,transform 0.15s;opacity:0.35;pointer-events:none}
+.proceed-btn.active{opacity:1;pointer-events:all}
+.proceed-btn.active:hover{opacity:0.88;transform:translateY(-1px)}
+.modal-secure-note{display:flex;align-items:center;justify-content:center;gap:6px;font-size:11.5px;color:var(--text3)}
+.modal-secure-note::before{content:'🔒';font-size:11px}
+
 /* ─── SCROLL PROGRESS ─── */
 .scroll-bar{position:fixed;top:64px;left:0;right:0;height:2px;z-index:299;pointer-events:none}
 .scroll-fill{height:100%;background:linear-gradient(90deg,var(--blue),#7c5cfc);width:0%;transition:width 0.08s linear}
@@ -407,6 +526,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:52px 5vw
   .compare-table th,.compare-table td{padding:10px 12px}
 }
 </style>
+<script async src="https://js.stripe.com/v3/buy-button.js"></script>
 </head>
 <body>
 
@@ -414,10 +534,112 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:52px 5vw
 <nav>
   <div class="nav-inner">
     <div class="nav-logo" onclick="showPage('home')">
-      <div class="nav-logo-icon">AV</div>
-      <div>
-        <div class="nav-logo-text">ApexVisa UK</div>
-        <span class="nav-logo-sub">UK Visa Check</span>
+      <!-- ULTRA PREMIUM SVG LOGO -->
+      <div class="nav-logo-svg-wrap">
+        <svg width="46" height="46" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <!-- Gradients -->
+            <linearGradient id="goldRing" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f5c842"><animate attributeName="stop-color" values="#f5c842;#fff0a0;#f5c842" dur="3s" repeatCount="indefinite"/></stop>
+              <stop offset="50%" stop-color="#e8a820"/>
+              <stop offset="100%" stop-color="#c8973c"><animate attributeName="stop-color" values="#c8973c;#f5c842;#c8973c" dur="3s" repeatCount="indefinite"/></stop>
+            </linearGradient>
+            <linearGradient id="goldA" x1="0%" y1="0%" x2="20%" y2="100%">
+              <stop offset="0%" stop-color="#fff0a0"/>
+              <stop offset="40%" stop-color="#f5c842"/>
+              <stop offset="100%" stop-color="#a06818"/>
+            </linearGradient>
+            <linearGradient id="silverV" x1="10%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="40%" stop-color="#d4d4d4"/>
+              <stop offset="100%" stop-color="#888"/>
+            </linearGradient>
+            <linearGradient id="swooshGold" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#c8973c" stop-opacity="0"/>
+              <stop offset="40%" stop-color="#f5c842"/>
+              <stop offset="100%" stop-color="#fff0a0" stop-opacity="0.8"/>
+            </linearGradient>
+            <linearGradient id="planeGold" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#fff0a0"/>
+              <stop offset="100%" stop-color="#c8973c"/>
+            </linearGradient>
+            <!-- Light sweep gradient -->
+            <linearGradient id="sweepGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="white" stop-opacity="0"/>
+              <stop offset="45%" stop-color="white" stop-opacity="0"/>
+              <stop offset="50%" stop-color="white" stop-opacity="0.55"/>
+              <stop offset="55%" stop-color="white" stop-opacity="0"/>
+              <stop offset="100%" stop-color="white" stop-opacity="0"/>
+            </linearGradient>
+            <!-- Glow filter -->
+            <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur"/>
+              <feColorMatrix in="blur" type="matrix" values="1 0.8 0 0 0.1  0.6 0.5 0 0 0  0 0 0 0 0  0 0 0 0.7 0"/>
+              <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="softGlow">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="1.5" result="blur"/>
+              <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <!-- Clip for sweep -->
+            <clipPath id="circleClip"><circle cx="100" cy="100" r="96"/></clipPath>
+          </defs>
+
+          <!-- Outer ring with dash animation -->
+          <circle cx="100" cy="100" r="96" fill="#050810" stroke="url(#goldRing)" stroke-width="4"
+            stroke-dasharray="603" stroke-dashoffset="0">
+            <animate attributeName="stroke-dashoffset" values="0;-603" dur="8s" repeatCount="indefinite" calcMode="linear"/>
+          </circle>
+          <!-- Inner subtle ring -->
+          <circle cx="100" cy="100" r="90" fill="none" stroke="rgba(245,200,66,0.12)" stroke-width="1"/>
+
+          <!-- Gold A -->
+          <g filter="url(#goldGlow)">
+            <polygon points="100,24 56,114 70,114 100,50 130,114 144,114" fill="url(#goldA)"/>
+            <polygon points="80,88 120,88 116,100 84,100" fill="url(#goldA)"/>
+          </g>
+
+          <!-- Silver V (overlapping) -->
+          <g filter="url(#softGlow)" opacity="0.95">
+            <polygon points="86,66 100,114 114,66 122,66 100,122 78,66" fill="url(#silverV)"/>
+          </g>
+
+          <!-- Gold swoosh arc -->
+          <path d="M50,108 Q100,82 152,72" stroke="url(#swooshGold)" stroke-width="4" fill="none"
+            stroke-linecap="round" filter="url(#goldGlow)" opacity="0.9"/>
+
+          <!-- Plane with trail -->
+          <g filter="url(#goldGlow)">
+            <!-- Trail dots -->
+            <circle cx="122" cy="82" r="1.2" fill="#f5c842" opacity="0.5">
+              <animate attributeName="opacity" values="0.5;0;0.5" dur="2s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="130" cy="77" r="1" fill="#f5c842" opacity="0.35">
+              <animate attributeName="opacity" values="0.35;0;0.35" dur="2s" begin="0.3s" repeatCount="indefinite"/>
+            </circle>
+            <!-- Plane body -->
+            <g transform="translate(148,66) rotate(-28)">
+              <polygon points="0,-6 16,0 0,6" fill="url(#planeGold)">
+                <animateTransform attributeName="transform" type="translate" values="0,0;2,-2;0,0" dur="4s" repeatCount="indefinite"/>
+              </polygon>
+              <polygon points="-5,-3 0,-6 0,6 -5,3" fill="#c8973c"/>
+              <!-- Wing -->
+              <polygon points="-2,-1 8,0 2,4" fill="rgba(245,200,66,0.6)"/>
+            </g>
+          </g>
+
+          <!-- GOLD LIGHT SWEEP (repeating) -->
+          <rect x="-120" y="0" width="100" height="200" fill="url(#sweepGrad)"
+            clip-path="url(#circleClip)" opacity="0.9">
+            <animate attributeName="x" values="-120;280" dur="3.5s" begin="1.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1"/>
+          </rect>
+        </svg>
+      </div>
+
+      <!-- Text -->
+      <div class="nav-logo-text-wrap">
+        <div class="nav-logo-text">APEX VISA</div>
+        <span class="nav-logo-sub">Your Journey. Our Expertise.</span>
       </div>
     </div>
     <div class="nav-links">
@@ -425,6 +647,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:52px 5vw
       <a onclick="showPage('who')" id="nav-who">Who It's For</a>
       <a onclick="showPage('pricing')" id="nav-pricing">Pricing</a>
       <a onclick="showPage('faq')" id="nav-faq">FAQ</a>
+      <a onclick="showPage('library')" id="nav-library">Library</a>
       <a onclick="showPage('guides')" id="nav-guides">Guides ▾</a>
       <a onclick="showPage('about')" id="nav-about">About</a>
       <a class="nav-cta" onclick="showPage('checker')" id="nav-checker">Start Free Check →</a>
@@ -656,7 +879,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:52px 5vw
       <div class="plan-div"></div>
       <div class="plan-inc">Included:</div>
       <ul class="plan-feats"><li>Answer 20 questions</li><li>See the main refusal signals quickly</li><li>Get an instant summary</li></ul>
-      <button class="plan-btn pb-ghost" onclick="showToast('Redirecting to payment…','#22c55e')">Get Basic Scan – £19</button>
+      <button class="plan-btn pb-ghost" onclick="openCheckout('basic')">Select Plan →</button>
     </div>
     <div class="pricing-card featured reveal">
       <div class="plan-label">Full Evidence Audit</div>
@@ -666,7 +889,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:52px 5vw
       <div class="plan-div"></div>
       <div class="plan-inc">Included:</div>
       <ul class="plan-feats"><li>Answer 30 detailed questions</li><li>Receive a structured PDF Fix Plan</li><li>See what to strengthen before you apply</li></ul>
-      <button class="plan-btn pb-primary" onclick="showToast('Redirecting to payment…','#4f8ef7')">Get Full Audit – £39</button>
+      <button class="plan-btn pb-primary" onclick="openCheckout('audit')">Select Plan →</button>
     </div>
     <div class="pricing-card reveal">
       <div class="plan-label">Complex Case Review</div>
@@ -676,7 +899,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:52px 5vw
       <div class="plan-div"></div>
       <div class="plan-inc">Included:</div>
       <ul class="plan-feats"><li>Answer up to 45 questions</li><li>Best for previous refusals and complex histories</li><li>Get enhanced review depth and guidance</li></ul>
-      <button class="plan-btn pb-ghost" onclick="showToast('Redirecting to payment…','#22c55e')">Get Complex Review – £69</button>
+      <button class="plan-btn pb-ghost" onclick="openCheckout('complex')">Select Plan →</button>
     </div>
   </div>
   <div class="pricing-footer reveal">
@@ -767,6 +990,165 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:52px 5vw
   </div>
 </div>
 
+
+<!-- ══ VISA INTELLIGENCE LIBRARY ══ -->
+<div class="page" id="page-library">
+  <div style="padding:0 5vw 20px;max-width:1160px;margin:0 auto">
+    <!-- Breadcrumb -->
+    <div style="padding:20px 0 0;font-size:13px;color:var(--text3);display:flex;align-items:center;gap:6px">
+      <span style="cursor:pointer;color:var(--text2);transition:color 0.15s" onclick="showPage('home')">Home</span>
+      <span>›</span>
+      <span style="color:var(--text)">UK Visa Guides</span>
+    </div>
+  </div>
+  <div class="guides-hero" style="padding-top:16px">
+    <div style="font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);margin-bottom:10px">Visa Intelligence Library</div>
+    <h1>UK Visa Refusal &amp; Evidence Guides</h1>
+    <p>Structured compliance intelligence covering the rules, risks, and evidence requirements that determine UK visa outcomes. Use these guides to understand what caseworkers assess before you submit your application.</p>
+    <p class="guides-last">Last reviewed: April 2026</p>
+  </div>
+  <div class="guides-body">
+
+    <!-- Financial Rules -->
+    <div class="guide-section reveal">
+      <div class="guide-sec-title">Financial Rules</div>
+      <div class="guide-grid">
+        <a class="guide-item">The 28-Day Rule Explained</a>
+        <a class="guide-item">Bank Balance Requirements by Route</a>
+        <a class="guide-item">Cash Savings Calculation Formula</a>
+        <a class="guide-item">Large Deposit Rules</a>
+        <a class="guide-item">Proof of Funds Rules</a>
+        <a class="guide-item">Sponsor Income Requirement (2026)</a>
+        <a class="guide-item">Financial Risk Factors</a>
+        <a class="guide-item">Category A Income Rules</a>
+        <a class="guide-item">Category B Income Rules</a>
+        <a class="guide-item">Self-Employment Income Calculation</a>
+        <a class="guide-item">Student Maintenance Funds</a>
+        <a class="guide-item">Skilled Worker Salary Threshold</a>
+      </div>
+    </div>
+
+    <!-- Refusal Reasons -->
+    <div class="guide-section reveal">
+      <div class="guide-sec-title">Refusal Reasons</div>
+      <div class="guide-grid">
+        <a class="guide-item">Insufficient Funds</a>
+        <a class="guide-item">Fake or Fraudulent Documents</a>
+        <a class="guide-item">Unexplained Large Deposits</a>
+        <a class="guide-item">Weak Relationship Evidence</a>
+        <a class="guide-item">Travel History Gaps</a>
+        <a class="guide-item">Immigration History Problems</a>
+        <a class="guide-item">Income Below Threshold</a>
+        <a class="guide-item">Missing Financial Evidence</a>
+        <a class="guide-item">Document Mismatch</a>
+        <a class="guide-item">Application Inconsistencies</a>
+        <a class="guide-item">Sponsor Credibility Issues</a>
+        <a class="guide-item">Relationship Breakdown During Processing</a>
+      </div>
+    </div>
+
+    <!-- Next Steps CTA -->
+    <div class="next-steps-box reveal">
+      <div class="ns-label">Next Steps</div>
+      <div class="ns-btn" onclick="showPage('checker')">Check for hidden refusal risks →</div>
+      <p class="ns-note">Not a law firm · Not legal advice</p>
+    </div>
+
+    <!-- High-priority refusal scenarios -->
+    <div class="guide-section reveal">
+      <p style="font-size:20px;font-weight:700;color:#fff;margin-bottom:6px;letter-spacing:-0.01em">High-priority refusal scenarios</p>
+      <p style="font-size:13.5px;color:var(--text2);margin-bottom:16px">These are the refusal grounds UKVI caseworkers cite most frequently. Understanding them before you apply can prevent an expensive refusal.</p>
+      <div class="guide-grid">
+        <a class="guide-item">UK visa refused for insufficient funds</a>
+        <a class="guide-item">UK visa refused for fake or fraudulent documents</a>
+        <a class="guide-item">UK visa refused for unexplained bank deposits</a>
+        <a class="guide-item">UK visa refused for no travel history</a>
+        <a class="guide-item">UK visa refused for previous immigration issues</a>
+        <a class="guide-item">UK visa refused for income below threshold</a>
+        <a class="guide-item">UK visa refused for missing financial evidence</a>
+        <a class="guide-item">UK visa refused for application inconsistencies</a>
+        <a class="guide-item">Spouse visa refused for weak relationship evidence</a>
+        <a class="guide-item">UK visa refused for document inconsistencies</a>
+        <a class="guide-item">Can I apply for a UK visa if unemployed?</a>
+        <a class="guide-item">Can I reapply after a UK visa refusal?</a>
+        <a class="guide-item">Can I apply after overstaying a UK visa?</a>
+        <a class="guide-item">Can I get a UK visa with low bank balance?</a>
+        <a class="guide-item">UK visa 28-day rule for bank statements</a>
+        <a class="guide-item">UK visa bank statement rules and format</a>
+      </div>
+    </div>
+
+    <!-- Applicant Situations -->
+    <div class="guide-section reveal">
+      <div class="guide-sec-title">Applicant Situations</div>
+      <div class="guide-grid">
+        <a class="guide-item">If Unemployed</a>
+        <a class="guide-item">After Previous Refusal</a>
+        <a class="guide-item">With Criminal Record</a>
+        <a class="guide-item">If Self-Employed</a>
+        <a class="guide-item">After Previous Overstay</a>
+        <a class="guide-item">With Low Bank Balance</a>
+        <a class="guide-item">Without Travel History</a>
+        <a class="guide-item">Using Cash Savings</a>
+        <a class="guide-item">On Zero-Hours Contract</a>
+        <a class="guide-item">With a New Job</a>
+      </div>
+    </div>
+
+    <!-- Evidence Requirements -->
+    <div class="guide-section reveal">
+      <div class="guide-sec-title">Evidence Requirements</div>
+      <div class="guide-grid">
+        <a class="guide-item">Bank Statement Requirements</a>
+        <a class="guide-item">Proof of Relationship Examples</a>
+        <a class="guide-item">Tenancy Agreement Evidence</a>
+        <a class="guide-item">Cover Letter Guide</a>
+        <a class="guide-item">Genuine Relationship Evidence Checklist</a>
+        <a class="guide-item">Employment Letter Format</a>
+        <a class="guide-item">Sponsor Letter Format</a>
+        <a class="guide-item">Self-Employment Evidence</a>
+        <a class="guide-item">Document Translation Rules</a>
+        <a class="guide-item">Evidence Bundle Organisation</a>
+        <a class="guide-item">Payslip Requirements</a>
+        <a class="guide-item">Accommodation Letter Example</a>
+      </div>
+    </div>
+
+    <!-- Financial & Evidence Requirements -->
+    <div class="guide-section reveal">
+      <p style="font-size:20px;font-weight:700;color:#fff;margin-bottom:14px;letter-spacing:-0.01em">Financial &amp; evidence requirements</p>
+      <div class="guide-grid">
+        <a class="guide-item">UK visa 28-day rule for bank statements</a>
+        <a class="guide-item">UK visa bank statement rules and format</a>
+        <a class="guide-item">UK visa proof of funds requirements</a>
+        <a class="guide-item">UK visa minimum bank balance by route</a>
+        <a class="guide-item">UK visa financial requirements overview</a>
+        <a class="guide-item">Cash savings calculation formula</a>
+      </div>
+    </div>
+
+    <!-- Can I apply if... -->
+    <div class="guide-section reveal">
+      <p style="font-size:20px;font-weight:700;color:#fff;margin-bottom:14px;letter-spacing:-0.01em">Can I apply if…</p>
+      <div class="guide-grid">
+        <a class="guide-item">Can I apply for a UK visa if unemployed?</a>
+        <a class="guide-item">Can I apply for a UK visa after previous refusal?</a>
+        <a class="guide-item">Can I apply for a UK visa after overstaying?</a>
+        <a class="guide-item">Can I apply for a UK visa with low bank balance?</a>
+        <a class="guide-item">Can I get a UK visa with no travel history?</a>
+        <a class="guide-item">Can I get a UK visa with a criminal record?</a>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px">
+        <button class="btn-secondary" onclick="showPage('library')" style="font-size:13px;padding:9px 16px">All UK Visa Guides →</button>
+        <button class="btn-secondary" onclick="showPage('library')" style="font-size:13px;padding:9px 16px">Visa Refusal Guides →</button>
+        <button class="btn-secondary" onclick="showPage('library')" style="font-size:13px;padding:9px 16px">Financial Requirements →</button>
+        <button class="btn-secondary" onclick="showPage('library')" style="font-size:13px;padding:9px 16px">Complete Guide Index →</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <!-- ══ FAQ ══ -->
 <div class="page" id="page-faq">
   <div class="faq-body">
@@ -840,7 +1222,7 @@ footer{background:var(--bg2);border-top:1px solid var(--border);padding:52px 5vw
       <a>Bank Statement Rules</a><span style="color:var(--text3)">·</span>
       <a>Common Refusal Mistakes</a><span style="color:var(--text3)">·</span>
       <a>Spouse Visa Guides</a><span style="color:var(--text3)">·</span>
-      <a onclick="showPage('guides')">All Guides Index</a>
+      <a onclick="showPage('library')">Visa Intelligence Library</a>
     </div>
   </div>
   <div class="footer-bottom">
@@ -914,8 +1296,8 @@ window.addEventListener('scroll',()=>{
 /* ═══════════════════════════════
    PAGE ROUTING
 ═══════════════════════════════ */
-const PAGES={home:'page-home',how:'page-how',who:'page-who',pricing:'page-pricing',checker:'page-checker',guides:'page-guides',faq:'page-faq',about:'page-about'};
-const NAVIDS={how:'nav-how',who:'nav-who',pricing:'nav-pricing',faq:'nav-faq',guides:'nav-guides',about:'nav-about',checker:'nav-checker'};
+const PAGES={home:'page-home',how:'page-how',who:'page-who',pricing:'page-pricing',checker:'page-checker',guides:'page-guides',library:'page-library',faq:'page-faq',about:'page-about'};
+const NAVIDS={how:'nav-how',who:'nav-who',pricing:'nav-pricing',faq:'nav-faq',guides:'nav-guides',library:'nav-library',about:'nav-about',checker:'nav-checker'};
 let checkerReady=false;
 
 function showPage(id){
@@ -1160,6 +1542,123 @@ function ckFallback(){
 }
 
 function ckRestart(){ckA={};ckS=0;renderChecker();}
+
+
+/* ═══════════════════════════════
+   SECURE CHECKOUT MODAL
+═══════════════════════════════ */
+const PLANS = {
+  basic:   { name:'Basic Pre-Check',    price:'£19', note:'You will pay £19 today.',  btnId:'buy_btn_1TQqD1E3hvzl2R0AHMD55PSo'  },
+  audit:   { name:'Professional Audit', price:'£39', note:'You will pay £39 today.',  btnId:'buy_btn_1TQqFOE3hvzl2R0AYjGml9QS'  },
+  complex: { name:'Professional Plus',  price:'£69', note:'You will pay £69 today.',  btnId:'buy_btn_1TQqFsE3hvzl2R0AvxReuACq'  },
+};
+const STRIPE_PK = 'pk_test_51TQVyGE3hvzl2R0ASLxJWj6tzHDmz6vj0tSbwj4l64Olsx2Z2qRqnbvs9ZBDxRcP0BFIQCzMvIJlFBMY5fTC18hC0014lXLtJF';
+
+let activePlan = null;
+let activeRoute = null;
+
+function openCheckout(planKey) {
+  activePlan = planKey;
+  activeRoute = null;
+  const plan = PLANS[planKey];
+  document.getElementById('co-name').textContent  = plan.name;
+  document.getElementById('co-price').textContent = plan.price;
+  document.getElementById('co-note').textContent  = plan.note;
+  document.querySelectorAll('.route-btn').forEach(b => b.classList.remove('selected'));
+  document.getElementById('proceed-btn').classList.remove('active');
+  document.getElementById('checkout-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCheckout() {
+  document.getElementById('checkout-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('checkout-modal')) closeCheckout();
+}
+
+function selectRoute(btn, route) {
+  document.querySelectorAll('.route-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  activeRoute = route;
+  document.getElementById('proceed-btn').classList.add('active');
+}
+
+function proceedToStripe() {
+  if (!activeRoute || !activePlan) return;
+  const plan = PLANS[activePlan];
+  // Build a temporary stripe-buy-button and auto-click it
+  const wrap = document.getElementById('stripe-injector');
+  wrap.innerHTML = '<stripe-buy-button buy-button-id="' + plan.btnId + '" publishable-key="' + STRIPE_PK + '" client-reference-id="' + activeRoute.replace(/\s+/g,'-') + '"></stripe-buy-button>';
+  closeCheckout();
+  setTimeout(() => {
+    const el = wrap.querySelector('stripe-buy-button');
+    if (el) el.click();
+  }, 400);
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeCheckout();
+});
+
 </script>
+
+<!-- ══════════════════════════════
+     SECURE CHECKOUT MODAL
+══════════════════════════════ -->
+<div class="modal-overlay" id="checkout-modal" onclick="handleOverlayClick(event)">
+  <div class="modal-box" id="checkout-box">
+
+    <!-- Header -->
+    <div class="modal-head">
+      <div class="modal-head-left">
+        <div class="modal-shield">🛡</div>
+        <div class="modal-head-title">Secure Checkout</div>
+      </div>
+      <button class="modal-close" onclick="closeCheckout()">✕</button>
+    </div>
+
+    <!-- Body -->
+    <div class="modal-body">
+
+      <!-- Selected Plan -->
+      <div class="plan-card">
+        <div class="plan-card-label">Selected Plan</div>
+        <div class="plan-card-name" id="co-name">Basic Pre-Check</div>
+        <div class="plan-card-desc">One-off payment. Secure Stripe checkout and instant access after payment.</div>
+        <div class="plan-card-price" id="co-price">£19</div>
+        <div class="plan-card-price-note" id="co-note">You will pay £19 today.</div>
+      </div>
+
+      <!-- Visa Route Selector -->
+      <div class="route-card">
+        <div class="route-card-title">Which visa route are you applying for?</div>
+        <div class="route-card-sub">This determines which UKVI rules your application is checked against.</div>
+        <div class="route-grid">
+          <button class="route-btn" onclick="selectRoute(this,'Skilled Worker')">Skilled Worker</button>
+          <button class="route-btn" onclick="selectRoute(this,'Spouse / Partner')">Spouse / Partner</button>
+          <button class="route-btn" onclick="selectRoute(this,'Graduate')">Graduate</button>
+          <button class="route-btn" onclick="selectRoute(this,'Student')">Student</button>
+          <button class="route-btn" onclick="selectRoute(this,'Visitor')">Visitor</button>
+          <button class="route-btn" onclick="selectRoute(this,'ILR / Settlement')">ILR / Settlement</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Proceed -->
+    <div class="modal-proceed">
+      <button class="proceed-btn" id="proceed-btn" onclick="proceedToStripe()">
+        Proceed to Secure Payment →
+      </button>
+      <div class="modal-secure-note">256-bit SSL · Powered by Stripe · Instant access after payment</div>
+    </div>
+
+  </div>
+</div>
+
+<div id="stripe-injector" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:3000;display:none"></div>
 </body>
 </html>
