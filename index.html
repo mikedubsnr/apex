@@ -1545,6 +1545,58 @@ function ckRestart(){ckA={};ckS=0;renderChecker();}
 
 
 /* ═══════════════════════════════
+   ARTICLES
+═══════════════════════════════ */
+const ARTICLES = {
+  "immigration-rules": {
+    tag: "Immigration Rules",
+    title: "UK Immigration Rules Overview",
+    intro: "The UK Immigration Rules define the legal framework governing entry, stay, and settlement.",
+    updated: "Based on GOV.UK guidance",
+    sections: [
+      { type: "h2", content: "What are Immigration Rules?" },
+      { type: "p", content: "The rules set out requirements for visas, refusals, eligibility, and compliance." },
+      {
+        type: "alert",
+        style: "info",
+        content: "<strong>Source:</strong> GOV.UK official immigration rules."
+      },
+      {
+        type: "list",
+        items: [
+          "Entry clearance requirements",
+          "Financial thresholds",
+          "Genuine intention tests",
+          "Grounds for refusal"
+        ]
+      }
+    ]
+  }
+};
+
+function renderArticle(id) {
+  const art = ARTICLES[id];
+  if (!art) return;
+  const container = document.getElementById("art-content");
+  let html = `
+    <div class="art-tag">${art.tag}</div>
+    <div class="art-h1">${art.title}</div>
+    <div class="art-intro">${art.intro}</div>
+    <div class="art-updated">${art.updated}</div>
+  `;
+  art.sections.forEach(sec => {
+    if (sec.type === "h2") html += `<div class="art-h2">${sec.content}</div>`;
+    if (sec.type === "p")  html += `<div class="art-p">${sec.content}</div>`;
+    if (sec.type === "alert") html += `<div class="art-alert art-alert--${sec.style}">${sec.content}</div>`;
+    if (sec.type === "list") {
+      html += `<ul class="art-list">${sec.items.map(i => `<li>${i}</li>`).join('')}</ul>`;
+    }
+  });
+  container.innerHTML = html;
+  showPage("article");
+}
+
+/* ═══════════════════════════════
    SECURE CHECKOUT MODAL
 ═══════════════════════════════ */
 const STRIPE_PK = 'pk_test_51TQVyGE3hvzl2R0ASLxJWj6tzHDmz6vj0tSbwj4l64Olsx2Z2qRqnbvs9ZBDxRcP0BFIQCzMvIJlFBMY5fTC18hC0014lXLtJF';
