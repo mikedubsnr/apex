@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://js.stripe.com; script-src 'self' 'unsafe-inline' https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self'; frame-src https://js.stripe.com;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://js.stripe.com; script-src 'self' 'unsafe-inline' https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://api.anthropic.com; frame-src https://js.stripe.com;">
 <meta name="description" content="ApexVisa UK — professional UK visa risk intelligence. 556 guides reviewed for 2026 Immigration Rules.">
 <title>ApexVisa UK — Visa Risk Intelligence</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2200,7 +2200,7 @@ function showPage(id){
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
   var el=document.getElementById('page-'+id);
   if(el){el.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});setTimeout(function(){triggerReveals();animateMeters();},80);}
-  if(id==='checker')renderChecker();
+  if(id==='checker'){ckState={step:0,answers:[]};renderChecker();}
   if(id==='library')renderLibrary();
 }
 function showCatPage(cat){
@@ -2353,26 +2353,96 @@ function renderChecker(){
 function ckPick(i){ckState.answers[ckState.step]=i;renderChecker();}
 function ckNext(){if(ckState.answers[ckState.step]===undefined)return;ckState.step++;renderChecker();}
 function ckBack(){if(ckState.step>0){ckState.step--;renderChecker();}}
+/* Runtime-only API key — entered by user, held in memory only, never persisted */
+var _ckApiKey='';
+function ckGetKey(){return _ckApiKey;}
+function ckPromptKey(onSuccess){
+  var app=document.getElementById('ckApp');
+  app.innerHTML='<div style="padding:32px 24px;max-width:480px;margin:0 auto;text-align:center">'
+    +'<div style="font-size:28px;margin-bottom:12px">\uD83D\uDD11</div>'
+    +'<p style="font-weight:600;font-size:16px;margin-bottom:8px;color:var(--text)">Enter your Anthropic API Key</p>'
+    +'<p style="font-size:13px;color:var(--text2);margin-bottom:20px;line-height:1.6">'
+    +'Your key is used only for this session and is never stored, sent to our servers, or written anywhere. '
+    +'Get a free key at <a href="https://console.anthropic.com" target="_blank" rel="noopener" style="color:var(--blue2)">console.anthropic.com</a>.</p>'
+    +'<input id="ckKeyInput" type="password" placeholder="sk-ant-api03-\u2026" autocomplete="off" spellcheck="false" '
+    +'style="width:100%;padding:12px 16px;border-radius:8px;border:1px solid var(--border2);background:var(--surface2);color:var(--text);font-family:var(--mono);font-size:13px;outline:none;margin-bottom:14px;display:block">'
+    +'<div style="display:flex;gap:10px;justify-content:center">'
+    +'<button class="btnPrimary" id="ckKeyOk">Analyse My Risk \u2192</button>'
+    +'<button class="btnGhost" id="ckKeyCancel">Cancel</button>'
+    +'</div>'
+    +'<p id="ckKeyErr" style="color:var(--red);font-size:12px;margin-top:12px;display:none">Please enter a valid Anthropic API key (starts with sk-ant-).</p>'
+    +'</div>';
+  var input=document.getElementById('ckKeyInput');
+  input.focus();
+  document.getElementById('ckKeyOk').onclick=function(){
+    var k=input.value.trim();
+    if(!k||!k.startsWith('sk-ant-')){document.getElementById('ckKeyErr').style.display='';return;}
+    _ckApiKey=k;onSuccess();
+  };
+  input.addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('ckKeyOk').click();});
+  document.getElementById('ckKeyCancel').onclick=ckReset;
+}
 function ckSubmit(){
   var app=document.getElementById('ckApp');
-  app.innerHTML='<div class="ckLoading"><div class="ckSpinner"></div><p style="color:var(--text2);font-size:14px">Analysing your application risk\u2026</p></div>';
   var visaTypes=['Spouse/Partner Visa','Skilled Worker Visa','Student Visa','Visitor Visa','ILR/Settlement','Unspecified'];
   var labels=CKQ.map(function(q,i){return q.opts[ckState.answers[i]]||'Not answered';});
   var prompt='You are a UK immigration risk analyst. Analyse this visa application profile.\n\nVisa type: '+visaTypes[ckState.answers[0]||0]+'\nCurrent status: '+labels[1]+'\nFinancial position: '+labels[2]+'\nTravel history: '+labels[3]+'\nImmigration issues: '+labels[4]+'\nEvidence readiness: '+labels[5]+'\n\nRespond ONLY with valid JSON (no markdown):\n{"overall":"HIGH"|"MEDIUM"|"LOW","headline":"one sentence summary","intro":"2-3 sentence overview","factors":[{"label":"Risk Factor","text":"explanation"},{"label":"Risk Factor","text":"explanation"},{"label":"Risk Factor","text":"explanation"}]}';
-  fetch('/api/analyse',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({prompt:prompt})
-  })
-  .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
-  .then(function(data){
-    try{
-      var text=(data.content||[]).map(function(c){return c.text||'';}).join('');
-      var clean=text.replace(/```json\n?|```/g,'').trim();
-      renderCkResult(JSON.parse(clean));
-    }catch(e){renderCkError();}
-  })
-  .catch(function(){renderCkError();});
+
+  function parseAndRender(data){
+    var text=(data.content||[]).map(function(c){return c.text||'';}).join('');
+    var clean=text.replace(/```json\n?|```/g,'').trim();
+    renderCkResult(JSON.parse(clean));
+  }
+
+  function doDirectFetch(){
+    /* Direct browser call — used only when no proxy available */
+    fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'anthropic-version':'2023-06-01',
+        'x-api-key':ckGetKey(),
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
+      body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:900,messages:[{role:'user',content:prompt}]})
+    })
+    .then(function(r){
+      if(r.status===401){_ckApiKey='';throw new Error('auth');}
+      if(!r.ok)throw new Error('HTTP '+r.status);
+      return r.json();
+    })
+    .then(function(data){try{parseAndRender(data);}catch(e){renderCkError();}})
+    .catch(function(err){
+      if(err&&err.message==='auth'){ckPromptKey(doDirectFetch);}
+      else{renderCkError();}
+    });
+  }
+
+  function doFetch(){
+    app.innerHTML='<div class="ckLoading"><div class="ckSpinner"></div><p style="color:var(--text2);font-size:14px">Analysing your application risk\u2026</p></div>';
+    /* Try server-side proxy first (keeps API key off the client) */
+    fetch('/api/analyse',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({prompt:prompt})
+    })
+    .then(function(r){
+      if(r.status===404||r.status===405){throw new Error('no-proxy');}
+      if(!r.ok)throw new Error('HTTP '+r.status);
+      return r.json();
+    })
+    .then(function(data){try{parseAndRender(data);}catch(e){renderCkError();}})
+    .catch(function(err){
+      if(err&&err.message==='no-proxy'){
+        /* No proxy deployed — fall back to direct browser call with user key */
+        if(ckGetKey()){doDirectFetch();}else{ckPromptKey(doDirectFetch);}
+      }else{
+        renderCkError();
+      }
+    });
+  }
+
+  doFetch();
 }
 function renderCkResult(r){
   var app=document.getElementById('ckApp');
