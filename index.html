@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://js.stripe.com https://api.anthropic.com; script-src 'self' 'unsafe-inline' https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://api.anthropic.com; frame-src https://js.stripe.com;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://js.stripe.com; script-src 'self' 'unsafe-inline' https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://api.anthropic.com; frame-src https://js.stripe.com;">
 <meta name="description" content="ApexVisa UK — professional UK visa risk intelligence. 556 guides reviewed for 2026 Immigration Rules.">
 <title>ApexVisa UK — Visa Risk Intelligence</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -234,18 +234,11 @@ nav.scrolled{background:rgba(4,8,15,0.95);border-bottom-color:var(--border2);box
 /* CHECKER */
 .checkerWrap{max-width:660px;margin:0 auto;padding:60px clamp(16px,4vw,48px)}
 .checkerHeader{text-align:center;margin-bottom:48px}
-.ckProgress{margin-bottom:36px}
-.ckProgressTrack{display:flex;gap:0;margin-bottom:10px;position:relative}
-.ckProgressTrack::before{content:'';position:absolute;top:14px;left:0;right:0;height:1px;background:var(--border2);z-index:0}
-.ckStep{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;position:relative;z-index:1}
-.ckStepDot{width:28px;height:28px;border-radius:50%;background:var(--surface3);border:1.5px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--text3);transition:all 0.35s;font-family:var(--mono)}
-.ckStepLabel{font-size:9.5px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--text3);text-align:center;line-height:1.3;transition:color 0.35s;white-space:nowrap}
-.ckStep.done .ckStepDot{background:var(--blue);border-color:var(--blue);color:#fff}
-.ckStep.done .ckStepLabel{color:var(--blue)}
-.ckStep.active .ckStepDot{background:linear-gradient(135deg,var(--blue),var(--blue2));border-color:var(--blue2);color:#fff;box-shadow:0 0 0 4px var(--blue-dim)}
-.ckStep.active .ckStepLabel{color:var(--text)}
-.ckProgressMeta{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
-.ckProgressPct{font-size:11px;color:var(--text3);font-weight:500}
+.ckProgress{display:flex;gap:6px;margin-bottom:36px}
+.ckStep{flex:1;height:3px;background:var(--surface3);border-radius:2px;transition:background 0.4s;overflow:hidden;position:relative}
+.ckStep.done{background:var(--blue)}
+.ckStep.active{background:linear-gradient(90deg,var(--blue),var(--blue2))}
+.ckStep.active::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);background-size:200% 100%;animation:shimmer 1.8s linear infinite}
 .ckQ{font-size:22px;font-weight:700;letter-spacing:-0.02em;margin-bottom:28px;line-height:1.3;animation:fadeUp 0.4s both}
 .ckOptions{display:grid;gap:10px;margin-bottom:36px}
 .ckOpt{display:flex;align-items:center;gap:14px;padding:16px 20px;border-radius:12px;background:var(--surface);border:1.5px solid var(--border2);cursor:pointer;font-size:14px;color:var(--text2);transition:all var(--t);font-family:inherit;width:100%;text-align:left;font-weight:500}
@@ -2207,7 +2200,7 @@ function showPage(id){
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
   var el=document.getElementById('page-'+id);
   if(el){el.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});setTimeout(function(){triggerReveals();animateMeters();},80);}
-  if(id==='checker')renderChecker();
+  if(id==='checker'){ckState={step:0,answers:[]};renderChecker();}
   if(id==='library')renderLibrary();
 }
 function showCatPage(cat){
@@ -2339,14 +2332,12 @@ var ckState={step:0,answers:[]};
 function renderChecker(){
   var app=document.getElementById('ckApp');if(!app)return;
   var s=ckState;
-  var ckStepLabels=['Visa Route','Status','Finances','Travel','History','Evidence'];
-  var prog='<div class="ckProgress"><div class="ckProgressTrack">';
+  var prog='<div class="ckProgress">';
   for(var i=0;i<CKQ.length;i++){
-    var scls=i<s.step?'done':(i===s.step?'active':'');
-    var dot=i<s.step?'&#10003;':(i+1);
-    prog+='<div class="ckStep '+scls+'"><div class="ckStepDot">'+dot+'</div><div class="ckStepLabel">'+ckStepLabels[i]+'</div></div>';
+    var cls=i<s.step?'done':(i===s.step?'active':'');
+    prog+='<div class="ckStep '+cls+'"></div>';
   }
-  prog+='</div><div class="ckProgressMeta"><span class="ckProgressPct">Step '+(s.step+1)+' of '+CKQ.length+'</span><span class="ckProgressPct">'+(Math.round(s.step/CKQ.length*100))+'% complete</span></div></div>';
+  prog+='</div>';
   var q=CKQ[s.step],keys=['A','B','C','D','E','F'];
   var opts=q.opts.map(function(o,i){
     var sel=s.answers[s.step]===i?'selected':'';
@@ -2362,94 +2353,104 @@ function renderChecker(){
 function ckPick(i){ckState.answers[ckState.step]=i;renderChecker();}
 function ckNext(){if(ckState.answers[ckState.step]===undefined)return;ckState.step++;renderChecker();}
 function ckBack(){if(ckState.step>0){ckState.step--;renderChecker();}}
-function ckShowEmailCapture(){
+/* Runtime-only API key — entered by user, held in memory only, never persisted */
+var _ckApiKey='';
+function ckGetKey(){return _ckApiKey;}
+function ckPromptKey(onSuccess){
   var app=document.getElementById('ckApp');
-  var stepLabels=['Visa Route','Status','Finances','Travel','History','Evidence'];
-  var done=ckState.answers.map(function(a,i){
-    return '<div style="display:inline-flex;align-items:center;gap:5px;background:var(--surface3);border-radius:6px;padding:3px 10px;margin:3px;font-size:12px;color:var(--text2)"><span style="color:var(--blue2)">'+escHTML(stepLabels[i])+'</span><span>'+escHTML(CKQ[i].opts[a])+'</span></div>';
-  }).join('');
-  var allDots=stepLabels.map(function(l){
-    return '<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;position:relative;z-index:1">'
-      +'<div style="width:28px;height:28px;border-radius:50%;background:var(--blue);border:1.5px solid var(--blue);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff">&#10003;</div>'
-      +'<div style="font-size:9.5px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--blue);text-align:center;white-space:nowrap">'+l+'</div>'
-      +'</div>';
-  }).join('');
-  app.innerHTML='<div style="animation:fadeUp 0.4s both">'
-    +'<div style="position:relative;display:flex;gap:0;margin-bottom:28px">'
-    +'<div style="position:absolute;top:14px;left:0;right:0;height:1px;background:var(--blue);opacity:0.3;z-index:0"></div>'
-    +allDots
+  app.innerHTML='<div style="padding:32px 24px;max-width:480px;margin:0 auto;text-align:center">'
+    +'<div style="font-size:28px;margin-bottom:12px">\uD83D\uDD11</div>'
+    +'<p style="font-weight:600;font-size:16px;margin-bottom:8px;color:var(--text)">Enter your Anthropic API Key</p>'
+    +'<p style="font-size:13px;color:var(--text2);margin-bottom:20px;line-height:1.6">'
+    +'Your key is used only for this session and is never stored, sent to our servers, or written anywhere. '
+    +'Get a free key at <a href="https://console.anthropic.com" target="_blank" rel="noopener" style="color:var(--blue2)">console.anthropic.com</a>.</p>'
+    +'<input id="ckKeyInput" type="password" placeholder="sk-ant-api03-\u2026" autocomplete="off" spellcheck="false" '
+    +'style="width:100%;padding:12px 16px;border-radius:8px;border:1px solid var(--border2);background:var(--surface2);color:var(--text);font-family:var(--mono);font-size:13px;outline:none;margin-bottom:14px;display:block">'
+    +'<div style="display:flex;gap:10px;justify-content:center">'
+    +'<button class="btnPrimary" id="ckKeyOk">Analyse My Risk \u2192</button>'
+    +'<button class="btnGhost" id="ckKeyCancel">Cancel</button>'
     +'</div>'
-    +'<div style="text-align:center;padding:0 0 8px">'
-    +'<div style="display:inline-flex;align-items:center;gap:5px;background:var(--green-dim);border:1px solid var(--green);color:var(--green);font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 10px;border-radius:12px;margin-bottom:14px">&#10003; Pre-Check Complete</div>'
-    +'<p style="font-size:20px;font-weight:700;letter-spacing:-0.02em;margin-bottom:8px;color:var(--text)">Your answers have been recorded</p>'
-    +'<p style="font-size:13.5px;color:var(--text2);line-height:1.6;margin-bottom:16px">Enter your email to receive a <strong>sample risk report</strong> — so you know exactly what to expect — then we’ll run your real assessment instantly.</p>'
-    +'<div style="display:flex;flex-wrap:wrap;gap:0;justify-content:center;margin-bottom:22px">'+done+'</div>'
-    +'<input id="ckEmailField" type="email" placeholder="your@email.com" autocomplete="email" style="width:100%;padding:14px 18px;border-radius:10px;border:1.5px solid var(--border2);background:var(--surface);color:var(--text);font-size:14px;font-family:inherit;outline:none;margin-bottom:12px;display:block;box-sizing:border-box;transition:border-color var(--t)">'
-    +'<button class="btnPrimary" id="ckEmailGo" style="width:100%;padding:14px;font-size:15px">Get My Risk Report →</button>'
-    +'<p style="font-size:11.5px;color:var(--text3);margin-top:10px;line-height:1.5">?? We never share your email. Unsubscribe any time. Sample arrives within seconds.</p>'
-    +'</div>'
-    +'<div style="text-align:left;margin-top:8px"><button class="btnGhost" onclick="ckBack()" style="font-size:13px">← Edit answers</button></div>'
+    +'<p id="ckKeyErr" style="color:var(--red);font-size:12px;margin-top:12px;display:none">Please enter a valid Anthropic API key (starts with sk-ant-).</p>'
     +'</div>';
-  var ef=document.getElementById('ckEmailField');
-  ef.focus();
-  function go(){
-    var em=ef.value.trim();
-    if(!em||!em.includes('@')){ef.style.borderColor='var(--red)';ef.focus();return;}
-    ckRunAnalysis(em);
-  }
-  document.getElementById('ckEmailGo').onclick=go;
-  ef.addEventListener('keydown',function(e){if(e.key==='Enter')go();});
-  ef.addEventListener('input',function(){ef.style.borderColor='';});
+  var input=document.getElementById('ckKeyInput');
+  input.focus();
+  document.getElementById('ckKeyOk').onclick=function(){
+    var k=input.value.trim();
+    if(!k||!k.startsWith('sk-ant-')){document.getElementById('ckKeyErr').style.display='';return;}
+    _ckApiKey=k;onSuccess();
+  };
+  input.addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('ckKeyOk').click();});
+  document.getElementById('ckKeyCancel').onclick=ckReset;
 }
-
-function ckRunAnalysis(email){
+function ckSubmit(){
   var app=document.getElementById('ckApp');
   var visaTypes=['Spouse/Partner Visa','Skilled Worker Visa','Student Visa','Visitor Visa','ILR/Settlement','Unspecified'];
   var labels=CKQ.map(function(q,i){return q.opts[ckState.answers[i]]||'Not answered';});
-  app.innerHTML='<div class="ckLoading"><div class="ckSpinner"></div>'
-    +'<p style="color:var(--text2);font-size:14px;margin-bottom:6px">Analysing your application risk…</p>'
-    +(email?'<p style="color:var(--text3);font-size:12px">Sample report will be sent to '+escHTML(email)+'</p>':'')
-    +'</div>';
-  if(email){
-    fetch('/api/send-sample',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({email:email,visaType:visaTypes[ckState.answers[0]||0],answers:labels})
-    }).catch(function(){});
+  var prompt='You are a UK immigration risk analyst. Analyse this visa application profile.\n\nVisa type: '+visaTypes[ckState.answers[0]||0]+'\nCurrent status: '+labels[1]+'\nFinancial position: '+labels[2]+'\nTravel history: '+labels[3]+'\nImmigration issues: '+labels[4]+'\nEvidence readiness: '+labels[5]+'\n\nRespond ONLY with valid JSON (no markdown):\n{"overall":"HIGH"|"MEDIUM"|"LOW","headline":"one sentence summary","intro":"2-3 sentence overview","factors":[{"label":"Risk Factor","text":"explanation"},{"label":"Risk Factor","text":"explanation"},{"label":"Risk Factor","text":"explanation"}]}';
+
+  function parseAndRender(data){
+    var text=(data.content||[]).map(function(c){return c.text||'';}).join('');
+    var clean=text.replace(/```json\n?|```/g,'').trim();
+    renderCkResult(JSON.parse(clean));
   }
-  var prompt='You are a UK immigration risk analyst. Analyse this visa application profile.
 
-Visa type: '+visaTypes[ckState.answers[0]||0]+'
-Current status: '+labels[1]+'
-Financial position: '+labels[2]+'
-Travel history: '+labels[3]+'
-Immigration issues: '+labels[4]+'
-Evidence readiness: '+labels[5]+'
+  function doDirectFetch(){
+    /* Direct browser call — used only when no proxy available */
+    fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json',
+        'anthropic-version':'2023-06-01',
+        'x-api-key':ckGetKey(),
+        'anthropic-dangerous-direct-browser-access':'true'
+      },
+      body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:900,messages:[{role:'user',content:prompt}]})
+    })
+    .then(function(r){
+      if(r.status===401){_ckApiKey='';throw new Error('auth');}
+      if(!r.ok)throw new Error('HTTP '+r.status);
+      return r.json();
+    })
+    .then(function(data){try{parseAndRender(data);}catch(e){renderCkError();}})
+    .catch(function(err){
+      if(err&&err.message==='auth'){ckPromptKey(doDirectFetch);}
+      else{renderCkError();}
+    });
+  }
 
-Respond ONLY with valid JSON (no markdown):
-{"overall":"HIGH"|"MEDIUM"|"LOW","headline":"one sentence summary","intro":"2-3 sentence overview","factors":[{"label":"Risk Factor","text":"explanation"},{"label":"Risk Factor","text":"explanation"},{"label":"Risk Factor","text":"explanation"}]}';
-  fetch('/api/analyse',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:prompt})})
-  .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
-  .then(function(data){
-    try{
-      var text=(data.content||[]).map(function(c){return c.text||'';}).join('');
-      var clean=text.replace(/```json
-?|```/g,'').trim();
-      renderCkResult(JSON.parse(clean),email);
-    }catch(e){renderCkError();}
-  })
-  .catch(function(){renderCkError();});
+  function doFetch(){
+    app.innerHTML='<div class="ckLoading"><div class="ckSpinner"></div><p style="color:var(--text2);font-size:14px">Analysing your application risk\u2026</p></div>';
+    /* Try server-side proxy first (keeps API key off the client) */
+    fetch('/api/analyse',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({prompt:prompt})
+    })
+    .then(function(r){
+      if(r.status===404||r.status===405){throw new Error('no-proxy');}
+      if(!r.ok)throw new Error('HTTP '+r.status);
+      return r.json();
+    })
+    .then(function(data){try{parseAndRender(data);}catch(e){renderCkError();}})
+    .catch(function(err){
+      if(err&&err.message==='no-proxy'){
+        /* No proxy deployed — fall back to direct browser call with user key */
+        if(ckGetKey()){doDirectFetch();}else{ckPromptKey(doDirectFetch);}
+      }else{
+        renderCkError();
+      }
+    });
+  }
+
+  doFetch();
 }
-
-function ckSubmit(){
-  ckShowEmailCapture();
-}
-
-function renderCkResult(r,email){
+function renderCkResult(r){
   var app=document.getElementById('ckApp');
   var level=(r.overall||'MEDIUM').toUpperCase();
   var labels={HIGH:'High Risk',MEDIUM:'Medium Risk',LOW:'Low Risk'};
   var cls={HIGH:'high',MEDIUM:'medium',LOW:'low'};
   var factors=(r.factors||[]).map(function(f){return '<div class="ckFactor"><div class="ckFactorLabel">'+escHTML(f.label||'')+'</div><div class="ckFactorText">'+escHTML(f.text||'')+'</div></div>';}).join('');
-  app.innerHTML='<div class="ckResult"><div class="ckResultHeader"><div class="ckRiskBadge '+(cls[level]||'medium')+'">'+(labels[level]||'Risk')+'</div><div class="ckResultH">'+escHTML(r.headline||'Risk Assessment Complete')+'</div><div class="ckResultP">'+escHTML(r.intro||'')+'</div></div><div class="ckFactors">'+factors+'</div><div class="ckCta"><p style="font-size:14px;color:var(--text2);margin-bottom:18px">Get a full written assessment of your evidence — from £14.99</p>'+(email?'<p style="font-size:12px;color:var(--green);margin-bottom:12px">?? Sample report sent to '+escHTML(email)+'</p>':'')+'<button class="btnPrimary" id="ckUpgrade" style="margin-right:8px">Full Evidence Audit \u2014 \u00a329.99</button><button class="btnGhost" id="ckRetry">Start Again</button></div></div>';
+  app.innerHTML='<div class="ckResult"><div class="ckResultHeader"><div class="ckRiskBadge '+(cls[level]||'medium')+'">'+(labels[level]||'Risk')+'</div><div class="ckResultH">'+escHTML(r.headline||'Risk Assessment Complete')+'</div><div class="ckResultP">'+escHTML(r.intro||'')+'</div></div><div class="ckFactors">'+factors+'</div><div class="ckCta"><p style="font-size:14px;color:var(--text2);margin-bottom:18px">Get a full written assessment of your evidence \u2014 from \u00a314.99</p><button class="btnPrimary" id="ckUpgrade" style="margin-right:8px">Full Evidence Audit \u2014 \u00a329.99</button><button class="btnGhost" id="ckRetry">Start Again</button></div></div>';
   document.getElementById('ckUpgrade').onclick=function(){openModal('audit');};
   document.getElementById('ckRetry').onclick=ckReset;
 }
