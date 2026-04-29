@@ -3,7 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://js.stripe.com; script-src 'self' 'unsafe-inline' https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src https://fonts.gstatic.com; connect-src 'self' https://ulliivthsjtktywdmdqj.supabase.co; frame-src https://js.stripe.com;">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https://ulliivthsjtktywdmdqj.supabase.co https://api.stripe.com; frame-src https://js.stripe.com https://hooks.stripe.com; form-action 'self'; base-uri 'self'; object-src 'none';">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://apexvisa.co.uk/">
+<meta property="og:title" content="ApexVisa UK — Visa Risk Intelligence">
+<meta property="og:description" content="Spot hidden refusal risks before you apply for a UK visa. Free 6-question risk check. 556 guides reviewed for 2026 Immigration Rules.">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="description" content="ApexVisa UK — professional UK visa risk intelligence. 556 guides reviewed for 2026 Immigration Rules.">
 <title>ApexVisa UK — Visa Risk Intelligence</title>
 <link rel="icon" type="image/webp" href="data:image/webp;base64,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">
@@ -2560,28 +2568,38 @@ function ckRunAnalysis(email){
   setTimeout(function(){
     try{
       var result=computeRiskAnalysis(ckState.answers);
-      // Send to Supabase Edge Function (fire-and-forget — user sees result regardless)
+      // POST to Supabase Edge Function (non-blocking — user sees result regardless of network)
       if(email){
         var visaTypes=['Spouse / Partner Visa','Skilled Worker Visa','Student Visa','Visitor Visa','ILR / Settlement','Unspecified'];
         var visaType=visaTypes[ckState.answers[0]!==undefined?ckState.answers[0]:5];
         var answerLabels=CKQ.map(function(q,i){return q.opts[ckState.answers[i]]||'';});
+        // 12-second timeout — Edge Function generally responds in <3s
+        var ctrl=(typeof AbortController!=='undefined')?new AbortController():null;
+        var timeoutId=ctrl?setTimeout(function(){ctrl.abort();},12000):null;
         fetch(SUPABASE_URL+'/functions/v1/send-sample',{
           method:'POST',
+          mode:'cors',
+          credentials:'omit',
           headers:{
             'Content-Type':'application/json',
             'apikey':SUPABASE_ANON_KEY,
             'Authorization':'Bearer '+SUPABASE_ANON_KEY
           },
           body:JSON.stringify({
-            email:email,
+            email:email.trim().toLowerCase(),
             visaType:visaType,
             riskLevel:result.overall,
             factors:result.factors,
             answers:answerLabels
-          })
+          }),
+          signal:ctrl?ctrl.signal:undefined
+        }).then(function(r){
+          if(timeoutId)clearTimeout(timeoutId);
+          if(!r.ok)console.warn('Sample email returned',r.status);
         }).catch(function(err){
-          // Network failure is silent — user already sees their on-screen result
-          console.warn('Sample email send failed (non-fatal):',err);
+          if(timeoutId)clearTimeout(timeoutId);
+          // Network or abort: user already sees their result, fail silently
+          if(err&&err.name!=='AbortError')console.warn('Sample email send failed:',err.message||err);
         });
       }
       renderCkResult(result,email);
